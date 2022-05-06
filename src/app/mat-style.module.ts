@@ -26,6 +26,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { CustomIconsService } from './core/services/utils/custom-icons.service';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 const MatImports = [
   MatSidenavModule,
@@ -39,7 +41,6 @@ const MatImports = [
   MatTableModule,
   MatSortModule,
   MatIconModule,
-  MatDialogModule,
   MatGridListModule,
   MatCheckboxModule,
   MatSelectModule,
@@ -55,13 +56,15 @@ const MatImports = [
   MatProgressSpinnerModule,
   MatSlideToggleModule,
   MatTabsModule,
-  MatButtonToggleModule
+  MatButtonToggleModule,
+  MatPaginatorModule,
+  MatDialogModule
 ];
 
 @NgModule({
   declarations: [],
   imports: MatImports,
   exports: MatImports,
-  providers: []
+  providers: [CustomIconsService]
 })
 export class MatStyleModule {}

@@ -5,7 +5,28 @@ import { MainComponent } from './main.component';
 const routes: Routes = [
   {
     path: '',
-    component: MainComponent
+    component: MainComponent,
+    children: [
+      {
+        path: '',
+        redirectTo: '/customer-services',
+        pathMatch: 'full'
+      },
+      {
+        path: 'dashboard',
+        loadChildren: (): Promise<any> =>
+          import('./dashboard/dashboard.module').then(m => m.DashboardModule),
+        data: { title: 'My Dashboard' }
+      },
+      {
+        path: 'customer-services',
+        loadChildren: (): Promise<any> =>
+          import('./customer-services/customer-services.module').then(
+            m => m.CustomerServicesModule
+          ),
+        data: { title: 'Customer Services' }
+      }
+    ]
   }
 ];
 

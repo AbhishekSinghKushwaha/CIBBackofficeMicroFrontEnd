@@ -1,0 +1,50 @@
+.menu-button {
+    display: block;
+    border-radius: 10px;
+    padding: 5px;
+    background-color: white !important;
+}
+
+
+
+
+.user-action {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    cursor: pointer;
+    padding: 8px;
+    width: 10rem;
+    height: 3rem;
+    background: #ffffff;
+    border-radius: 54px;
+    filter: drop-shadow(0px 4px 9px rgba(0, 0, 0, 0.04));
+
+    .user-action-short {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 32px;
+        height: 32px;
+        background: #a32a29;
+        border-radius: 80px;
+        font-size: 14px;
+        line-height: 20px;
+        color: #ffffff;
+    }
+
+    .user-action-username {
+        margin: 0 7px;
+        font-size: 12px;
+        line-height: 16px;
+        color: #221f1f;
+    }
+}
+
+.customIcon {
+    font-size: 50px;
+    height: 40px;
+    width: 40px;
+  
+}
+

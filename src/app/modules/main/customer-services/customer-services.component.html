@@ -1,0 +1,46 @@
+<div>
+  <mat-card>
+    <div class="d-flex justify-content-between p-3">
+      <div>
+        <h2>Service Portal</h2>
+        <p class="text-grey">
+          Easily assist existing or new corporate customers
+        </p>
+      </div>
+      <div>
+        <mat-icon class="customIcon" svgIcon="search"></mat-icon>
+        <mat-icon class="customIcon" svgIcon="info">info</mat-icon>
+      </div>
+    </div>
+    <mat-divider></mat-divider>
+    <div>
+      <div class="d-flex flex-column">
+        <div class="row mt-3 p-3">
+          <div class="col-md-3 mb-4">
+            <mat-card (click)="openCorporateSearchModal()">
+              <img
+                height="100vh"
+                mat-card-image
+                src="assets/images/backgrounds/customer-service.png"
+              />
+
+              <div class="button-container">
+                <button mat-fab color="light">
+                  <mat-icon svgIcon="add"></mat-icon>
+                </button>
+              </div>
+
+              <div class="text-center">
+                <h3 class="fw-bold">Corporate Customer Service</h3>
+                <p class="text-grey">
+                  Assist an existing customer with transaction by viewing their
+                  profile and account details
+                </p>
+              </div>
+            </mat-card>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-card>
+</div>

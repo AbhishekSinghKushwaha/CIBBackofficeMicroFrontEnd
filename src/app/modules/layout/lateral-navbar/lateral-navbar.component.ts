@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
+import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
+import { filter, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-lateral-navbar',
@@ -6,10 +9,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./lateral-navbar.component.scss']
 })
 export class LateralNavbarComponent implements OnInit {
-
-  constructor() { }
+  title!: string;
+  constructor(private titleService: Title) {}
 
   ngOnInit(): void {
+    this.title = this.titleService.getTitle();
   }
-
 }
