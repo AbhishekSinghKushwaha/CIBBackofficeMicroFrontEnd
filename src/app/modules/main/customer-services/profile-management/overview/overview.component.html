@@ -1,0 +1,233 @@
+<!-- Company Information -->
+<mat-card class="mt-4">
+  <mat-card-title class="p-3"><h2>Company Information</h2></mat-card-title>
+  <hr class="customer-info-divider" />
+  <mat-card-content>
+    <div class="row gx-0">
+      <div class="col-lg-3">
+        <div class="d-flex flex-column justify-content-center">
+          <mat-icon
+            class="align-self-center"
+            svgIcon="placeholder-portrait"
+            aria-hidden="false"
+            aria-label="placeholder-potrait"
+            style="width: 200px; height: 200px"
+          >
+          </mat-icon>
+          <mat-icon
+            class="align-self-center"
+            svgIcon="placeholder-landscape"
+            aria-hidden="false"
+            aria-label="placeholder"
+            style="width: 200px; height: 200px"
+          >
+          </mat-icon>
+        </div>
+      </div>
+      <div class="col-lg-9">
+        <div class="d-flex justify-content-between m-3">
+          <div class="">
+            <div class="d-flex flex-column">
+              <h3>Barcelona Fc</h3>
+              <p class="text-grey mb-0">Customer Channels</p>
+              <div class="customer-channels">
+                <p>Web</p>
+                <p>USSD</p>
+                <p>Chatbot</p>
+                <p>STK</p>
+                <p>APP</p>
+              </div>
+            </div>
+          </div>
+          <div class="">
+            <button class="p-3" mat-stroked-button>
+              <mat-icon class="customIcon">fingerprint</mat-icon>
+            </button>
+            <span class="p-2 fw-bold">BIO ENABLED</span>
+          </div>
+        </div>
+        <div class="d-flex flex-column m-3">
+          <div class="row">
+            <div class="col-md-3 mb-3">
+              <p class="text-grey">CIF</p>
+              <p>265456466</p>
+            </div>
+            <div class="col-md-3 mb-3">
+              <p class="text-grey">GCIF</p>
+              <p>6546546546</p>
+            </div>
+            <div class="col-md-3 mb-3">
+              <p class="text-grey">Nationalilty</p>
+              <p>Kenyan</p>
+            </div>
+            <div class="col-md-3 mb-3">
+              <p class="text-grey">KRA Pin Number</p>
+              <p>A51654621316G</p>
+            </div>
+            <div class="col-md-3 mb-3">
+              <p class="text-grey">Currency</p>
+              <p>KES</p>
+            </div>
+            <div class="col-md-3 mb-3">
+              <p class="text-grey">Mobile Number</p>
+              <p>+000 0000 0000</p>
+            </div>
+            <div class="col-md-3 mb-3">
+              <p class="text-grey">Email Address</p>
+              <p>info@barcelonafc.com</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-card-content>
+  <mat-card-actions class="mx-0">
+    <mat-accordion class="accordion customer-info-accordion">
+      <mat-expansion-panel
+        (opened)="panelOpenState.additionalInfo = true"
+        (closed)="panelOpenState.additionalInfo = false"
+      >
+        <mat-expansion-panel-header>
+          <mat-panel-title class="">
+            <h2>Additional Customer Information</h2>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <p>I'm visible because I am open</p>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </mat-card-actions>
+</mat-card>
+
+<!-- Signatories -->
+<mat-accordion class="accordion customer-info-accordion">
+  <mat-expansion-panel
+    (opened)="panelOpenState.mandate = true"
+    (closed)="panelOpenState.mandate = false"
+  >
+    <mat-expansion-panel-header class="panel-header">
+      <mat-panel-title>
+        <div class="d-flex">
+          <div class="">
+            <img src="assets/images/icons/avatar.svg" alt="" />
+            <!-- <mat-icon svgIcon="avatar.svg"></mat-icon> -->
+          </div>
+          <div class="mx-3">
+            <p class="fw-bold">Mathias Ojwang Otieno</p>
+            <p class="text-grey">Director & Signatory</p>
+          </div>
+        </div>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <mat-divider></mat-divider>
+    <ng-template matExpansionPanelContent> Some deferred content </ng-template>
+  </mat-expansion-panel>
+</mat-accordion>
+
+<!-- Approver Information -->
+<mat-card class="mt-4">
+  <div class="p-3">
+    <h2>Approver</h2>
+    <p class="text-grey">
+      This customer's existing photo and signature are displayed below
+    </p>
+  </div>
+  <mat-divider class="mb-2"></mat-divider>
+  <mat-card-content>
+    <div class="row gx-0 mt-3">
+      <div class="col-lg-3">
+        <div class="d-flex flex-column justify-content-center p-3">
+          <img
+            style="max-height: 15rem"
+            src="assets/images/icons/mandate-pp.svg"
+            alt=""
+          />
+
+          <img
+            style="max-height: 5rem"
+            src="assets/images/icons/mandate-signature.svg"
+            alt=""
+          />
+        </div>
+      </div>
+      <div class="col-lg-9">
+        <div class="d-flex flex-column m-3">
+          <div class="row">
+            <div class="col-md-3 mb-3">
+              <p class="text-grey">Name</p>
+              <p>John Doe</p>
+            </div>
+            <div class="col-md-3 mb-3">
+              <p class="text-grey">Email Address</p>
+              <p>johndoe@mail.com</p>
+            </div>
+            <div class="col-md-3 mb-3">
+              <p class="text-grey">ID/PP</p>
+              <p>246546554</p>
+            </div>
+            <div class="col-md-3 mb-3">
+              <p class="text-grey">Phone number</p>
+              <p>+254 000 000 000</p>
+            </div>
+            <div class="col-md-3 mb-3">
+              <p class="text-grey">Transaction Limit</p>
+              <p>5,000,000</p>
+            </div>
+            <div class="col-md-3 mb-3">
+              <p class="text-grey">Office Phone Number</p>
+              <p>+254 000 000 000</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>
+
+<mat-accordion class="example-headers-align">
+  <mat-expansion-panel
+    [expanded]="panelOpenState.mandate === true"
+    (opened)="(panelOpenState.mandate === true)"
+  >
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <h2>Mandate</h2>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <mat-divider></mat-divider>
+
+    <div class="d-flex flex-column m-5">
+      <div class="row">
+        <div class="col-md-3 mb-3">
+          <img src="assets/images/icons/placeholder-portrait.svg" alt="" />
+        </div>
+        <div class="col-md-3 mb-3">
+          <p class="text-grey">Name</p>
+          <p>Susan Rose</p>
+        </div>
+        <div class="col-md-3 mb-3">
+          <p class="text-grey">Designation</p>
+          <p>CEO</p>
+        </div>
+        <div class="col-md-3 mb-3">
+          <img src="assets/images/icons/mandate-signature.svg" alt="" />
+        </div>
+      </div>
+    </div>
+  </mat-expansion-panel>
+</mat-accordion>
+
+<div class="d-flex flex-row justify-content-between mt-4 mb-4">
+  <div class="">
+    <button mat-stroked-button color="primary">Quit</button>
+  </div>
+  <div class="">
+    <div class="d-flex mx-4">
+      <div class="mx-5">
+        <button mat-stroked-button color="primary">Print</button>
+      </div>
+      <div>
+        <button mat-raised-button color="primary">Approve</button>
+      </div>
+    </div>
+  </div>
+</div>

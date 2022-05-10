@@ -166,7 +166,12 @@ export const SVG_ICONS = [
   'wallet-hide-white.svg',
   'web-devices-grey.svg',
   'withdraw.svg',
-  'withdraw-alt.svg'
+  'withdraw-alt.svg',
+  'mandate-pp.svg',
+  'placeholder-portrait.svg',
+  'mandate-signature.svg',
+  'placeholder-landscape.svg',
+  'avatar.svg'
 ];
 
 export const PROVIDER_ICONS = [

@@ -116,6 +116,6 @@ export class CorporateSearchModalComponent implements OnInit {
 
   goToOverview() {
     this.corporateSearchService.corporateSearchModalRef.close();
-    this.router.navigateByUrl('/customer/overview');
+    this.router.navigate(['/customer-services/corporate-360']);
   }
 }
