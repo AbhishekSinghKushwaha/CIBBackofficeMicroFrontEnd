@@ -1,0 +1,111 @@
+<div class="dialog-header">
+  <h2 class="mat-dialog-title title">Corporate Search</h2>
+  <button
+    mat-icon-button
+    aria-label="Close dialog"
+    (click)="closeSearch()"
+    color="primary"
+  >
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+
+<mat-dialog-content class="dialog-body">
+  <mat-divider></mat-divider>
+
+  <div *ngIf="!eddFlow" class="dialog-form">
+    <p class="dialog-text">
+      Search for customer using their ID number, account number, CIF or mobile
+      number
+    </p>
+
+    <form
+      class="form-horizontal"
+      [formGroup]="searchForm"
+      (keydown.enter)="onSearchSubmit()"
+    >
+      <div class="form-field form-field-select">
+        <mat-select class="search-term" formControlName="option">
+          <mat-option value="" disabled> Select filter</mat-option>
+          <mat-option *ngFor="let filter of searchFilters" [value]="filter">
+            {{ filter }}
+          </mat-option>
+        </mat-select>
+      </div>
+
+      <div class="form-field form-field-input">
+        <input
+          type="text"
+          placeholder="Search"
+          class="search-text"
+          formControlName="searchText"
+        />
+        <button
+          *ngIf="!searchForm.controls.searchText.value"
+          matSuffix
+          class="button-icon search-icon"
+          mat-icon-button
+          aria-label="Clear"
+          (click)="clearSearchText()"
+        >
+          <mat-icon>search</mat-icon>
+        </button>
+        <button
+          type="button"
+          class="button-icon"
+          *ngIf="searchForm.controls.searchText.value"
+          color="primary"
+          matSuffix
+          mat-icon-button
+          aria-label="Clear"
+          (click)="clearSearchText()"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <div *ngIf="eddFlow" class="edd-warning">
+    <div class="edd-warning-content">
+      <h4>Caution: High Risk Customer</h4>
+      <p>
+        This customer already has an Equity Bank profile that has been
+        blacklisted/sanctioned due to underlying issues.
+      </p>
+      <p>
+        Please complete the Enahaced Due Diligence (EDD) process and submit it
+        for authorisation.
+      </p>
+    </div>
+  </div>
+
+  <div class="dialog-table" *ngIf="showSearchTable">
+    <app-search-result-table
+      [customerData]="customerData"
+      [highRiskCustomer]="eddFlow"
+    >
+    </app-search-result-table>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions class="dialog-actions">
+  <button
+    mat-stroked-button
+    color="primary"
+    [class]="!searchForm.pristine ? 'btn-border-red' : ''"
+    class="btn-cancel"
+    [matDialogClose]="true"
+    [disabled]="searchForm.pristine"
+  >
+    Cancel
+  </button>
+  <button
+    mat-flat-button
+    color="primary"
+    [disabled]="!showSearchTable || noResult"
+    (click)="goToOverview()"
+  >
+    {{ eddFlow ? 'Launch EDD Process' : 'Launch customer 360° view' }}
+  </button>
+</mat-dialog-actions>

@@ -1,0 +1,42 @@
+<div class="d-flex justify-content-between">
+  <div>
+    <h1 class="mb-0">{{ title }}</h1>
+    <app-breadcrumbs-navbar></app-breadcrumbs-navbar>
+  </div>
+  <div class="d-flex flex-row mt-2">
+    <!-- Search-->
+    <button mat-icon-button class="mx-2">
+      <mat-icon class="customIcon" svgIcon="search"></mat-icon>
+    </button>
+    <!-- Help-->
+    <button mat-icon-button class="mx-2">
+      <mat-icon class="customIcon" svgIcon="help"></mat-icon>
+    </button>
+    <!-- Notifications-->
+    <button mat-icon-button class="mx-2">
+      <mat-icon class="customIcon" svgIcon="notification"></mat-icon>
+    </button>
+    <!-- <button mat-icon-button [matMenuTriggerFor]="langMenu">
+      <mat-icon [svgIcon]="'ic-flag-ke'"></mat-icon>
+    </button> -->
+    <!-- <mat-menu #langMenu="matMenu" xPosition="before">
+      <button
+        mat-menu-item
+        (click)="changeLocale(loc.id)"
+        *ngFor="let loc of supportedLocales"
+      >
+        <mat-icon svgIcon="{{ loc.icon }}">&nbsp;</mat-icon
+        >{{ loc.name | translate }}
+      </button>
+    </mat-menu> -->
+    <div class="user-action mx-2" [matMenuTriggerFor]="profileMenu">
+      <span class="user-action-short">BM</span>
+      <span class="user-action-username">{{ 'Username' }}</span>
+    </div>
+    <mat-menu #profileMenu xPosition="before">
+      <mat-card class="mat-elevation-z0">
+        <p>WIP</p>
+      </mat-card>
+    </mat-menu>
+  </div>
+</div>

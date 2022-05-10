@@ -1,17 +1,22 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, Title } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AppComponent } from './app.component';
+import { MatStyleModule } from './mat-style.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
-  declarations: [],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MatStyleModule
   ],
   providers: [],
-  bootstrap: []
+  bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
