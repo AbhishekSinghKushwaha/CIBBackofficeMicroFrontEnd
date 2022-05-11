@@ -1,0 +1,20 @@
+{
+  "dataLookUp": {
+    "getCountries": "/cibpaymentservice-v1/api/v1/Transfer/GetCountries",
+    "getBanks": "/cibpaymentservice-v1/api/v1/Transfer/GetBanks/",
+    "getCurrencies": "/cibpaymentservice-v1/api/v1/Transfer/GetCurrencies",
+    "getSubsidiaries": "/cibpaymentservice-v1/api/v1/Transfer/GetSubsidiaries",
+    "getTelcos": "/cibpaymentservice-v1/api/v1/Transfer/GetTelcos",
+    "getMobileWallets": "/cibpaymentservice-v1/api/v1/Transfer/GetMobileWallets",
+    "getSectors": "/cibpaymentservice-v1/api/v1/Transfer/GetSectors",
+    "getFavouriteMerchants": "/cibpaymentservice-v1/api/v1/BuyGoods/FavoriteMerchants",
+    "getMerchants": "/cibpaymentservice-v1/api/v1/BuyGoods/Merchants",
+    "getMerchantDetails": "/cibpaymentservice-v1/api/v1/BuyGoods/MerchantDetail/",
+    "getFavouriteMerchantDetails": "/cibpaymentservice-v1/api/v1/BuyGoods/FavoriteMerchants/"
+  },
+  "customerOnboarding": {
+    "getRoles": "/cibonboarding-v1/api/Registration/get-roles/",
+    "getProductsAndServices": "/cibonboarding-v1/api/Registration/get-products-and-services",
+    "getUserAccounts": "/cibaccountservice-v1/api/v1/Accounts/GetUserMappedAccounts"
+  }
+}

@@ -3,7 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  apiUrl: 'https://api-dev.equitygroupholdings.com/v1',
+  kService: 'b_tDiAKr=yiM'
 };
 
 /*
