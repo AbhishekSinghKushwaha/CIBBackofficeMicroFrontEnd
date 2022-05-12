@@ -1,1 +1,59 @@
-<p>new-file-templates works!</p>
+<mat-accordion class="example-headers-align">
+  <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" showToggle>
+    <mat-expansion-panel-header>
+      <mat-panel-title class="h4 pt-2 pb-2">
+        File Template Configuration
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <mat-divider class="ms-3 me-3"></mat-divider>
+    <div class="row mt-3">
+      <div class="col-md-8">
+        <div class="row">
+          <div class="col-md-3">
+            <mat-form-field appearance="fill" class="" floatLabel="always">
+              <mat-label>Template name</mat-label>
+              <input matInput />
+            </mat-form-field>
+          </div>
+          <div class="col-md-3">
+            <mat-form-field appearance="fill" floatLabel="always">
+              <mat-label>Module</mat-label>
+              <mat-select>
+                <mat-option value="Fund Transfer"> Fund Transfer </mat-option>
+                <mat-option value="Salaries"> Salaries </mat-option>
+                <mat-option value="Beneficiary"> Beneficiary </mat-option>
+                <mat-option value="user Management">
+                  user Management
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(0)" showToggle>
+    <mat-expansion-panel-header>
+      <mat-panel-title class="h4 pt-2 pb-2">
+        File Template Configuration
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <mat-divider class="ms-3 me-3"></mat-divider>
+    <div class="row mt-3 lower-template text-center">
+      <div></div>
+      <div>
+        <mat-icon
+          svgIcon="big-circular-plus"
+          style="font-size: 40px"
+        ></mat-icon>
+        <p class="text-bold">Start Building your Template</p>
+        <small class="text-grey">
+          Assist an existing customer with transactions
+          <br />by viewing their profile and account details
+        </small>
+      </div>
+      <div></div>
+    </div>
+  </mat-expansion-panel>
+</mat-accordion>

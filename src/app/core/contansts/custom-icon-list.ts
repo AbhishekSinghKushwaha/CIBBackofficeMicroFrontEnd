@@ -173,7 +173,8 @@ export const SVG_ICONS = [
   'mandate-signature.svg',
   'placeholder-landscape.svg',
   'avatar.svg',
-  'user.svg'
+  'user.svg',
+  'big-circular-plus.svg'
 ];
 
 export const PROVIDER_ICONS = [
