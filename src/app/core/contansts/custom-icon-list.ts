@@ -172,7 +172,8 @@ export const SVG_ICONS = [
   'placeholder-portrait.svg',
   'mandate-signature.svg',
   'placeholder-landscape.svg',
-  'avatar.svg'
+  'avatar.svg',
+  'user.svg'
 ];
 
 export const PROVIDER_ICONS = [
