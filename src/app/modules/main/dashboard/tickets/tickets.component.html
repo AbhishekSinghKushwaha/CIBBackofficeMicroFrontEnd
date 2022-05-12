@@ -67,7 +67,24 @@
             <!-- Symbol Column -->
             <ng-container matColumnDef="status">
               <th mat-header-cell *matHeaderCellDef>Status</th>
-              <td mat-cell *matCellDef="let element">{{ element.status }}</td>
+              <td mat-cell *matCellDef="let element">
+                <span *ngIf="element.status === 'Approved'" class="approved">{{
+                  element.status
+                }}</span>
+                <span *ngIf="element.status === 'Rejected'" class="rejected">{{
+                  element.status
+                }}</span>
+                <span *ngIf="element.status === 'Pending'" class="pending">{{
+                  element.status
+                }}</span>
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="action">
+              <th mat-header-cell *matHeaderCellDef>Actions</th>
+              <td mat-cell *matCellDef="let element">
+                <mat-icon (click)="action()">more_horiz</mat-icon>
+              </td>
             </ng-container>
 
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

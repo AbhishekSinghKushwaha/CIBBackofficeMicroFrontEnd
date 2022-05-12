@@ -2,6 +2,7 @@ import { UpperCasePipe } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 import { ELEMENT_DATA } from 'src/app/core/contansts/tickets.mockdata';
 import { TableCustomColumns } from 'src/app/shared/components/datatable/custom-column.component';
 import { dataSource } from 'src/app/shared/components/datatable/table.datasource';
@@ -33,7 +34,8 @@ export class TicketsComponent implements OnInit {
     'ticketID',
     'createdBy',
     'dateCreated',
-    'status'
+    'status',
+    'action'
   ];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
 
@@ -43,9 +45,13 @@ export class TicketsComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
   }
 
-  constructor() {
+  constructor(private router: Router) {
     this.headers = ['id', 'name'];
   }
 
   ngOnInit(): void {}
+
+  action() {
+    this.router.navigate(['/customer-services']);
+  }
 }
