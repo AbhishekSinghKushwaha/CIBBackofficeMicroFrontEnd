@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-overview',
@@ -11,7 +12,11 @@ export class OverviewComponent implements OnInit {
     mandate: true,
     signatories: false
   };
-  constructor() {}
+  constructor(private router: Router) {}
 
   ngOnInit(): void {}
+
+  navigate() {
+    this.router.navigate(['/customer-services/corporate-onboarding']);
+  }
 }

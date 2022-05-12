@@ -14,6 +14,14 @@ const routes: Routes = [
         m => m.ProfileManagementModule
       ),
     data: { title: 'Profile Management' }
+  },
+  {
+    path: 'corporate-onboarding',
+    loadChildren: (): Promise<any> =>
+      import('./corporate-onboarding/corporate-onboarding.module').then(
+        m => m.CorporateOnboardingModule
+      ),
+    data: { title: 'Profile Management' }
   }
 ];
 

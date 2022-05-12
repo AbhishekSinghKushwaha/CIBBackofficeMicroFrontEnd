@@ -1,0 +1,83 @@
+<div class="topbar">
+  <p>
+    <mat-toolbar class="toolbar">
+      <div>
+        <!-- 360 &#176; Customer Profile -->
+        <span class="title">{{ title }}</span>
+        <span class="vl"></span>
+        <span class="toolbar-page">{{ toolbarPage }}</span>
+      </div>
+
+      <div class="toolbar-actions">
+        <div class="toolbar-actions-section" [matMenuTriggerFor]="menu">
+          <span class="toolbar-documents">Attached documents</span>
+          <mat-icon
+            aria-hidden="false"
+            aria-label="dropdown-arrow"
+            class="dropdown-arrow"
+            >expand_more
+          </mat-icon>
+        </div>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item>Item 1</button>
+          <button mat-menu-item>Item 2</button>
+        </mat-menu>
+
+        <div
+          class="toolbar-actions-section"
+          [matMenuTriggerFor]="customerManagement"
+        >
+          <span class="toolbar-documents">Customer management</span>
+          <mat-icon
+            aria-hidden="false"
+            aria-label="dropdown-arrow"
+            class="dropdown-arrow"
+            >expand_more
+          </mat-icon>
+        </div>
+        <mat-menu
+          #customerManagement="matMenu"
+          xPosition="before"
+          class="mat-menu custom-mat-menu-wrapper"
+        >
+          <div mat-menu-item class="menu-item">
+            <mat-icon
+              aria-hidden="false"
+              aria-label="additional account"
+              class="menu-icon"
+            >
+            </mat-icon>
+            <span>Add an additional account</span>
+          </div>
+          <div mat-menu-item class="menu-item">
+            <mat-icon
+              aria-hidden="false"
+              aria-label="transact"
+              class="menu-icon"
+            >
+            </mat-icon>
+            <span>Transact on customer profile</span>
+          </div>
+          <div mat-menu-item class="menu-item">
+            <mat-icon
+              aria-hidden="false"
+              aria-label="update profile"
+              class="menu-icon"
+            >
+            </mat-icon>
+            <span>Update customer profile</span>
+          </div>
+          <div mat-menu-item class="menu-item">
+            <mat-icon
+              aria-hidden="false"
+              aria-label="service request"
+              class="menu-icon"
+            >
+            </mat-icon>
+            <span>Create customer service request</span>
+          </div>
+        </mat-menu>
+      </div>
+    </mat-toolbar>
+  </p>
+</div>

@@ -1,0 +1,148 @@
+<app-profile-management-top-nav
+  title="Add Workflow"
+  toolbarPage="Corporate Onboarding"
+></app-profile-management-top-nav>
+
+<mat-accordion multi>
+  <!-- Customer Identifier -->
+  <mat-expansion-panel
+    [expanded]="panelOpenState.workflowDetails === true"
+    (opened)="(panelOpenState.workflowDetails === true)"
+  >
+    <mat-expansion-panel-header class="panel-header">
+      <mat-panel-title>
+        <h2 class="bullets">1</h2>
+        <h2>Please enter workflow details</h2>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <mat-divider></mat-divider>
+    <div class="d-flex flex-column">
+      <div class="row pt-4">
+        <div class="col-md-3">
+          <mat-form-field
+            appearance="fill"
+            style="width: 100%"
+            floatLabel="always"
+          >
+            <mat-label>Company Name</mat-label>
+            <input matInput />
+          </mat-form-field>
+        </div>
+        <div class="col-md-3">
+          <mat-form-field
+            appearance="fill"
+            style="width: 100%"
+            floatLabel="always"
+          >
+            <mat-label>Workflow Name</mat-label>
+            <input matInput />
+          </mat-form-field>
+        </div>
+        <div class="col-md-3">
+          <mat-form-field
+            appearance="fill"
+            style="width: 100%"
+            floatLabel="always"
+          >
+            <mat-label>Workflow Description</mat-label>
+            <input matInput />
+          </mat-form-field>
+        </div>
+        <div class="col-md-3">
+          <mat-form-field
+            appearance="fill"
+            style="width: 100%"
+            floatLabel="always"
+          >
+            <mat-label>Number of Approvers</mat-label>
+            <input matInput />
+          </mat-form-field>
+        </div>
+        <div class="col-md-3">
+          <mat-form-field
+            appearance="fill"
+            style="width: 100%"
+            floatLabel="always"
+          >
+            <mat-label>Currency</mat-label>
+            <input matInput />
+          </mat-form-field>
+        </div>
+        <div class="col-md-3">
+          <mat-form-field
+            appearance="fill"
+            style="width: 100%"
+            floatLabel="always"
+          >
+            <mat-label>Minimum Amount</mat-label>
+            <input matInput />
+          </mat-form-field>
+        </div>
+        <div class="col-md-3">
+          <mat-form-field
+            appearance="fill"
+            style="width: 100%"
+            floatLabel="always"
+          >
+            <mat-label>Maximum Amount</mat-label>
+            <input matInput />
+          </mat-form-field>
+        </div>
+        <div class="col-md-3">
+          <mat-form-field
+            appearance="fill"
+            style="width: 100%"
+            floatLabel="always"
+          >
+            <mat-label>Accounts To Access</mat-label>
+            <input matInput />
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+  </mat-expansion-panel>
+
+  <!-- Products -->
+  <mat-expansion-panel
+    [expanded]="panelOpenState.products === true"
+    (opened)="(panelOpenState.products === true)"
+  >
+    <mat-expansion-panel-header class="panel-header">
+      <mat-panel-title>
+        <h2 class="bullets">2</h2>
+        <h2>Please select the products this customer can access</h2>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <mat-divider></mat-divider>
+  </mat-expansion-panel>
+
+  <!-- Tariffs -->
+  <mat-expansion-panel
+    [expanded]="panelOpenState.fxReferenceOption === true"
+    (opened)="(panelOpenState.fxReferenceOption === true)"
+  >
+    <mat-expansion-panel-header class="panel-header">
+      <mat-panel-title>
+        <h2 class="bullets">3</h2>
+        <h2>Please select a FX reference ID option</h2>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div class="d-flex flex-column">
+      <div class="row pt-4">
+        <div class="col-md-3">
+          <div class="col-md-3">
+            <mat-form-field
+              appearance="fill"
+              style="width: 100%"
+              floatLabel="always"
+            >
+              <mat-label>Full Name</mat-label>
+              <input matInput />
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-expansion-panel>
+</mat-accordion>

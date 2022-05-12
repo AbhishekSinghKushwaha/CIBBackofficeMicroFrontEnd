@@ -1,0 +1,186 @@
+<app-profile-management-top-nav
+  title="Create Company Profile"
+  toolbarPage="Corporate Onboarding"
+></app-profile-management-top-nav>
+
+<form action="" [formGroup]="customerProfileForm">
+  <mat-accordion multi>
+    <!-- Customer Identifier -->
+    <mat-expansion-panel
+      [expanded]="panelOpenState.customerIdenfitifier === true"
+      (opened)="(panelOpenState.customerIdenfitifier === true)"
+    >
+      <mat-expansion-panel-header class="panel-header">
+        <mat-panel-title>
+          <h2 class="bullets">1</h2>
+          <h2>Customer Identifier</h2>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-divider></mat-divider>
+      <div class="d-flex flex-column">
+        <div class="row pt-4">
+          <div class="col-md-4">
+            <app-input
+              [parentForm]="customerProfileForm"
+              fieldName="globalCIF"
+              placeholder=""
+              formControlName="globalCIF"
+              label="GCIF"
+            ></app-input>
+          </div>
+          <div class="col-md-4">
+            <app-input
+              [parentForm]="customerProfileForm"
+              fieldName="corporateCIF"
+              placeholder=""
+              formControlName="corporateCIF"
+              label="Corporate CIF"
+            ></app-input>
+          </div>
+          <div class="col-md-4">
+            <app-input
+              [parentForm]="customerProfileForm"
+              fieldName="corporateSegment"
+              placeholder=""
+              formControlName="corporateSegment"
+              label="Corporate Segment"
+            ></app-input>
+          </div>
+        </div>
+      </div>
+    </mat-expansion-panel>
+    <!-- Transaction Limits -->
+    <mat-expansion-panel
+      [expanded]="panelOpenState.customerIdenfitifier === true"
+      (opened)="(panelOpenState.customerIdenfitifier === true)"
+    >
+      <mat-expansion-panel-header class="panel-header">
+        <mat-panel-title>
+          <h2 class="bullets">2</h2>
+          <h2>Please set the global transaction limits</h2>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-divider></mat-divider>
+      <div class="d-flex flex-column">
+        <div class="row pt-4">
+          <div class="col-md-3">
+            <app-input
+              [parentForm]="customerProfileForm"
+              fieldName="curreny"
+              placeholder=""
+              formControlName="currency"
+              label="Currency"
+            ></app-input>
+          </div>
+          <div class="col-md-3">
+            <app-input
+              [parentForm]="customerProfileForm"
+              fieldName="maximumPerTransaction"
+              placeholder=""
+              formControlName="maximumPerTransaction"
+              label="Maximum Per Transaction"
+            ></app-input>
+          </div>
+          <div class="col-md-3">
+            <app-input
+              [parentForm]="customerProfileForm"
+              fieldName="dailyLimit"
+              placeholder=""
+              formControlName="dailyLimit"
+              label="Daily Limit"
+            ></app-input>
+          </div>
+          <div class="col-md-3">
+            <app-input
+              [parentForm]="customerProfileForm"
+              fieldName="weeklyLimit"
+              placeholder=""
+              formControlName="weeklyLimit"
+              label="Weekly Limit"
+            ></app-input>
+          </div>
+        </div>
+      </div>
+    </mat-expansion-panel>
+    <!-- Products -->
+    <mat-expansion-panel
+      [expanded]="panelOpenState.customerIdenfitifier === true"
+      (opened)="(panelOpenState.customerIdenfitifier === true)"
+    >
+      <mat-expansion-panel-header class="panel-header">
+        <mat-panel-title>
+          <h2 class="bullets">3</h2>
+          <h2>Please select the products the customer can access</h2>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <mat-divider></mat-divider>
+
+      <mat-expansion-panel
+        class="mb-2 mt-3"
+        *ngFor="let product of products; let i = index"
+        [expanded]="panelOpenState.products === true && i == 0"
+        (opened)="(panelOpenState.products === true)"
+      >
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <h2 class="fw-bold">
+              <mat-checkbox color="primary" [checked]="i === 0">{{
+                product?.productName
+              }}</mat-checkbox>
+            </h2>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="d-flex flex-column">
+          <div class="row">
+            <div
+              class="col-md-3 m-3"
+              *ngFor="let service of product?.productServices"
+            >
+              <mat-checkbox color="primary">{{
+                service?.serviceName
+              }}</mat-checkbox>
+            </div>
+          </div>
+        </div>
+      </mat-expansion-panel>
+    </mat-expansion-panel>
+
+    <!-- Tariffs -->
+    <mat-expansion-panel
+      [expanded]="panelOpenState.customerIdenfitifier === true"
+      (opened)="(panelOpenState.customerIdenfitifier === true)"
+    >
+      <mat-expansion-panel-header class="panel-header">
+        <mat-panel-title>
+          <h2 class="bullets">4</h2>
+          <h2>Please select the relevant tarrif</h2>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div class="d-flex flex-column">
+        <div class="row pt-4">
+          <div class="col-md-3">
+            <app-input
+              [parentForm]="customerProfileForm"
+              fieldName="tariff"
+              placeholder=""
+              formControlName="tariff"
+              label="Tariff"
+            ></app-input>
+          </div>
+        </div>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+  <div class="d-flex flex-row justify-content-between mt-4 mb-4">
+    <div class="">
+      <button mat-stroked-button color="primary">Quit</button>
+    </div>
+    <div>
+      <button mat-raised-button (click)="saveAndContinue()" color="primary">
+        Save & Continue
+      </button>
+    </div>
+  </div>
+</form>
