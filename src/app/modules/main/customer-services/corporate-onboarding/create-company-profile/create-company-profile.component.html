@@ -118,13 +118,17 @@
 
       <mat-expansion-panel
         class="mb-2 mt-3"
-        *ngFor="let product of products"
-        [expanded]="panelOpenState.products === true"
+        *ngFor="let product of products; let i = index"
+        [expanded]="panelOpenState.products === true && i == 0"
         (opened)="(panelOpenState.products === true)"
       >
         <mat-expansion-panel-header>
           <mat-panel-title>
-            <h2 class="fw-bold">{{ product?.productName }}</h2>
+            <h2 class="fw-bold">
+              <mat-checkbox color="primary" [checked]="i === 0">{{
+                product?.productName
+              }}</mat-checkbox>
+            </h2>
           </mat-panel-title>
         </mat-expansion-panel-header>
         <div class="d-flex flex-column">
@@ -133,7 +137,9 @@
               class="col-md-3 m-3"
               *ngFor="let service of product?.productServices"
             >
-              <mat-checkbox>{{ service?.serviceName }}</mat-checkbox>
+              <mat-checkbox color="primary">{{
+                service?.serviceName
+              }}</mat-checkbox>
             </div>
           </div>
         </div>

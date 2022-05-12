@@ -10,7 +10,7 @@ import { StorageService } from 'src/app/core/services/utils/storage.service';
 export class AddUsersComponent implements OnInit {
   panelOpenState = {
     userDetails: true,
-    initiators: false,
+    roles: true,
     products: true
   };
 

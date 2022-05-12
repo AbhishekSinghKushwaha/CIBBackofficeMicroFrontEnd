@@ -6,10 +6,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./add-workflow.component.scss']
 })
 export class AddWorkflowComponent implements OnInit {
+  panelOpenState = {
+    workflowDetails: true,
+    products: true,
+    fxReferenceOption: true,
+    approvalSequence: true,
+    approvers: true,
+    checkers: true
+  };
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

@@ -34,4 +34,8 @@ export class SetAccountLimitsComponent implements OnInit {
   saveAndContinue() {
     this.router.navigate(['/customer-services/corporate-onboarding/add-users']);
   }
+
+  skip() {
+    this.router.navigate(['/customer-services/corporate-onboarding/add-users']);
+  }
 }

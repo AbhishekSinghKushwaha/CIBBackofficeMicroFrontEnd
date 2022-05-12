@@ -33,7 +33,7 @@ export class CorporateSearchModalComponent implements OnInit {
   customerData: CustomerSearchResult[] = [
     {
       name: 'George Okonjo',
-      idNumber: 234343,
+      idNumber: 123456789,
       profileType: 'Individual',
       status: 'Active',
       lastViewed: '12/02/2020'

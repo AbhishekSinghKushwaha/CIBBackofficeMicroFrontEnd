@@ -34,5 +34,44 @@ mat-card {
   border-radius: 0.5rem !important;
 }
 
+.mat-checkbox-inner-container {
+  height: 1.5rem !important;
+  width: 1.5rem !important;  
+}
+
+button {
+  &.mat-button {
+    border-radius: 8px !important;
+    min-height: 48px;
+  }
+
+  &.mat-flat-button {
+    border-radius: 8px !important;
+    min-height: 48px;
+
+    &:disabled {
+      color: var(--cool-grey) !important;
+      background-color: var(--cool-grey-40) !important;
+    }
+  }
+
+  &.mat-raised-button {
+    border-radius: 8px !important;
+    min-height: 48px;
+
+    &:disabled {
+      color: var(--cool-grey) !important;
+      background-color: var(--cool-grey-40) !important;
+    }
+  }
+
+  &.mat-stroked-button {
+    border-radius: 8px !important;
+    min-height: 48px;
+    background-color: var(--white);
+  }
+}
+
+
 
 

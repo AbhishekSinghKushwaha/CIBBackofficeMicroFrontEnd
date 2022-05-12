@@ -109,13 +109,17 @@
         <h3 class="mb-3">Roles</h3>
         <mat-expansion-panel
           class="mb-2"
-          *ngFor="let role of roles"
-          [expanded]="panelOpenState.userDetails === true"
-          (opened)="(panelOpenState.userDetails === true)"
+          *ngFor="let role of roles; let i = index"
+          [expanded]="panelOpenState.roles === true && i === 0"
+          (opened)="(panelOpenState.roles === true)"
         >
           <mat-expansion-panel-header>
             <mat-panel-title>
-              <h2 class="fw-bold">{{ role?.description }}</h2>
+              <h2 class="fw-bold">
+                <mat-checkbox color="primary" [checked]="i === 0">{{
+                  role?.description
+                }}</mat-checkbox>
+              </h2>
             </mat-panel-title>
           </mat-expansion-panel-header>
           <div class="d-flex flex-column">
@@ -124,7 +128,9 @@
                 class="col-md-3 m-3"
                 *ngFor="let permission of role?.permissions"
               >
-                <mat-checkbox>{{ permission?.description }}</mat-checkbox>
+                <mat-checkbox color="primary">{{
+                  permission?.description
+                }}</mat-checkbox>
               </div>
             </div>
           </div>
@@ -140,13 +146,17 @@
         </h3>
         <mat-expansion-panel
           class="mb-2"
-          *ngFor="let product of products"
-          [expanded]="panelOpenState.products === true"
+          *ngFor="let product of products; let i = index"
+          [expanded]="panelOpenState.products === true && i === 0"
           (opened)="(panelOpenState.products === true)"
         >
           <mat-expansion-panel-header>
             <mat-panel-title>
-              <h2 class="fw-bold">{{ product?.productName }}</h2>
+              <h2 class="fw-bold">
+                <mat-checkbox color="primary" [checked]="i === 0">{{
+                  product?.productName
+                }}</mat-checkbox>
+              </h2>
             </mat-panel-title>
           </mat-expansion-panel-header>
           <div class="d-flex flex-column">
@@ -155,7 +165,9 @@
                 class="col-md-3 m-3"
                 *ngFor="let service of product?.productServices"
               >
-                <mat-checkbox>{{ service?.serviceName }}</mat-checkbox>
+                <mat-checkbox color="primary">{{
+                  service?.serviceName
+                }}</mat-checkbox>
               </div>
             </div>
           </div>
@@ -179,8 +191,13 @@
           </mat-expansion-panel-header>
           <div class="d-flex flex-column">
             <div class="row">
-              <div class="col-md-3 m-3" *ngFor="let account of accounts">
-                <mat-checkbox>{{ account?.accountName }}</mat-checkbox>
+              <div
+                class="col-md-3 m-3"
+                *ngFor="let account of accounts; let i = index"
+              >
+                <mat-checkbox color="primary" [checked]="i === 0">{{
+                  account?.accountName
+                }}</mat-checkbox>
               </div>
             </div>
           </div>
@@ -249,6 +266,17 @@
       </div>
     </mat-expansion-panel>
   </mat-accordion>
+
+  <div class="mt-4 mb-4">
+    <mat-card>
+      <mat-card-header class="addition-button">
+        <div class="d-flex flex-row pt-2" style="color: var(--equity)">
+          <mat-icon>add</mat-icon>
+          <p class="mx-3">Add Additional User</p>
+        </div>
+      </mat-card-header>
+    </mat-card>
+  </div>
 
   <div class="d-flex flex-row justify-content-between mt-4 mb-4">
     <div class="">
