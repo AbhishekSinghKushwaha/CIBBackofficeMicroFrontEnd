@@ -174,7 +174,8 @@ export const SVG_ICONS = [
   'placeholder-landscape.svg',
   'avatar.svg',
   'user.svg',
-  'big-circular-plus.svg'
+  'big-circular-plus.svg',
+  'three-dots-circled.svg'
 ];
 
 export const PROVIDER_ICONS = [

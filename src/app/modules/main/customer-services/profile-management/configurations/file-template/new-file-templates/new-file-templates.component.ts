@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { LiveAnnouncer } from '@angular/cdk/a11y';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatSort, Sort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
+import { FileTemplateService } from 'src/app/core/services/file-template/file-template.service';
 
 @Component({
   selector: 'app-new-file-templates',
@@ -7,10 +11,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NewFileTemplatesComponent implements OnInit {
   step = 0;
+  displayedColumns: string[] = ['id', 'name', 'required', 'type', 'businessRule', 'action'];
+  @ViewChild(MatSort) sort: MatSort;
+  dataSource = new MatTableDataSource();
+  data = [];
 
-  constructor() { }
+  constructor(
+    private readonly fileTemplateService: FileTemplateService,
+    private _liveAnnouncer: LiveAnnouncer,) { }
 
   ngOnInit(): void {
+  }
+
+  ngAfterViewInit() {
+    this.dataSource.sort = this.sort;
   }
 
   setStep(index: number) {
@@ -23,6 +37,34 @@ export class NewFileTemplatesComponent implements OnInit {
 
   prevStep() {
     this.step--;
+  }
+
+  openTemplateBuilder() {
+    this.fileTemplateService
+      .openTemplateBuilder('new')
+      .afterClosed()
+      .subscribe(data => {
+        if (data) {
+          this.data = data;
+          this.dataSource.data = data;
+          this.dataSource.sort = this.sort;
+        }
+      })
+  }
+
+  announceSortChange(sortState: Sort) {
+    if (sortState.direction) {
+      this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
+    } else {
+      this._liveAnnouncer.announce('Sorting cleared');
+    }
+  }
+
+  editTemplate() {
+    this.fileTemplateService
+      .openTemplateBuilder('edit')
+      .afterClosed()
+      .subscribe()
   }
 
 }

@@ -10,12 +10,13 @@ export class FileTemplateService {
 
   constructor(private readonly dialog: MatDialog) { }
 
-  openTemplateBuilder(): MatDialogRef<ConfigureFileTemplatesModalComponent, any> {
+  openTemplateBuilder(data:any): MatDialogRef<ConfigureFileTemplatesModalComponent, any> {
     this.templateBuilderRef = this.dialog.open<ConfigureFileTemplatesModalComponent, any>(
       ConfigureFileTemplatesModalComponent,
       {
-        maxWidth: '50vw',
+        width: '60vw',
         disableClose: true,
+        data
       }
     );
     return this.templateBuilderRef;

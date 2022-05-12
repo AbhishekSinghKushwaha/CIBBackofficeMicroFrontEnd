@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ConfigureFileTemplatesModalComponent } from './configure-file-templates-modal/configure-file-templates-modal.component';
+import { MatStyleModule } from 'src/app/mat-style.module';
 
 
 
@@ -9,7 +10,8 @@ import { ConfigureFileTemplatesModalComponent } from './configure-file-templates
     ConfigureFileTemplatesModalComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    MatStyleModule
   ]
 })
 export class SharedModalsModule { }
