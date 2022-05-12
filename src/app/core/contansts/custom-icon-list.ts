@@ -29,6 +29,7 @@ export const SVG_ICONS = [
   'call.svg',
   'camera-white.svg',
   'card.svg',
+  'caret-right.svg',
   'cashcode-grey.svg',
   'chat.svg',
   'check.svg',

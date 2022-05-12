@@ -1,1 +1,49 @@
-<p>configurations works!</p>
+<div class="row screen">
+  <div class="col-md-3 ps-0">
+    <mat-card class="mat-elevation-z20 ps-0 h-100 pt-0 pe-0">
+      <mat-card-content>
+        <mat-list role="list" class="pt-0">
+          <mat-list-item
+            role="listitem"
+            class="row-fluid cursor-pointer"
+            [routerLink]="['holiday-configuration']"
+            routerLinkActive="router-link-active"
+          >
+            <div class="col-10 strong-text">Holiday</div>
+            <div class="col-1">
+              <mat-icon color="primary" svgIcon="caret-right"></mat-icon>
+            </div>
+            <mat-divider mat-inset></mat-divider>
+          </mat-list-item>
+          <mat-list-item
+            role="listitem"
+            class="row-fluid cursor-pointer"
+            [routerLink]="['file-template-configuration']"
+            routerLinkActive="router-link-active"
+          >
+            <div class="col-10 strong-text">File Template</div>
+            <div class="col-1">
+              <mat-icon color="primary" svgIcon="caret-right"></mat-icon>
+            </div>
+            <mat-divider mat-inset></mat-divider>
+          </mat-list-item>
+        </mat-list>
+
+        <!-- <div
+          class="row justify-content-around align-items-center side-nav-links"
+          style="height: 80px"
+        >
+          <div class="col-10 float-left text-truncate">
+            <h2>Remove</h2>
+          </div>
+          <div class="col-2 float-right">
+            <mat-icon color="primary" svgIcon="caret-right"></mat-icon>
+          </div>
+        </div> -->
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div class="col-md-9 p-5">
+    <router-outlet></router-outlet>
+  </div>
+</div>

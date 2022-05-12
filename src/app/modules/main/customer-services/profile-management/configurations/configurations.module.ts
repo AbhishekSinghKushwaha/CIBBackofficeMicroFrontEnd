@@ -1,17 +1,26 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { ConfigurationsRoutingModule } from './configurations-routing.module';
 import { ConfigurationsComponent } from './configurations.component';
+import { HolidayConfigurationComponent } from './holiday-configuration/holiday-configuration.component';
+import { FileTemplateComponent } from './file-template/file-template.component';
+import { MatStyleModule } from 'src/app/mat-style.module';
+import { ListFileTemplatesComponent } from './file-template/list-file-templates/list-file-templates.component';
+import { NewFileTemplatesComponent } from './file-template/new-file-templates/new-file-templates.component';
 
 
 @NgModule({
   declarations: [
-    ConfigurationsComponent
+    ConfigurationsComponent,
+    HolidayConfigurationComponent,
+    FileTemplateComponent,
+    ListFileTemplatesComponent,
+    NewFileTemplatesComponent
   ],
   imports: [
     CommonModule,
-    ConfigurationsRoutingModule
+    ConfigurationsRoutingModule,
+    MatStyleModule
   ]
 })
 export class ConfigurationsModule { }
