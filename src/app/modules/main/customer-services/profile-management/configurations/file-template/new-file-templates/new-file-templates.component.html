@@ -1,4 +1,4 @@
-<mat-accordion class="example-headers-align">
+<mat-accordion class="example-headers-align" *ngIf="!stage">
   <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" showToggle>
     <mat-expansion-panel-header>
       <mat-panel-title class="h4 pt-2 pb-2">
@@ -161,6 +161,25 @@
         ></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
       </table>
+      <div class="row mt-3">
+        <div class="row-fluid d-flex justify-content-end mt-5">
+          <button
+            mat-flat-button
+            color="primary"
+            type="button"
+            (click)="saveTemplate()"
+          >
+            Save
+          </button>
+        </div>
+      </div>
     </div>
   </mat-expansion-panel>
 </mat-accordion>
+
+<div class="row" *ngIf="stage === 'completed'">
+  <app-confirmation-completion
+    [data]="completionData"
+    (confirmationDone)="confirmationDone($event)"
+  ></app-confirmation-completion>
+</div>

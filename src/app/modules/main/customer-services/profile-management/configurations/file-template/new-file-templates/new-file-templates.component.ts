@@ -2,6 +2,8 @@ import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
+import { ConfirmationCompletionModel } from 'src/app/core/domain/confirmation-completion.model';
 import { FileTemplateService } from 'src/app/core/services/file-template/file-template.service';
 
 @Component({
@@ -15,10 +17,19 @@ export class NewFileTemplatesComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
   dataSource = new MatTableDataSource();
   data = [];
+  stage: string;
+  completionData: ConfirmationCompletionModel = {
+  buttonText: 'Go to Overview',
+  message: 'Your request has been submitted for approval',
+  subMessage: 'The customer\'s details have been submitted successfully',
+  icon: 'assets/images/backgrounds/visual-support-icons-virtual-account-submission-avatar.svg',
+  category: 'small',
+};
 
   constructor(
     private readonly fileTemplateService: FileTemplateService,
-    private _liveAnnouncer: LiveAnnouncer,) { }
+    private _liveAnnouncer: LiveAnnouncer,
+    private readonly router:Router) { }
 
   ngOnInit(): void {
   }
@@ -65,6 +76,14 @@ export class NewFileTemplatesComponent implements OnInit {
       .openTemplateBuilder('edit')
       .afterClosed()
       .subscribe()
+  }
+
+  saveTemplate() {
+    this.stage = 'completed';
+  }
+
+  confirmationDone(event: any) {
+    this.router.navigate(['/customer-services/corporate-360/configurations'])
   }
 
 }
