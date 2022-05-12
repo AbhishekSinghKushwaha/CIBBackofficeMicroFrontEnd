@@ -1,0 +1,131 @@
+<app-profile-management-top-nav
+  title="Add Roles"
+  toolbarPage="Corporate Onboarding"
+></app-profile-management-top-nav>
+
+<form action="" [formGroup]="rolesForm">
+  <mat-accordion multi>
+    <!-- Customer Identifier -->
+    <mat-expansion-panel
+      [expanded]="panelOpenState.title === true"
+      (opened)="(panelOpenState.title === true)"
+    >
+      <mat-expansion-panel-header class="panel-header">
+        <mat-panel-title>
+          <h2 class="bullets">1</h2>
+          <h2>Role Title</h2>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-divider></mat-divider>
+      <div class="d-flex flex-column">
+        <div class="row pt-4">
+          <div class="col-md-4">
+            <app-input
+              [parentForm]="rolesForm"
+              fieldName="roleTitle"
+              placeholder=""
+              formControlName="roleTitle"
+              label="Role Title"
+            ></app-input>
+          </div>
+        </div>
+      </div>
+    </mat-expansion-panel>
+
+    <!-- Roles -->
+    <mat-expansion-panel
+      [expanded]="panelOpenState.roles === true"
+      (opened)="(panelOpenState.roles === true)"
+    >
+      <mat-expansion-panel-header class="panel-header">
+        <mat-panel-title>
+          <h2 class="bullets">3</h2>
+          <h2>Please select the rights you want to assign to this role</h2>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-divider></mat-divider>
+      <div class="mb-3 mt-3">
+        <div class="row px-5">
+          <div class="col d-flex flex-column">
+            <mat-checkbox color="primary" class="mb-3"
+              >Assisted Onboarding</mat-checkbox
+            >
+            <mat-checkbox color="primary" class="mb-3">Edit Users</mat-checkbox>
+            <mat-checkbox color="primary" class="mb-3"
+              >Assign users roles</mat-checkbox
+            >
+            <mat-checkbox color="primary" class="mb-3"
+              >Block/Unblock users</mat-checkbox
+            >
+            <mat-checkbox color="primary" class="mb-3"
+              >Create user roles</mat-checkbox
+            >
+            <mat-checkbox color="primary" class="mb-3"
+              >Upload payment files</mat-checkbox
+            >
+            <mat-checkbox color="primary" class="mb-3"
+              >View balances</mat-checkbox
+            >
+            <mat-checkbox color="primary" class="mb-3"
+              >Review transaction requests</mat-checkbox
+            >
+          </div>
+          <div class="col d-flex flex-column">
+            <mat-checkbox color="primary" class="mb-3"
+              >Create users</mat-checkbox
+            >
+            <mat-checkbox color="primary" class="mb-3"
+              >Delete Users</mat-checkbox
+            >
+            <mat-checkbox color="primary" class="mb-3"
+              >Set approval workflows</mat-checkbox
+            >
+            <mat-checkbox color="primary" class="mb-3"
+              >Remove user roles</mat-checkbox
+            >
+            <mat-checkbox color="primary" class="mb-3"
+              >Inititate transactions</mat-checkbox
+            >
+            <mat-checkbox color="primary" class="mb-3"
+              >Receive notifications</mat-checkbox
+            >
+            <mat-checkbox color="primary" class="mb-3"
+              >Generate statements</mat-checkbox
+            >
+          </div>
+        </div>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+  <div class="mt-4 mb-4">
+    <mat-card>
+      <mat-card-header class="addition-button">
+        <div class="d-flex flex-row pt-2" style="color: var(--equity)">
+          <mat-icon>add</mat-icon>
+          <p class="mx-3">Additional Role</p>
+        </div>
+      </mat-card-header>
+    </mat-card>
+  </div>
+
+  <div class="d-flex flex-row justify-content-between mt-4 mb-4">
+    <div class="">
+      <button mat-stroked-button color="primary">Quit</button>
+    </div>
+    <div>
+      <div class="d-flex mx-4">
+        <div class="mx-5">
+          <button mat-stroked-button color="primary" (click)="skip()">
+            Skip
+          </button>
+        </div>
+        <div>
+          <button mat-raised-button (click)="saveAndContinue()" color="primary">
+            Save & Continue
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

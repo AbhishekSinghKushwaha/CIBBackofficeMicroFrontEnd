@@ -9,7 +9,8 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: '/customer-services',
+        // redirectTo: '/customer-services',
+        redirectTo: '/dashboard',
         pathMatch: 'full'
       },
       {
