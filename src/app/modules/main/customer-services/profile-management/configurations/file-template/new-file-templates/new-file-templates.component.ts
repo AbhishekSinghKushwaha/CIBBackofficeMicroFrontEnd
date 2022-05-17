@@ -17,19 +17,20 @@ export class NewFileTemplatesComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
   dataSource = new MatTableDataSource();
   data = [];
+  selected = [];
   stage: string;
   completionData: ConfirmationCompletionModel = {
-  buttonText: 'Go to Overview',
-  message: 'Your request has been submitted for approval',
-  subMessage: 'The customer\'s details have been submitted successfully',
-  icon: 'assets/images/backgrounds/visual-support-icons-virtual-account-submission-avatar.svg',
-  category: 'small',
-};
+    buttonText: 'Go to Overview',
+    message: 'Your request has been submitted for approval',
+    subMessage: 'The customer\'s details have been submitted successfully',
+    icon: 'assets/images/backgrounds/visual-support-icons-virtual-account-submission-avatar.svg',
+    category: 'small',
+  };
 
   constructor(
     private readonly fileTemplateService: FileTemplateService,
     private _liveAnnouncer: LiveAnnouncer,
-    private readonly router:Router) { }
+    private readonly router: Router) { }
 
   ngOnInit(): void {
   }
@@ -52,12 +53,12 @@ export class NewFileTemplatesComponent implements OnInit {
 
   openTemplateBuilder() {
     this.fileTemplateService
-      .openTemplateBuilder('new')
+      .openTemplateBuilder('new', [], [])
       .afterClosed()
       .subscribe(data => {
         if (data) {
-          this.data = data;
-          this.dataSource.data = data;
+          this.data = data?.payload;
+          this.dataSource.data = this.data;
           this.dataSource.sort = this.sort;
         }
       })
@@ -73,9 +74,17 @@ export class NewFileTemplatesComponent implements OnInit {
 
   editTemplate() {
     this.fileTemplateService
-      .openTemplateBuilder('edit')
+      .openTemplateBuilder('edit', this.data, this.selected)
       .afterClosed()
-      .subscribe()
+      .subscribe(data => {
+        console.log(data);
+        if (data) {
+          this.data = data?.payload;
+          this.selected = data?.selected;
+          this.dataSource.data = this.data;
+          this.dataSource.sort = this.sort;
+        }
+      })
   }
 
   saveTemplate() {
