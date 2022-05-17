@@ -29,6 +29,7 @@ export const SVG_ICONS = [
   'call.svg',
   'camera-white.svg',
   'card.svg',
+  'caret-right.svg',
   'cashcode-grey.svg',
   'chat.svg',
   'check.svg',
@@ -171,7 +172,10 @@ export const SVG_ICONS = [
   'placeholder-portrait.svg',
   'mandate-signature.svg',
   'placeholder-landscape.svg',
-  'avatar.svg'
+  'avatar.svg',
+  'user.svg',
+  'big-circular-plus.svg',
+  'three-dots-circled.svg'
 ];
 
 export const PROVIDER_ICONS = [

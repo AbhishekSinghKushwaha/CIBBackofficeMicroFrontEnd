@@ -16,9 +16,17 @@ const routes: Routes = [
     data: { title: 'Profile Management' }
   },
   {
+    path: 'corporate-onboarding',
+    loadChildren: (): Promise<any> =>
+      import('./corporate-onboarding/corporate-onboarding.module').then(
+        m => m.CorporateOnboardingModule
+      ),
+    data: { title: 'Profile Management' }
+  },
+  {
     path: 'transaction-approvals',
     loadChildren: (): Promise<any> =>
-      import('./transaction-approvals/transaction-approvals.module').then(m => m.TransactionApprovalsModule),  
+      import('./transaction-approvals/transaction-approvals.module').then(m => m.TransactionApprovalsModule),
   }
 ];
 

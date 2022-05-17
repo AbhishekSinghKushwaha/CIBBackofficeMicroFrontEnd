@@ -1,0 +1,24 @@
+table {
+    width: 100%;
+}
+
+.approved {
+    background: rgba(47, 152, 3, 0.2);
+    border-radius: 32px;
+    color: #2F9803;
+    padding: 8px 12px;
+}
+
+.rejected {
+    background: rgba(230, 0, 0, 0.2);
+    border-radius: 22px;
+    color: var(--red);
+    padding: 8px 12px;
+}
+
+.pending {
+    background: rgba(243, 135, 7, 0.2);
+    border-radius: 22px;
+    color: var(--orange);
+    padding: 8px 12px;
+}
