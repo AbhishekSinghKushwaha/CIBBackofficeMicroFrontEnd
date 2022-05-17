@@ -1,0 +1,28 @@
+hr {
+    margin: 0px !important;
+}
+
+.status {
+    text-transform: capitalize;
+    border-radius: 15px;
+    &.approved {
+      background-color: rgba(47, 152, 3, 0.04);
+      color: var(--green);
+    }
+    &.pending {
+      background-color: rgba(243, 135, 7, 0.04);
+      color: var(--orange);
+    }
+    &.rejected {
+      background-color: rgba(243, 7, 7, 0.04);
+      color: var(--red);
+    }
+  }
+
+.input-width{
+    width: 100%;
+}
+
+.eyeicon {
+    color: #A32A29;
+}

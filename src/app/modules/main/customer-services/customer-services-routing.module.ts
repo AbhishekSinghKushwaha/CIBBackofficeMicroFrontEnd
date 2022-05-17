@@ -14,6 +14,11 @@ const routes: Routes = [
         m => m.ProfileManagementModule
       ),
     data: { title: 'Profile Management' }
+  },
+  {
+    path: 'transaction-approvals',
+    loadChildren: (): Promise<any> =>
+      import('./transaction-approvals/transaction-approvals.module').then(m => m.TransactionApprovalsModule),  
   }
 ];
 

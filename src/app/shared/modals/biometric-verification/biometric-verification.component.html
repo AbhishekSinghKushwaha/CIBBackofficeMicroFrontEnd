@@ -1,0 +1,85 @@
+<div class="biometric-modal-screen p-0">
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-7">
+            <h4 class="strong-text">Biometric verification</h4>
+        </div>
+        <div class="col-md-1">
+            <mat-icon (click)="close()" class="cursor-pointer">close</mat-icon>
+        </div>
+    </div>
+  <div>
+    <p class="text-grey pt-4 mb-2">If the required signatory as per the mandate is not present, select skip bio and submit a bio-override request.</p>
+    <!-- <div class="user-action me-2">
+        <span class="user-action-short">BM</span>
+        <span class="user-action-username">Mathias Ojwang</span>
+    </div> -->
+    <div class="d-flex justify-content-start">
+        <div>
+            <span class="user-action-short">MO</span>
+        </div>
+        <div class="ps-3">
+            <span><small>Mathias Ojwang</small></span><br>
+            <span><small><small class="text-grey">Account name</small></small></span>
+        </div>
+    </div>
+    <div class="col-lg-12">
+        <div class="d-flex flex-column my-3">
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <span class="text-grey">Account number</span><br>
+                    <span>12345677</span>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <span class="text-grey">Account type</span><br>
+                    <span>Individual</span>
+                    </div>
+                <div class="col-md-4 mb-3">
+                    <span class="text-grey">Account mandate</span><br>
+                    <span>Self</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <mat-divider></mat-divider>
+    <p class="text-grey pt-4 mb-2">Place and hold the index finger on the fingerprint reader until the screen indicates that the scan is successful.</p>  
+
+    <div class="row col-md-12 pb-3">
+        <div class="col-md-6 upload ms-2">
+            <mat-icon class="customIcon">fingerprint</mat-icon>
+        </div>
+        <div class="col-md-6 bio ms-3">
+            <div class="d-flex justify-content-between pt-1">
+                <div class="d-flex justify-content-start">
+                    <div>
+                        <span class="user-action-short">MO</span>
+                    </div>
+                    <div class="ps-3">
+                        <span><small>Mathias Ojwang</small></span><br>
+                        <span><small><small class="text-grey">Bio required</small></small></span>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-between verified">
+                    <mat-icon color="success">check_circle</mat-icon>
+                    <small class="px-2">Verified</small> 
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="d-flex justify-content-end pb-2">
+        <div class="pe-3">
+            <button mat-stroked-button color="primary" class="px-5">Skip BIO</button>
+        </div>
+        <div>
+            <button
+            mat-raised-button
+            type="submit"
+            color="primary"
+            class="px-5"
+          >
+            Continue
+          </button>
+        </div>
+    </div>
+  </div>
+</div>
