@@ -2,21 +2,17 @@ import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { FileTemplateService } from 'src/app/core/services/file-template/file-template.service';
+import * as moment from 'moment';
 
 export interface FileTemplateModel {
   name: string;
   module: string;
   user: string;
-  created: string;
+  created: any;
 }
 
-const ELEMENT_DATA: FileTemplateModel[] = [
-  { name: 'Bulk Payment', module: 'Transact', user: 'John Ogbu', created: '01/04/22' },
-  { name: 'Beneficiary', module: 'Transact', user: 'Teslim James', created: '01/05/22' },
-  { name: 'Salary', module: 'Transact', user: 'John Ogbu', created: '01/03/22' },
-  { name: 'Name', module: 'Department', user: 'Jane Doe', created: '01/02/22' },
-  { name: 'User Name', module: 'Department Name', user: 'Phoebe Jane', created: '01/06/22' },
-];
+const ELEMENT_DATA: FileTemplateModel[] = [];
 
 @Component({
   selector: 'app-list-file-templates',
@@ -28,9 +24,24 @@ export class ListFileTemplatesComponent implements OnInit, AfterViewInit {
   dataSource = new MatTableDataSource(ELEMENT_DATA);
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private _liveAnnouncer: LiveAnnouncer) { }
+  constructor(private _liveAnnouncer: LiveAnnouncer,
+    private readonly fileTemplateService: FileTemplateService,) { }
 
   ngOnInit(): void {
+    this.getTemplates();
+  }
+
+  getTemplates() {
+    this.fileTemplateService.getTemplates('cd6724dd56c6481b8be9dadfe1bbf805')
+      .subscribe((response: any) => {
+        console.log(response);
+        if (response.isSuccessful) {
+          for (const item of response.data) {
+            ELEMENT_DATA.push({ name: item.templateName, module: item.module, user: 'Unset', created: moment(item.createdAt) })
+          }
+          this.dataSource = new MatTableDataSource(ELEMENT_DATA);
+        }
+      })
   }
 
   ngAfterViewInit() {
