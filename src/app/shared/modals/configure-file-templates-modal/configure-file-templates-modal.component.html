@@ -135,7 +135,7 @@
         </td>
       </ng-container>
 
-      <ng-container matColumnDef="businessRule">
+      <ng-container matColumnDef="businessRules">
         <th
           mat-header-cell
           *matHeaderCellDef
@@ -150,7 +150,7 @@
           [formGroupName]="i"
         >
           <span *ngIf="!element.value.edit">
-            {{ element.value.businessRule }}</span
+            {{ element.value.businessRules }}</span
           >
           <mat-form-field *ngIf="element.value.edit">
             <mat-label>Business Rule</mat-label>
@@ -161,7 +161,7 @@
               #autosize="cdkTextareaAutosize"
               cdkAutosizeMinRows="1"
               cdkAutosizeMaxRows="5"
-              formControlName="businessRule"
+              formControlName="businessRules"
             ></textarea>
           </mat-form-field>
         </td>

@@ -6,31 +6,40 @@
       </mat-panel-title>
     </mat-expansion-panel-header>
     <mat-divider class="ms-3 me-3"></mat-divider>
-    <div class="row mt-3">
-      <div class="col-md-8">
-        <div class="row">
-          <div class="col-md-3">
-            <mat-form-field appearance="fill" class="" floatLabel="always">
-              <mat-label>Template name</mat-label>
-              <input matInput />
-            </mat-form-field>
-          </div>
-          <div class="col-md-3">
-            <mat-form-field appearance="fill" floatLabel="always">
-              <mat-label>Module</mat-label>
-              <mat-select>
-                <mat-option value="Fund Transfer"> Fund Transfer </mat-option>
-                <mat-option value="Salaries"> Salaries </mat-option>
-                <mat-option value="Beneficiary"> Beneficiary </mat-option>
-                <mat-option value="user Management">
-                  user Management
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
+    <form [formGroup]="templateForm" autocomplete="off">
+      <div class="row mt-3">
+        <div class="col-md-8">
+          <div class="row">
+            <div class="col-md-3">
+              <mat-form-field appearance="fill" class="" floatLabel="always">
+                <mat-label>Template name</mat-label>
+                <input
+                  input
+                  matInput
+                  type="text"
+                  id="templateName"
+                  formControlName="templateName"
+                  placeholder="Enter template name"
+                />
+              </mat-form-field>
+            </div>
+            <div class="col-md-3">
+              <mat-form-field appearance="fill" floatLabel="always">
+                <mat-label>Module</mat-label>
+                <mat-select formControlName="module">
+                  <mat-option value="Fund Transfer"> Fund Transfer </mat-option>
+                  <mat-option value="Salaries"> Salaries </mat-option>
+                  <mat-option value="Beneficiary"> Beneficiary </mat-option>
+                  <mat-option value="user Management">
+                    user Management
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </form>
   </mat-expansion-panel>
 
   <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(0)" showToggle>
@@ -120,7 +129,7 @@
           </td>
         </ng-container>
 
-        <ng-container matColumnDef="businessRule">
+        <ng-container matColumnDef="businessRules">
           <th
             mat-header-cell
             *matHeaderCellDef
@@ -130,7 +139,7 @@
             Business Rule
           </th>
           <td mat-cell *matCellDef="let element">
-            <p>{{ element.businessRule }}</p>
+            <p>{{ element.businessRules }}</p>
           </td>
         </ng-container>
 
@@ -168,6 +177,7 @@
             color="primary"
             type="button"
             (click)="saveTemplate()"
+            [disabled]="templateForm.status === 'INVALID' || !data?.length"
           >
             Save
           </button>

@@ -9,6 +9,7 @@ import { ListFileTemplatesComponent } from './file-template/list-file-templates/
 import { NewFileTemplatesComponent } from './file-template/new-file-templates/new-file-templates.component';
 import { SharedModalsModule } from 'src/app/shared/modals/shared-modals.module';
 import { ConfirmationCompletionComponent } from 'src/app/shared/components/confirmation-completion/confirmation-completion.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -25,6 +26,7 @@ import { ConfirmationCompletionComponent } from 'src/app/shared/components/confi
     ConfigurationsRoutingModule,
     MatStyleModule,
     SharedModalsModule,
+    ReactiveFormsModule
   ],
 })
 export class ConfigurationsModule { }

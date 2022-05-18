@@ -5,4 +5,5 @@ export interface ConfirmationCompletionModel {
   icon: string;
   buttonText: string;
   category?: string;
+  content?: any[]
 }

@@ -16,7 +16,7 @@ import { FileTemplateService } from 'src/app/core/services/file-template/file-te
   styleUrls: ['./configure-file-templates-modal.component.scss']
 })
 export class ConfigureFileTemplatesModalComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'name', 'required', 'type', 'businessRule', 'action'];
+  displayedColumns: string[] = ['id', 'name', 'required', 'type', 'businessRules', 'action'];
   @ViewChild(MatSort) sort: MatSort;
   selection = new SelectionModel<TemplateModel>(true, []);
   @ViewChild('autosize', { static: false }) autosize: CdkTextareaAutosize;
@@ -83,7 +83,7 @@ export class ConfigureFileTemplatesModalComponent implements OnInit {
       name: [data.name, Validators.required],
       required: [data.required, Validators.required],
       type: [data.type, Validators.required],
-      businessRule: [data.businessRule, Validators.required],
+      businessRules: [data.businessRules, Validators.required],
       edit: [true],
       check: [false],
     });
@@ -104,7 +104,7 @@ export class ConfigureFileTemplatesModalComponent implements OnInit {
         name: '',
         required: '',
         type: '',
-        businessRule: '',
+        businessRules: '',
         edit: true,
         check: false
       })

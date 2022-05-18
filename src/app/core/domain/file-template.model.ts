@@ -6,7 +6,7 @@ export interface TemplateModel {
   name: string;
   required: string;
   type: string;
-  businessRule: string;
+  businessRules: string;
   edit: boolean;
   check: boolean;
 }
