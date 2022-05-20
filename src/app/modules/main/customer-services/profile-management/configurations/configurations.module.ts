@@ -10,6 +10,8 @@ import { NewFileTemplatesComponent } from './file-template/new-file-templates/ne
 import { SharedModalsModule } from 'src/app/shared/modals/shared-modals.module';
 import { ConfirmationCompletionComponent } from 'src/app/shared/components/confirmation-completion/confirmation-completion.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ListHolidaysComponent } from './holiday-configuration/list-holidays/list-holidays.component';
+import { CreateHolidayModalComponent } from '../../../../../shared/modals/create-holiday-modal/create-holiday-modal.component';
 
 
 @NgModule({
@@ -20,6 +22,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     ListFileTemplatesComponent,
     NewFileTemplatesComponent,
     ConfirmationCompletionComponent,
+    ListHolidaysComponent,
   ],
   imports: [
     CommonModule,
