@@ -1,9 +1,11 @@
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { ConfirmationCompletionModel } from 'src/app/core/domain/confirmation-completion.model';
+import { TemplateModel } from 'src/app/core/domain/file-template.model';
 import { FileTemplateService } from 'src/app/core/services/file-template/file-template.service';
 
 @Component({
@@ -13,30 +15,40 @@ import { FileTemplateService } from 'src/app/core/services/file-template/file-te
 })
 export class NewFileTemplatesComponent implements OnInit {
   step = 0;
-  displayedColumns: string[] = ['id', 'name', 'required', 'type', 'businessRule', 'action'];
+  displayedColumns: string[] = ['id', 'name', 'required', 'type', 'businessRules', 'action'];
   @ViewChild(MatSort) sort: MatSort;
   dataSource = new MatTableDataSource();
-  data = [];
+  data: TemplateModel[] = [];
+  selected = [];
   stage: string;
   completionData: ConfirmationCompletionModel = {
-  buttonText: 'Go to Overview',
-  message: 'Your request has been submitted for approval',
-  subMessage: 'The customer\'s details have been submitted successfully',
-  icon: 'assets/images/backgrounds/visual-support-icons-virtual-account-submission-avatar.svg',
-  category: 'small',
-};
+    buttonText: 'Go to Overview',
+    message: 'Your request has been submitted for approval',
+    subMessage: 'The customer\'s details have been submitted successfully',
+    icon: 'assets/images/backgrounds/visual-support-icons-virtual-account-submission-avatar.svg',
+  };
+  templateForm: FormGroup;
 
   constructor(
     private readonly fileTemplateService: FileTemplateService,
     private _liveAnnouncer: LiveAnnouncer,
-    private readonly router:Router) { }
+    private readonly router: Router) { }
 
   ngOnInit(): void {
+    this.initForm()
   }
 
   ngAfterViewInit() {
     this.dataSource.sort = this.sort;
   }
+
+  initForm() {
+    this.templateForm = new FormGroup({
+      templateName: new FormControl(null, [Validators.required]),
+      module: new FormControl(null, [Validators.required]),
+    });
+  }
+
 
   setStep(index: number) {
     this.step = index;
@@ -52,12 +64,12 @@ export class NewFileTemplatesComponent implements OnInit {
 
   openTemplateBuilder() {
     this.fileTemplateService
-      .openTemplateBuilder('new')
+      .openTemplateBuilder('new', [], [])
       .afterClosed()
       .subscribe(data => {
         if (data) {
-          this.data = data;
-          this.dataSource.data = data;
+          this.data = data?.payload;
+          this.dataSource.data = this.data;
           this.dataSource.sort = this.sort;
         }
       })
@@ -73,13 +85,32 @@ export class NewFileTemplatesComponent implements OnInit {
 
   editTemplate() {
     this.fileTemplateService
-      .openTemplateBuilder('edit')
+      .openTemplateBuilder('edit', this.data, this.selected)
       .afterClosed()
-      .subscribe()
+      .subscribe(data => {
+        console.log(data);
+        if (data) {
+          this.data = data?.payload;
+          this.selected = data?.selected;
+          this.dataSource.data = this.data;
+          this.dataSource.sort = this.sort;
+        }
+      })
   }
 
   saveTemplate() {
-    this.stage = 'completed';
+    this.fileTemplateService
+      .saveTemplate({
+        ...this.templateForm.getRawValue(),
+        corporateId: "cd6724dd56c6481b8be9dadfe1bbf805",
+        columns: [...this.data.map((item, i) => ({ ...item, columnId: 0 }))]
+      }).subscribe((response: any) => {
+        if (response?.isSuccessful) {
+          this.stage = 'completed';
+        }
+        console.log(response);
+      })
+
   }
 
   confirmationDone(event: any) {

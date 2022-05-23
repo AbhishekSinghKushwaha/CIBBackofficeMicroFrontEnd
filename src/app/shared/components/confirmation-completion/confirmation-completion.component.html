@@ -24,6 +24,15 @@
     <div class="row mt-3 mb-3" *ngIf="data?.category === 'small'">
       <img class="img-fluid mt-4 mb-4 width-60" [src]="data.icon" />
     </div>
+    <div class="row gx-0 p-4" *ngIf="data?.content">
+      <div
+        *ngFor="let item of data.content"
+        class="col-lg-6 col-md-6 col-sm-12 mb-3"
+      >
+        <span class="text-grey text-sm">{{ item.key }}</span>
+        <p class="mb-0 text-sm pb-0" [innerHTML]="item.value"></p>
+      </div>
+    </div>
     <div class="pt-5" [ngClass]="{ row: data?.category === 'small' }">
       <button mat-raised-button color="primary" (click)="done()">
         {{ data.buttonText }}
