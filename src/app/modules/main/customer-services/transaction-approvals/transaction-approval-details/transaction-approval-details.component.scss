@@ -26,3 +26,16 @@ hr {
 .eyeicon {
     color: #A32A29;
 }
+
+.strech-img {
+  object-fit: cover;
+}
+
+::ng-deep .mat-select-panel .mat-option {
+  height: 5em !important;
+  padding-bottom: 5px !important;
+}
+
+:host ::ng-deep .mat-select-arrow { 
+  opacity: 0; 
+}

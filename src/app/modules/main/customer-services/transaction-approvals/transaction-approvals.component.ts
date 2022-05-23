@@ -5,6 +5,9 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { UserListModel } from 'src/app/core/domain/user.model';
 import { Router } from '@angular/router';
+import { MatMenuTrigger } from '@angular/material/menu';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatPaginatorIntl } from '@angular/material/paginator';
 
 export type UserStatus = 'approved' | 'rejected' | 'pending';
 
@@ -22,7 +25,25 @@ export interface User {
 
 interface Approval {
   text: string;
-  subtext: string;
+}
+
+export function CustomPaginator() {
+  const customPaginatorIntl = new MatPaginatorIntl();
+
+  customPaginatorIntl.itemsPerPageLabel = 'Rows per page';
+
+  customPaginatorIntl.getRangeLabel = (page: number, pageSize: number, length: number) => {
+    if (length === 0 || pageSize === 0) {
+      return `0 à ${length }`;
+    }
+    length = Math.max(length, 0);
+    const startIndex = page * pageSize;
+    // If the start index exceeds the list length, do not try and fix the end index to the end.
+    const endIndex = startIndex < length ? Math.min(startIndex + pageSize, length) : startIndex + pageSize;
+    return `${startIndex + 1} - ${endIndex} of ${length} items`;
+  };
+
+  return customPaginatorIntl;
 }
 
 @Component({
@@ -35,6 +56,10 @@ export class TransactionApprovalsComponent implements OnInit, AfterViewInit  {
 
   @ViewChild(MatSort)
   private sort: MatSort;
+
+  @ViewChild('trigger') trigger: any;
+
+  @ViewChild('paginator') paginator: MatPaginator;
 
   displayedColumns: string[] = [
     'select',
@@ -62,13 +87,25 @@ export class TransactionApprovalsComponent implements OnInit, AfterViewInit  {
   searchControl: FormControl = new FormControl({ value: '', disabled: false });
 
   selection = new SelectionModel<UserListModel>(true, []);
+  searchText: string;
+
+  pageSize = 10;
+  pageSizes = [5,10,20];
+
+  searchType: any;
 
   constructor(
     private router: Router
   ) { }
 
-  approval: Approval[] = [
-    {text: 'Company CIF', subtext: 'The details provided by the maker are all okay.'}
+  filterItems: Approval[] = [
+    {text: 'Corporate name'},
+    {text: 'Transaction type'},
+    {text: 'Account number'},
+    {text: 'Corporate reference'},
+    {text: 'Corporate CIiff'},
+    {text: 'Date'},
+    {text: 'Company CIF'}
   ];
 
   ngOnInit(): void {
@@ -90,6 +127,7 @@ export class TransactionApprovalsComponent implements OnInit, AfterViewInit  {
 
   ngAfterViewInit(): void {
     this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
   }
 
   openActionsMenu(user: User) {
@@ -117,6 +155,15 @@ export class TransactionApprovalsComponent implements OnInit, AfterViewInit  {
 
   approve() {
     this.router.navigate(['/customer-services/transaction-approvals/success']);
+  }
+
+  closeFilter(menuTrigger: MatMenuTrigger) {
+    menuTrigger.closeMenu();
+  }
+
+  onSelected(item: any) {
+    console.log(item);
+    this.searchType = item;
   }
 
 }
