@@ -1,0 +1,293 @@
+<link rel="stylesheet" href="https://fonts.sandbox.google.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+
+<mat-card class="mb-3">
+    <div class="d-flex justify-content-between p-1">
+        <div class="d-flex justify-content-start">
+            <div>
+                Bulk Funds Transfer Request
+            </div>
+            <div class="ps-2">
+                <hr width="1" size="25">
+            </div>
+            <div class="ps-2">
+                <small class="text-grey">Ticket ID 453345</small>
+            </div>
+        </div>
+        <div class="status" ngClass="pending">
+            pending
+        </div>
+    </div>    
+</mat-card>
+
+<mat-card class="mb-3">
+    <div class="p-1 pb-2">
+        Customer account details
+    </div>
+    <mat-divider></mat-divider>
+    <mat-card-content>
+        <div class="row gx-0">
+            <div class="col-lg-3">
+                <mat-icon
+                  class="align-self-center p-3"
+                  svgIcon="placeholder-portrait"
+                  aria-hidden="false"
+                  aria-label="placeholder-potrait"
+                  style="width: 200px; height: 200px"
+                >
+                </mat-icon>
+            </div>
+            <div class="col-lg-9">
+            <div class="d-flex flex-column m-3">
+                <div class="row">
+                  <div class="col-md-4 mb-3">
+                    <p class="text-grey">Account name</p>
+                    <p>Mathias Ltd.</p>
+                  </div>
+                  <div class="col-md-4 mb-3">
+                    <p class="text-grey">Account type</p>
+                    <p>Entity</p>
+                  </div>
+                  <div class="col-md-4 mb-3">
+                    <p class="text-grey">Mandate type</p>
+                    <p>All to sign</p>
+                  </div>
+                  <div class="col-md-4 mb-3">
+                    <p class="text-grey">CIF</p>
+                    <p>2342443</p>
+                  </div>
+                  <div class="col-md-4 mb-3">
+                    <p class="text-grey">Phone number</p>
+                    <p>+254 78955442</p>
+                  </div>
+                  <div class="col-md-4 mb-3">
+                    <p class="text-grey">Email</p>
+                    <p>mathias@gmail.com</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+        
+    </mat-card-content>
+</mat-card>
+
+<mat-card class="mb-3">
+    <div class="p-1 pb-2">
+        Bulk funds transfer details
+    </div>
+    <mat-divider></mat-divider>
+    <mat-card-content class="m-0 p-0">
+        <mat-tab-group
+          mat-stretch-tabs
+          class="example-stretched-tabs mat-elevation-z4"
+        >
+          <mat-tab label="Payment details">
+            <div class="col-lg-12">
+                <div class="d-flex flex-column m-3">
+                    <div class="row">
+                      <div class="col-md-3 mb-3">
+                        <p class="text-grey">Total batch amount</p>
+                        <p>2,000,000.00 KES</p>
+                      </div>
+                      <div class="col-md-3 mb-3">
+                        <p class="text-grey">Total Charges</p>
+                        <p>90,000.00 </p>
+                      </div>
+                      <div class="col-md-3 mb-3">
+                        <p class="text-grey">Daily rate</p>
+                        <p>12%</p>
+                      </div>
+                      <div class="col-md-3 mb-3">
+                        <p class="text-grey">Bulk payment option</p>
+                        <p>Single debit</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>  
+          </mat-tab>
+          <mat-tab label="Uploaded documents">
+              <div class="row col-md-12 ps-4">
+                <div class="col-md-4 my-4">
+                    <mat-card>
+                      <img
+                        height="100vh"
+                        mat-card-image
+                        src="assets/images/icons/placeholder-portrait.svg"
+                        class="strech-img"
+                      />
+        
+                      <div class="d-flex justify-content-between">
+                          <div>
+                            <span>Transaction template</span><br>
+                            <small class="text-grey">1.2 mb</small>
+                          </div>
+                          <div>
+                            <mat-icon class="material-symbols-outlined eyeicon">visibility</mat-icon>
+                          </div>
+                      </div>
+                    </mat-card>
+                  </div>
+                  <div class="col-md-4 my-4">
+                    <mat-card>
+                      <img
+                        height="100vh"
+                        mat-card-image
+                        src="assets/images/icons/placeholder-portrait.svg"
+                        class="strech-img"
+                      />
+        
+                      <div class="d-flex justify-content-between">
+                          <div>
+                            <span>Board of Resolution</span><br>
+                            <small class="text-grey">1.2 mb</small>
+                          </div>
+                          <div>
+                            <mat-icon class="material-symbols-outlined eyeicon">visibility</mat-icon>
+                          </div>
+                      </div>
+                    </mat-card>
+                  </div>
+                  <div class="col-md-4 my-4">
+                    <mat-card>
+                      <img
+                        height="100vh"
+                        mat-card-image
+                        src="assets/images/icons/placeholder-portrait.svg"
+                        class="strech-img"
+                      />
+        
+                      <div class="d-flex justify-content-between">
+                          <div>
+                            <span>Letter of introduction from DSDO</span><br>
+                            <small class="text-grey">1.2 mb</small>
+                          </div>
+                          <div>
+                            <mat-icon class="material-symbols-outlined eyeicon">visibility</mat-icon>
+                          </div>
+                      </div>
+                    </mat-card>
+                  </div>
+              </div>
+          </mat-tab>
+        </mat-tab-group>
+      </mat-card-content>
+</mat-card>
+
+<form [formGroup]="callBackDetailsForm">
+<mat-card class="mb-3">
+    <div class="p-1">
+        Callback details
+        <p><small class="text-grey">
+            Review request and give additional comments if the request is returned or rejected. 
+            Add the information of the person contacted during callback.
+        </small></p>
+    </div>
+    <mat-divider></mat-divider>
+    <mat-card-content class="pt-3">
+        <div class="col-lg-12">
+            <div class="d-flex flex-column m-3" formArrayName="callBackDetails">
+                <div class="row" 
+                *ngFor="let items of callBackDetails?.controls; let i = index" [formGroupName]="i">
+                  <div class="col-md-3">
+                    <mat-form-field class="input-width" appearance="fill">
+                        <mat-label>Callback person*</mat-label>
+                        <input type="text" matInput formControlName="callBackPerson">
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-3">
+                    <mat-form-field appearance="fill" class="input-width">
+                        <mat-label>Date contacted*</mat-label>
+                        <input matInput [matDatepicker]="picker" formControlName="dateContacted">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                      </mat-form-field>
+                  </div>
+                  <div class="col-md-3">
+                    <mat-form-field class="input-width" appearance="fill">
+                        <mat-label>Time contacted*</mat-label>
+                        <input type="text" matInput formControlName="timeContacted">
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-3">
+                    <mat-form-field class="input-width" appearance="fill">
+                        <mat-label>Mobile number</mat-label>
+                        <input type="text" matInput formControlName="mobileNumber">
+                    </mat-form-field>
+                  </div>
+                </div>
+              </div>
+              <div class="border rounded search-filter">
+                <div class="d-flex justify-content-start eyeicon pt-3 ps-3" (click)="addCallBackDetails()">
+                  <div class="cursor-pointer">
+                    <mat-icon>add</mat-icon>
+                  </div>
+                  <div class="strong-text cursor-pointer">
+                    Add another callback entry
+                  </div>
+                </div>  
+              </div>
+            </div>  
+    </mat-card-content>
+</mat-card>
+</form>
+
+<form autocomplete="off" [formGroup]="transactionApprovalDetailsForm">
+<mat-card class="mb-3">
+    <div class="p-1">
+        Approval
+        <p><small class="text-grey">
+            Please approve and give additional comments.
+        </small></p>
+    </div>
+    <mat-divider></mat-divider>
+    <mat-card-content class="pt-3">
+        <div class="col-lg-12">
+            <div class="d-flex flex-column m-3">
+                <div class="row">
+                  <div class="col-md-6">
+                    <mat-form-field appearance="fill" class="input-width">
+                        <mat-label>Approve, return or reject ticket*</mat-label>
+                        <mat-select formControlName="approval" id="approval" name="approval">
+                          <mat-select-trigger>
+                            {{transactionApprovalDetailsForm.get('approval')?.value}}
+                          </mat-select-trigger>
+                          <mat-option *ngFor="let data of approval" [value]="data.text" class="p-4">
+                            {{data.text}}
+                            <p><small class="text-grey">{{data.subtext}}</small></p>
+                            <mat-divider></mat-divider>
+                          </mat-option>
+                        </mat-select>
+                        <mat-icon matSuffix>expand_more</mat-icon>
+                      </mat-form-field>
+                  </div>
+                  
+                  <div class="col-md-6">
+                    <mat-form-field class="input-width" appearance="fill">
+                        <mat-label>Comments</mat-label>
+                        <input matInput #message maxlength="100">
+                        <mat-hint align="end">{{message.value.length}} / 100</mat-hint>
+                    </mat-form-field>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </mat-card-content>
+</mat-card>
+</form>
+
+<div class="d-flex justify-content-between pb-5">
+    <div>
+        <button mat-stroked-button color="primary" class="px-5">Cancel</button>
+    </div>
+    <div>
+        <button
+        mat-raised-button
+        type="submit"
+        color="primary"
+        class="px-5"
+        (click)="Submit()"
+      >
+        Submit
+      </button>
+    </div>
+</div>
