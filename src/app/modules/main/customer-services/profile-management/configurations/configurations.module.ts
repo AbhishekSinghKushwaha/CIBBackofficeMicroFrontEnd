@@ -10,7 +10,8 @@ import { NewFileTemplatesComponent } from './file-template/new-file-templates/ne
 import { SharedModalsModule } from 'src/app/shared/modals/shared-modals.module';
 import { ConfirmationCompletionComponent } from 'src/app/shared/components/confirmation-completion/confirmation-completion.component';
 import { ReactiveFormsModule } from '@angular/forms';
-
+import { WorkflowManagementModule } from './workflow-management/workflow-management.module';
+import { CreateWorkflowModule } from './workflow-management/create-workflow/create-workflow.module';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     ConfigurationsRoutingModule,
     MatStyleModule,
     SharedModalsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    WorkflowManagementModule,
+    CreateWorkflowModule
   ],
 })
 export class ConfigurationsModule { }

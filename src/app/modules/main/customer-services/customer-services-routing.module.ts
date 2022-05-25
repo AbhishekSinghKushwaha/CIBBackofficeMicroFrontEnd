@@ -27,6 +27,14 @@ const routes: Routes = [
     path: 'transaction-approvals',
     loadChildren: (): Promise<any> =>
       import('./transaction-approvals/transaction-approvals.module').then(m => m.TransactionApprovalsModule),
+  },
+  {
+    path: 'create-workflow-management',
+    loadChildren: () => import('./profile-management/configurations/workflow-management/create-workflow/create-workflow.module').then(m => m.CreateWorkflowModule)
+  },
+  {
+    path: 'workflow-management/:id/:mode',
+    loadChildren: () => import('./profile-management/configurations/workflow-management/create-workflow/create-workflow.module').then(m => m.CreateWorkflowModule)
   }
 ];
 

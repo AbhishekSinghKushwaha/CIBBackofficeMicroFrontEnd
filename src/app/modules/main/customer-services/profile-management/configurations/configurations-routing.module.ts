@@ -5,6 +5,8 @@ import { FileTemplateComponent } from './file-template/file-template.component';
 import { ListFileTemplatesComponent } from './file-template/list-file-templates/list-file-templates.component';
 import { NewFileTemplatesComponent } from './file-template/new-file-templates/new-file-templates.component';
 import { HolidayConfigurationComponent } from './holiday-configuration/holiday-configuration.component';
+import { WorkflowManagementComponent } from './workflow-management/workflow-management.component';
+import { CreateWorkflowComponent } from './workflow-management/create-workflow/create-workflow.component';
 
 const routes: Routes = [
   {
@@ -23,6 +25,10 @@ const routes: Routes = [
           { path: 'list', component: ListFileTemplatesComponent },
           { path: 'new', component: NewFileTemplatesComponent },
         ]
+      },
+      {
+        path: 'workflow-management',
+        loadChildren: () => import('./workflow-management/workflow-management.module').then(m => m.WorkflowManagementModule)
       },
     ]
   }
