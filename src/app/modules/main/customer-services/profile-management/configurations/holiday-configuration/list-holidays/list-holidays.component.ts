@@ -47,9 +47,16 @@ export class ListHolidaysComponent implements OnInit {
     this.holidayConfigurationService
       .openNewHoliday(data)
       .afterClosed()
-      .subscribe((respo) => {
-        this.getHolidays();
+      .subscribe((response) => {
+        console.log(response)
+        this.holidayConfigurationService.saveHoliday(response, 'cd6724dd56c6481b8be9dadfe1bbf805')
+          .subscribe((hols: any) => {
+            console.log(hols);
+            if (response.isSuccessful) {
+              this.getHolidays();
         this.stage = 'completed'
+            }
+          })
       })
   }
 
@@ -62,7 +69,7 @@ export class ListHolidaysComponent implements OnInit {
   }
   delete(data: HolidayConfigurationModel) {
     this.holidayConfigurationService
-      .deleteHolidays('cd6724dd56c6481b8be9dadfe1bbf805', data.id)
+      .deleteHolidays('cd6724dd56c6481b8be9dadfe1bbf805', data.holidayDate)
       .subscribe((response) => {
         this.getHolidays();
       })

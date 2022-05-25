@@ -33,27 +33,16 @@ export class HolidayConfigurationService {
     this.createHolidayRef.close(data);
   }
 
-  saveHoliday(payload: HolidayConfigurationModel) {
-    // return this.http.post(`${urlList.fileTemplate.submitFileTemplate}/${payload.corporateId}`, payload);
-    console.log(payload)
-    const exists = this.holidays.some(holiday => holiday.id === payload?.id);
-    if (exists) {
-      this.holidays = this.holidays.map(holiday => holiday.id === payload.id ? payload : { ...holiday, id: this.holidays.length + 1 })
-    } else {
-      this.holidays.push({ ...payload, id: this.holidays.length + 1 });
-    }
-    return of({ isSuccessful: true, data: this.holidays })
+  saveHoliday(payload: any, corporateId: string) {
+    return this.http.post(`${urlList.fileTemplate.submitFileTemplate}/${corporateId}`, payload);
   }
 
   getHolidays(corporateId: string) {
-    // return this.http.get(`${urlList.fileTemplate.submitFileTemplate}/${corporateId}`);
-    return of({ isSuccessful: true, data: this.holidays })
+    return this.http.get(`${urlList.holidayConfiguration.getHolidays}/${corporateId}`);
   }
 
-  deleteHolidays(corporateId: string, id?: number) {
-    // return this.http.get(`${urlList.fileTemplate.submitFileTemplate}/${corporateId}`);
-    this.holidays = this.holidays.filter(holiday => holiday.id !== id)
-    return of({ isSuccessful: true, data: this.holidays })
+  deleteHolidays(corporateId: string, holidayId: string) {
+    return this.http.put(`${urlList.fileTemplate.submitFileTemplate}/${corporateId}`, { holidayId });
   }
 
 }

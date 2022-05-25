@@ -11,7 +11,11 @@ const routes: Routes = [
   {
     path: '', component: ConfigurationsComponent,
     children: [
-      { path: '', redirectTo: 'file-template-configuration',pathMatch:'full' },
+      {
+        path: '',
+        redirectTo: 'file-template-configuration',
+        pathMatch: 'full'
+      },
       {
         path: 'holiday-configuration',
         component: HolidayConfigurationComponent,

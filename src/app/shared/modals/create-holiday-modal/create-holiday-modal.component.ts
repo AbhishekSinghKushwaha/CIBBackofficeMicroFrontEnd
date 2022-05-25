@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { HolidayConfigurationModel } from 'src/app/core/domain/holiday-config.model';
 import { HolidayConfigurationService } from 'src/app/core/services/holiday-configuration/holiday-configuration.service';
+import * as moment from 'moment'
 
 @Component({
   selector: 'app-create-holiday-modal',
@@ -24,8 +25,8 @@ export class CreateHolidayModalComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     console.log(this.data)
     this.data && this.myForm.setValue({
-      name: this.data.name,
-      date: this.data.date
+      holidayName: this.data.holidayName,
+      holidayDate: this.data.holidayDate
     })
   }
 
@@ -34,15 +35,15 @@ export class CreateHolidayModalComponent implements OnInit, AfterViewInit {
   }
 
   submitHoliday() {
-    this.holidayConfigurationService
-      .saveHoliday({ ...this.data, ...this.myForm.value })
-      .subscribe(data => this.dialogRef.close(this.myForm.value));
+    const value = { ...this.data, ...this.myForm.value, holidayDate: moment(this.myForm.value.holidayDate).format("YYYY-MM-DDTHH:mm:ss"), };
+    console.log(value, this.myForm.value);
+    this.dialogRef.close(value)
   }
 
   initForm() {
     this.myForm = new FormGroup({
-      name: new FormControl(null, [Validators.required]),
-      date: new FormControl(null, [Validators.required]),
+      holidayName: new FormControl(null, [Validators.required]),
+      holidayDate: new FormControl(null, [Validators.required]),
     });
   }
 

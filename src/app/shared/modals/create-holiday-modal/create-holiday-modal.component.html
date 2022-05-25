@@ -8,23 +8,23 @@
     <form [formGroup]="myForm" (ngSubmit)="submitHoliday()" autocomplete="off">
       <div class="row">
         <mat-form-field class="col-md-12" appearance="legacy" color="accent">
-          <mat-label for="name"> Holiday Name </mat-label>
+          <mat-label for="holidayName"> Holiday Name </mat-label>
           <input
             matInput
             type="text"
-            id="name"
-            formControlName="name"
+            id="holidayName"
+            formControlName="holidayName"
             placeholder="Enter Holiday Name"
           />
         </mat-form-field>
       </div>
       <div class="row">
         <mat-form-field class="col-md-12" appearance="legacy" color="accent">
-          <mat-label for="ContactName"> Date </mat-label>
+          <mat-label for="holidayDate"> Date </mat-label>
           <input
             matInput
             [matDatepicker]="picker"
-            formControlName="date"
+            formControlName="holidayDate"
             placeholder="Select Date"
             [disabled]="true"
           />
@@ -53,7 +53,7 @@
           class="col-4"
           [disabled]="myForm.status === 'INVALID'"
         >
-          <span>{{ data?.id ? 'Update' : 'Create' }}</span>
+          <span>{{ data?.holidayId ? 'Update' : 'Create' }}</span>
         </button>
       </div>
     </form>
