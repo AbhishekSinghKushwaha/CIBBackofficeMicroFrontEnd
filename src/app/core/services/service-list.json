@@ -22,6 +22,7 @@
   },
   "holidayConfiguration":{
     "getHolidays": "https://api-dev.equitygroupholdings.com/v1/cibbackoffice-v1/api/HolidayConfiguration",
-    "postHolidays": "https://api-dev.equitygroupholdings.com/v1/cibbackoffice-v1/api/HolidayConfiguration"
+    "postHolidays": "https://api-dev.equitygroupholdings.com/v1/cibbackoffice-v1/api/HolidayConfiguration",
+    "deleteHoliday":"https://api-dev.equitygroupholdings.com/v1/cibbackoffice-v1/api/HolidayConfiguration/delete"
   }
 }

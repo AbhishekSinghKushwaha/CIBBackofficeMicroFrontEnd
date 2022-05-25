@@ -6,6 +6,7 @@ import { HolidayConfigurationModel } from 'src/app/core/domain/holiday-config.mo
 import { HolidayConfigurationService } from 'src/app/core/services/holiday-configuration/holiday-configuration.service';
 import * as moment from 'moment';
 import { ConfirmationCompletionModel } from 'src/app/core/domain/confirmation-completion.model';
+import { confirmModal } from 'src/app/shared/decorators/confirm-dialog.decorator';
 
 @Component({
   selector: 'app-list-holidays',
@@ -15,7 +16,7 @@ import { ConfirmationCompletionModel } from 'src/app/core/domain/confirmation-co
 export class ListHolidaysComponent implements OnInit {
   ELEMENT_DATA: HolidayConfigurationModel[] = [];
   stage: string;
-  displayedColumns: string[] = ['name', 'user', 'date', 'action'];
+  displayedColumns: string[] = ['name', 'makerName', 'date', 'action'];
   dataSource = new MatTableDataSource(this.ELEMENT_DATA);
   @ViewChild(MatSort) sort: MatSort;
   completionData: ConfirmationCompletionModel = {
@@ -35,7 +36,7 @@ export class ListHolidaysComponent implements OnInit {
   getHolidays() {
     this.holidayConfigurationService.getHolidays('cd6724dd56c6481b8be9dadfe1bbf805')
       .subscribe((response: any) => {
-        console.log(response);
+
         if (response.isSuccessful) {
           this.ELEMENT_DATA = response.data;
           this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
@@ -48,13 +49,13 @@ export class ListHolidaysComponent implements OnInit {
       .openNewHoliday(data)
       .afterClosed()
       .subscribe((response) => {
-        console.log(response)
+
         this.holidayConfigurationService.saveHoliday(response, 'cd6724dd56c6481b8be9dadfe1bbf805')
           .subscribe((hols: any) => {
-            console.log(hols);
+
             if (response.isSuccessful) {
               this.getHolidays();
-        this.stage = 'completed'
+              this.stage = 'completed'
             }
           })
       })
@@ -67,11 +68,18 @@ export class ListHolidaysComponent implements OnInit {
   edit(data: HolidayConfigurationModel) {
     this.addNewHoliday(data)
   }
+
+  @confirmModal({
+    title: "Delete Holiday",
+    message: "Are you sure you want to delete this holiday",
+    cancelText: "Cancel",
+    confirmText: "Yes, delete",
+  })
   delete(data: HolidayConfigurationModel) {
     this.holidayConfigurationService
-      .deleteHolidays('cd6724dd56c6481b8be9dadfe1bbf805', data.holidayDate)
+      .deleteHoliday(data.holidayId, 'cd6724dd56c6481b8be9dadfe1bbf805')
       .subscribe((response) => {
-        this.getHolidays();
+        // this.getHolidays();
       })
   }
 

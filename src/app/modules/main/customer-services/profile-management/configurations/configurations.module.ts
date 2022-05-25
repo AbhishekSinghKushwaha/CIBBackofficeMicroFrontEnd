@@ -11,7 +11,7 @@ import { SharedModalsModule } from 'src/app/shared/modals/shared-modals.module';
 import { ConfirmationCompletionComponent } from 'src/app/shared/components/confirmation-completion/confirmation-completion.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ListHolidaysComponent } from './holiday-configuration/list-holidays/list-holidays.component';
-import { CreateHolidayModalComponent } from '../../../../../shared/modals/create-holiday-modal/create-holiday-modal.component';
+import { ConfirmDialogModule } from 'src/app/shared/modals/confirm-dialog/confirm-dialog.module';
 
 
 @NgModule({
@@ -29,7 +29,8 @@ import { CreateHolidayModalComponent } from '../../../../../shared/modals/create
     ConfigurationsRoutingModule,
     MatStyleModule,
     SharedModalsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ConfirmDialogModule
   ],
 })
 export class ConfigurationsModule { }

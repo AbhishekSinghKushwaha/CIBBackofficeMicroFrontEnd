@@ -1,6 +1,6 @@
 export interface HolidayConfigurationModel {
-  holidayId: number;
+  holidayId: string;
   holidayName: string;
-  user?: string;
+  makerName?: string;
   holidayDate: any;
 }

@@ -59,14 +59,14 @@
             mat-header-cell
             *matHeaderCellDef
             mat-sort-header
-            sortActionDescription="Sort by name"
+            sortActionDescription="Sort by holiday"
           >
             Holiday
           </th>
           <td mat-cell *matCellDef="let element">{{ element.holidayName }}</td>
         </ng-container>
 
-        <ng-container matColumnDef="user">
+        <ng-container matColumnDef="makerName">
           <th
             mat-header-cell
             *matHeaderCellDef
@@ -75,7 +75,7 @@
           >
             User
           </th>
-          <td mat-cell *matCellDef="let element">{{ element.user }}</td>
+          <td mat-cell *matCellDef="let element">{{ element.makerName }}</td>
         </ng-container>
 
         <ng-container matColumnDef="date">

@@ -34,15 +34,15 @@ export class HolidayConfigurationService {
   }
 
   saveHoliday(payload: any, corporateId: string) {
-    return this.http.post(`${urlList.fileTemplate.submitFileTemplate}/${corporateId}`, payload);
+    return this.http.post(`${urlList.holidayConfiguration.postHolidays}/${corporateId}`, payload);
   }
 
   getHolidays(corporateId: string) {
     return this.http.get(`${urlList.holidayConfiguration.getHolidays}/${corporateId}`);
   }
 
-  deleteHolidays(corporateId: string, holidayId: string) {
-    return this.http.put(`${urlList.fileTemplate.submitFileTemplate}/${corporateId}`, { holidayId });
+  deleteHoliday( holidayId: string, corporateId: string) {
+    return this.http.put(`${urlList.holidayConfiguration.deleteHoliday}/${holidayId}`, {});
   }
 
 }
