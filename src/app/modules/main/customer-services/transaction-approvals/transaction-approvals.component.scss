@@ -1,0 +1,79 @@
+table {
+    width: 100%;
+  }
+  
+  .mat-form-field {
+    font-size: 14px;
+  }
+  
+  td,
+  th {
+    color: var(--black);
+    font-size: 14px;
+  }
+  
+  th {
+    font-weight: 600;
+    background-color: #e9eaea;
+  }
+
+  hr {
+    margin: 0.7rem 0 !important;
+  }
+
+  ::ng-deep .mat-paginator-container {
+    display: flex !important;
+    justify-content: space-between !important;
+  }
+  
+  .status {
+    text-transform: capitalize;
+    border-radius: 15px;
+    &.approved {
+      background-color: rgba(47, 152, 3, 0.04);
+      color: var(--green);
+    }
+    &.pending {
+      background-color: rgba(243, 135, 7, 0.04);
+      color: var(--orange);
+    }
+    &.rejected {
+      background-color: rgba(243, 7, 7, 0.04);
+      color: var(--red);
+    }
+  }
+
+.eyeicon {
+    color: #A32A29;
+}
+
+.search-filter {
+  height: 50px;
+  border-color: #ebe9e9 !important;
+}
+
+:host ::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-ripple .mat-ripple-element {
+    opacity: 0.03 !important;
+    background-color: #A32A29!important;
+  }
+
+:host ::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background,.mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
+    background-color: #A32A29;
+  }
+
+:host ::ng-deep .mat-form-field-flex > .mat-form-field-infix {
+    padding: 0.4em 0px !important;
+  }
+:host ::ng-deep .mat-form-field-appearance-outline .mat-form-field-label {
+    margin-top: -15px;
+  }
+:host ::ng-deep label.ng-star-inserted {
+    transform: translateY(-0.59375em) scale(0.75) !important;
+  }
+  
+:host ::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline-end {
+    border: none !important;
+}
+:host ::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline-start {
+    border: none !important;
+}
