@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BiometricVerificationService } from 'src/app/core/services/biometric-verification/biometric-verification.service';
 import { FormBuilder, FormGroup, Validators, FormArray, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
+import { TransactionApprovalService } from 'src/app/core/services/transaction-approval/transaction-approval.service';
 
 interface Approval {
   text: string;
@@ -19,10 +20,13 @@ export class TransactionApprovalDetailsComponent implements OnInit {
 
   callBackDetailsForm: FormGroup;
 
+  statusConverted: any;
+
   constructor(
     private readonly biometricVerificationService: BiometricVerificationService,
     private readonly fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private readonly transactionApprovalService: TransactionApprovalService
   ) { }
 
   get getForm() {
@@ -36,7 +40,8 @@ export class TransactionApprovalDetailsComponent implements OnInit {
 
   initForm(): void {
     this.transactionApprovalDetailsForm = this.fb.group({
-      approval: ['', [Validators.required]],
+      status: ['', [Validators.required]],
+      comments: ['']
     });
   }
 
@@ -74,8 +79,40 @@ export class TransactionApprovalDetailsComponent implements OnInit {
     {text: 'Reject', subtext: 'The details provided by the maker are not genuine.'},
   ];
 
+  statusConversion() {
+    switch (this.getForm.status.value) {
+      case 'Approve':
+        this.statusConverted = 'Approved';
+        break;
+      case 'Return':
+        this.statusConverted = 'Returned';
+        break;
+      case 'Reject':
+        this.statusConverted = 'Declined';     
+    }
+  }
+
   Submit() {
-    this.biometricVerificationService.open();
+    this.statusConversion();
+    // this.biometricVerificationService.open();
+    let data = this.callBackDetailsForm.get('callBackDetails') as FormArray;
+
+    const payload = {
+      transactionReference : 'string',
+      requestId: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
+      status: this.statusConverted,
+      comments: this.getForm.comments.value,
+      callBacks: data.value
+    }
+
+    console.log(payload, "payload");
+
+    this.transactionApprovalService.submitTransaction(payload).subscribe((res: any) => {
+      console.log(res);
+      if(res.isSuccessful) {
+        this.biometricVerificationService.open();
+      }
+    });
   }
 
 }

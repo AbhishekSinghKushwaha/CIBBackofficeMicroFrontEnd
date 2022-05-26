@@ -19,5 +19,9 @@
   },
   "fileTemplate":{
     "submitFileTemplate": "https://api-dev.equitygroupholdings.com/v1/cibbackoffice-v1/api/FileTemplate"
+  }, 
+  "transactionApproval": {
+    "submit": "https://api-dev.equitygroupholdings.com/v1/cibbackoffice-v1/api/TransactionApproval/Submit",
+    "getTransactions": "https://api-dev.equitygroupholdings.com/v1/cibbackoffice-v1/api/TransactionApproval/GetTransactions"
   }
 }

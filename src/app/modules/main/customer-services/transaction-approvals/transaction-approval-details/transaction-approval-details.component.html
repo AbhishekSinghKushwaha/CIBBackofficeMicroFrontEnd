@@ -108,7 +108,7 @@
           <mat-tab label="Uploaded documents">
               <div class="row col-md-12 ps-4">
                 <div class="col-md-4 my-4">
-                    <mat-card>
+                    <mat-card class="card-color">
                       <img
                         height="100vh"
                         mat-card-image
@@ -128,7 +128,7 @@
                     </mat-card>
                   </div>
                   <div class="col-md-4 my-4">
-                    <mat-card>
+                    <mat-card class="card-color">
                       <img
                         height="100vh"
                         mat-card-image
@@ -148,7 +148,7 @@
                     </mat-card>
                   </div>
                   <div class="col-md-4 my-4">
-                    <mat-card>
+                    <mat-card class="card-color">
                       <img
                         height="100vh"
                         mat-card-image
@@ -247,9 +247,9 @@
                   <div class="col-md-6">
                     <mat-form-field appearance="fill" class="input-width">
                         <mat-label>Approve, return or reject ticket*</mat-label>
-                        <mat-select formControlName="approval" id="approval" name="approval">
+                        <mat-select formControlName="status" id="status" name="status">
                           <mat-select-trigger>
-                            {{transactionApprovalDetailsForm.get('approval')?.value}}
+                            {{transactionApprovalDetailsForm.get('status')?.value}}
                           </mat-select-trigger>
                           <mat-option *ngFor="let data of approval" [value]="data.text" class="p-4">
                             {{data.text}}
@@ -264,7 +264,7 @@
                   <div class="col-md-6">
                     <mat-form-field class="input-width" appearance="fill">
                         <mat-label>Comments</mat-label>
-                        <input matInput #message maxlength="100">
+                        <input matInput #message maxlength="100" formControlName="comments" id="comments" name="comments">
                         <mat-hint align="end">{{message.value.length}} / 100</mat-hint>
                     </mat-form-field>
                   </div>
