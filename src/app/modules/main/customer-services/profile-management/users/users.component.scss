@@ -1,0 +1,31 @@
+.screen{
+    margin-top: 30px;
+    // background-color: white;
+    min-height: 90vh;
+    border-radius: 25px;
+  }
+  
+  .inner-content{
+     min-height: 75vh !important;
+  }
+  
+  .side-nav-links{
+   border-bottom: 3px solid var(--cool-grey-20);
+  }
+  
+  .side-nav{
+    background-color:  var(--cool-grey-20);
+  }
+  
+  .mat-list-base .mat-list-item{
+    height: 70px !important;
+  }
+  
+  .mat-list-item:hover {
+    background-color:  var(--cool-grey-20);
+  }
+  
+  .router-link-active {
+    background-color:  var(--cool-grey-20);
+  }
+  
