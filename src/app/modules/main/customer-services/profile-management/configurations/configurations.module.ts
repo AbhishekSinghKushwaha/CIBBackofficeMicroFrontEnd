@@ -10,6 +10,8 @@ import { NewFileTemplatesComponent } from './file-template/new-file-templates/ne
 import { SharedModalsModule } from 'src/app/shared/modals/shared-modals.module';
 import { ConfirmationCompletionComponent } from 'src/app/shared/components/confirmation-completion/confirmation-completion.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ListHolidaysComponent } from './holiday-configuration/list-holidays/list-holidays.component';
+import { ConfirmDialogModule } from 'src/app/shared/modals/confirm-dialog/confirm-dialog.module';
 import { WorkflowManagementModule } from './workflow-management/workflow-management.module';
 import { CreateWorkflowModule } from './workflow-management/create-workflow/create-workflow.module';
 
@@ -21,6 +23,7 @@ import { CreateWorkflowModule } from './workflow-management/create-workflow/crea
     ListFileTemplatesComponent,
     NewFileTemplatesComponent,
     ConfirmationCompletionComponent,
+    ListHolidaysComponent,
   ],
   imports: [
     CommonModule,
@@ -28,6 +31,7 @@ import { CreateWorkflowModule } from './workflow-management/create-workflow/crea
     MatStyleModule,
     SharedModalsModule,
     ReactiveFormsModule,
+    ConfirmDialogModule,
     WorkflowManagementModule,
     CreateWorkflowModule
   ],

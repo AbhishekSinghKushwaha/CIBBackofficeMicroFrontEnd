@@ -5,17 +5,24 @@ import { FileTemplateComponent } from './file-template/file-template.component';
 import { ListFileTemplatesComponent } from './file-template/list-file-templates/list-file-templates.component';
 import { NewFileTemplatesComponent } from './file-template/new-file-templates/new-file-templates.component';
 import { HolidayConfigurationComponent } from './holiday-configuration/holiday-configuration.component';
-import { WorkflowManagementComponent } from './workflow-management/workflow-management.component';
-import { CreateWorkflowComponent } from './workflow-management/create-workflow/create-workflow.component';
+import { ListHolidaysComponent } from './holiday-configuration/list-holidays/list-holidays.component';
 
 const routes: Routes = [
   {
     path: '', component: ConfigurationsComponent,
     children: [
-      { path: '', redirectTo: 'file-template-configuration',pathMatch:'full' },
+      {
+        path: '',
+        redirectTo: 'file-template-configuration',
+        pathMatch: 'full'
+      },
       {
         path: 'holiday-configuration',
-        component: HolidayConfigurationComponent
+        component: HolidayConfigurationComponent,
+        children: [
+          { path: '', redirectTo: 'list' },
+          { path: 'list', component: ListHolidaysComponent },
+        ]
       },
       {
         path: 'file-template-configuration',
