@@ -20,15 +20,15 @@ export class AddUsersComponent implements OnInit {
   constructor(private router: Router, private storageService: StorageService) {}
 
   ngOnInit(): void {
-    this.roles = this.storageService.getData('onboarding-roles');
-    this.products = this.storageService.getData('products-and-services');
-    this.accounts = this.storageService.getData('user-accounts');
-    console.log(this.accounts);
+    // this.roles = this.storageService.getData('onboarding-roles');
+    // this.products = this.storageService.getData('products-and-services');
+    // this.accounts = this.storageService.getData('user-accounts');
+    // console.log(this.accounts,);
   }
 
-  saveAndContinue() {
-    this.router.navigate([
-      '/customer-services/corporate-onboarding/add-workflow'
-    ]);
-  }
+  // saveAndContinue() {
+  //   this.router.navigate([
+  //     '/customer-services/corporate-onboarding/add-workflow'
+  //   ]);
+  // }
 }

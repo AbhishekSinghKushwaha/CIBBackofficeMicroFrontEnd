@@ -15,7 +15,7 @@ export class NewUserComponent implements OnInit {
 
   addUser(){
     this.router.navigate([
-      '/customer-services/corporate-onboarding/add-users'
+      '/customer-services/corporate-360/users/add-user'
     ]);
   }
 

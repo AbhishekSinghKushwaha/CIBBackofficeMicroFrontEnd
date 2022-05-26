@@ -7,19 +7,25 @@ import { NewUserComponent } from './new-user/new-user.component';
 import { MatStyleModule } from 'src/app/mat-style.module';
 import { SharedModalsModule } from 'src/app/shared/modals/shared-modals.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ProfileAddUserComponent } from './add-user/add-user.component';
+import { ProfileManagementTopNavModule } from 'src/app/shared/components/profile-management-top-nav/profile-management-top-nav.module';
+import { AddUserModule } from 'src/app/shared/components/add-user/add-user.module';
 
 
 @NgModule({
   declarations: [
     UsersComponent,
-    NewUserComponent
+    NewUserComponent,
+    ProfileAddUserComponent
   ],
   imports: [
     CommonModule,
     UsersRoutingModule,
     MatStyleModule,
     SharedModalsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ProfileManagementTopNavModule,
+    AddUserModule,
   ]
 })
 export class UsersModule { }
