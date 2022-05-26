@@ -1,0 +1,33 @@
+<mat-card class="h-100">
+    <div class="d-flex justify-content-between">
+      <div class="h2, header-text">Management</div>
+    </div>
+    <div class="row mb-3">
+      <small
+        >Create roles and assign them to users</small
+      >
+    </div>
+    <mat-card-content class="list-table mt-5">
+      <div class="d-flex justify-content-between">
+        <h2 class="m-4">All</h2>
+        <div class="d-flex flex-row m-4" style="color: var(--equity)">
+            <mat-icon>filter</mat-icon>
+            <p class="mx-3">Filter</p>
+          </div>
+      </div>
+      <div>
+          <img src="../../../../../../../assets/images/icons/new.svg" alt="add-user" class="img-user" />
+      </div>
+      <div class="row my-3 text-center">
+        <small
+          >There are no Super Admins added for this corporate customer </small
+        >
+      </div>
+      <div class=" my-3 text-center">
+        <button class="px-5" mat-raised-button (click)="addUser()"  color="primary">
+          Add Users
+        </button>
+      </div>
+    </mat-card-content>
+  </mat-card>
+  
