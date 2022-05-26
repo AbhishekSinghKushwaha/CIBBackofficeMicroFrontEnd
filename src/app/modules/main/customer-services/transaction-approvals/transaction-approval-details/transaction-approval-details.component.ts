@@ -98,7 +98,7 @@ export class TransactionApprovalDetailsComponent implements OnInit {
     let data = this.callBackDetailsForm.get('callBackDetails') as FormArray;
 
     const payload = {
-      transactionReference : 'string',
+      requestReference : 'string',
       requestId: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
       status: this.statusConverted,
       comments: this.getForm.comments.value,
