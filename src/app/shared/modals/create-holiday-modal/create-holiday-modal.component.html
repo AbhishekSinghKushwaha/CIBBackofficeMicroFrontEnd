@@ -1,0 +1,61 @@
+<div class="screen p-0 m-0">
+  <div class="d-flex justify-content-between">
+    <h3 class="strong-text">Create Holiday</h3>
+    <mat-icon (click)="close()" class="cursor-pointer">close</mat-icon>
+  </div>
+
+  <div class="row gx-0">
+    <form [formGroup]="myForm" (ngSubmit)="submitHoliday()" autocomplete="off">
+      <div class="row">
+        <mat-form-field class="col-md-12" appearance="legacy" color="accent">
+          <mat-label for="holidayName"> Holiday Name </mat-label>
+          <input
+            matInput
+            type="text"
+            id="holidayName"
+            formControlName="holidayName"
+            placeholder="Enter Holiday Name"
+          />
+        </mat-form-field>
+      </div>
+      <div class="row">
+        <mat-form-field class="col-md-12" appearance="legacy" color="accent">
+          <mat-label for="holidayDate"> Date </mat-label>
+          <input
+            matInput
+            [matDatepicker]="picker"
+            formControlName="holidayDate"
+            placeholder="Select Date"
+            [disabled]="true"
+          />
+          <!-- <mat-hint>MM/DD/YYYY</mat-hint> -->
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker disabled="false"></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div class="mt-4 d-flex justify-content-end">
+        <button
+          mat-button
+          color="default"
+          type="submit"
+          class="mr-3"
+          (click)="close()"
+        >
+          <span class="text-primary">Quit</span>
+        </button>
+        <button
+          mat-raised-button
+          color="primary"
+          type="submit"
+          class="col-4"
+          [disabled]="myForm.status === 'INVALID'"
+        >
+          <span>{{ data?.holidayId ? 'Update' : 'Create' }}</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
