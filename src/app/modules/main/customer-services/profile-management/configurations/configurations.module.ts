@@ -12,6 +12,8 @@ import { ConfirmationCompletionComponent } from 'src/app/shared/components/confi
 import { ReactiveFormsModule } from '@angular/forms';
 import { ListHolidaysComponent } from './holiday-configuration/list-holidays/list-holidays.component';
 import { ConfirmDialogModule } from 'src/app/shared/modals/confirm-dialog/confirm-dialog.module';
+import { TransactionConfigurationComponent } from './transaction-configuration/transaction-configuration.component';
+import { ListTransactionConfigurationComponent } from './transaction-configuration/list-transaction-configuration/list-transaction-configuration.component';
 
 
 @NgModule({
@@ -23,6 +25,8 @@ import { ConfirmDialogModule } from 'src/app/shared/modals/confirm-dialog/confir
     NewFileTemplatesComponent,
     ConfirmationCompletionComponent,
     ListHolidaysComponent,
+    TransactionConfigurationComponent,
+    ListTransactionConfigurationComponent,
   ],
   imports: [
     CommonModule,

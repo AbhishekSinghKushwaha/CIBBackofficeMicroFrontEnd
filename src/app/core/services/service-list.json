@@ -27,5 +27,15 @@
     "getHolidays": "https://api-dev.equitygroupholdings.com/v1/cibbackoffice-v1/api/HolidayConfiguration",
     "postHolidays": "https://api-dev.equitygroupholdings.com/v1/cibbackoffice-v1/api/HolidayConfiguration",
     "deleteHoliday": "https://api-dev.equitygroupholdings.com/v1/cibbackoffice-v1/api/HolidayConfiguration/delete"
+  },
+  "transactionConfiguration": {
+    "postTransactionConfiguration": "/cibbackoffice-v1/api/TransactionConfiguration",
+    "getTransactionConfigurationType": "/cibbackoffice-v1/api/TransactionConfiguration/",
+
+    "getTransactionConfigurationArea": "/cibbackoffice-v1/api/TransactionConfiguration/area",
+    "getTransactionConfigurationChargeEvent": "/cibbackoffice-v1/api/TransactionConfiguration/charge-event",
+    "getTransactionConfigurationChargeGrid": "/cibbackoffice-v1/api/TransactionConfiguration/grid",
+    "getTransactionConfigurationChargeSubsidiary": "/cibbackoffice-v1/api/TransactionConfiguration/subsidiary",
+    "getTransactionConfigurationChargeTranstype": "/cibbackoffice-v1/api/TransactionConfiguration/trans-type"
   }
 }

@@ -1,0 +1,50 @@
+<mat-card class="h-100">
+  <div class="d-flex justify-content-between">
+    <div class="h2">Transaction Configuration</div>
+    <div
+      class="h3 text-danger strong-text cursor-pointer"
+      [routerLink]="['/customer-services/configure-transaction']"
+    >
+      <span><mat-icon class="icon-display">add</mat-icon></span>
+      <span> Add Transaction</span>
+    </div>
+  </div>
+  <div class="row mb-3">
+    <small>Select transaction you wish to configure.</small>
+  </div>
+  <mat-card-content class="list-table mt-5">
+    <div class="row">
+      <h2 class="m-4">All</h2>
+    </div>
+    <table
+      mat-table
+      [dataSource]="dataSource"
+      matSort
+      class="mat-elevation-z1 w-100"
+    >
+      <ng-container matColumnDef="type">
+        <th mat-header-cell *matHeaderCellDef>Transaction Type</th>
+        <td mat-cell *matCellDef="let element">{{ element.type }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="user">
+        <th mat-header-cell *matHeaderCellDef>User</th>
+        <td mat-cell *matCellDef="let element">{{ element.user }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="date">
+        <th mat-header-cell *matHeaderCellDef>Date Created</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.date | date: 'dd/MM/y' }}
+        </td>
+      </ng-container>
+
+      <tr
+        mat-header-row
+        *matHeaderRowDef="displayedColumns"
+        class="header-table"
+      ></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  </mat-card-content>
+</mat-card>
