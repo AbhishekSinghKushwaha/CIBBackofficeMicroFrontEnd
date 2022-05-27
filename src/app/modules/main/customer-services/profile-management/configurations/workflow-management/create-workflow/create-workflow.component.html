@@ -270,6 +270,7 @@
                         <td class="mat-cell" colspan="4">No data matching the filter</td>
                         </tr>
                     </table>
+                    <mat-paginator #paginator hidePageSize="true" [pageSize]="pageSize"></mat-paginator>
                 </mat-card-content>
           </mat-expansion-panel>
         </mat-accordion>
@@ -349,6 +350,7 @@
                         <td class="mat-cell" colspan="4">No data matching the filter</td>
                         </tr>
                     </table>
+                    <mat-paginator #checkersPaginator hidePageSize="true" [pageSize]="pageSize"></mat-paginator>
                 </mat-card-content>
           </mat-expansion-panel>
         </mat-accordion>
@@ -356,17 +358,17 @@
 </form>
 
 <div class="py-4" *ngIf="id && mode === 'view'">
-    <button mat-raised-button color="primary" class="px-5">Quit</button>
+    <button mat-raised-button color="primary" class="px-5" (click)="quit()">Quit</button>
 </div>
 
 <div class="py-4" *ngIf="id && mode === 'update'">
   <div class="d-flex justify-content-between">
     <div>
-      <button mat-stroked-button color="primary" class="px-5">Quit</button>
+      <button mat-stroked-button color="primary" class="px-5" (click)="quit()">Quit</button>
     </div>
     <div class="d-flex justify-content-end">
-      <button mat-stroked-button color="primary" class="px-5 me-4">Back</button>
-      <button mat-raised-button color="primary" class="px-5">Submit</button>
+      <button mat-stroked-button color="primary" class="px-5 me-4" (click)="back()">Back</button>
+      <button mat-raised-button color="primary" class="px-5" (click)="submit()">Submit</button>
     </div>
   </div>
 </div>
@@ -374,10 +376,10 @@
 <div class="py-4" *ngIf="!id">
   <div class="d-flex justify-content-between">
     <div>
-      <button mat-stroked-button color="primary" class="px-5">Quit</button>
+      <button mat-stroked-button color="primary" class="px-5" (click)="quit()">Quit</button>
     </div>
     <div>
-      <button mat-raised-button color="primary" class="px-5">Submit</button>
+      <button mat-raised-button color="primary" class="px-5" (click)="submit()">Submit</button>
     </div>
   </div>
 </div>

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { SequentialApprovalService } from 'src/app/core/services/sequential-approval/sequential-approval.service';
 
 @Component({
   selector: 'app-sequential-approval',
@@ -7,9 +9,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SequentialApprovalComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private readonly dialogRef: MatDialogRef<SequentialApprovalComponent>,
+    private readonly sequentialApprovalService: SequentialApprovalService
+  ) { }
 
   ngOnInit(): void {
+  }
+
+  close() {
+    this.dialogRef.close(true);
+  }
+
+  sequenceManually(){
+    this.sequentialApprovalService.openSequentialData();
   }
 
 }

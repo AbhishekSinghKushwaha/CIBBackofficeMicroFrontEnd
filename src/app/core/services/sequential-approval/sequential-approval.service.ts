@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { SequentialApprovalComponent } from 'src/app/shared/modals/sequential-approval/sequential-approval.component';
 import { Subject } from 'rxjs';
+import { SequentialApprovalDataComponent } from 'src/app/shared/modals/sequential-approval/sequential-approval-data/sequential-approval-data.component';
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +10,8 @@ import { Subject } from 'rxjs';
 export class SequentialApprovalService {
 
   dialogRef: any;
+
+  seqDialogRef: any;
 
   constructor(private readonly dialog: MatDialog) { }
 
@@ -21,5 +24,16 @@ export class SequentialApprovalService {
 
   close() {
     this.dialogRef.close()
+  }
+
+  openSequentialData() {
+    this.seqDialogRef =  this.dialog.open<SequentialApprovalDataComponent>(SequentialApprovalDataComponent, {
+      disableClose: true,
+    });
+    return this.seqDialogRef;
+  } 
+
+  closeSequentialData() {
+    this.seqDialogRef.close()
   }
 }

@@ -7,6 +7,9 @@ import { AddUsersWorkflowModel } from 'src/app/core/domain/add-users-workflow.mo
 import { SelectionModel } from '@angular/cdk/collections';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SequentialApprovalService } from 'src/app/core/services/sequential-approval/sequential-approval.service';
+import { MatPaginatorIntl } from '@angular/material/paginator';
+import { MatPaginator } from '@angular/material/paginator';
+import { BiometricVerificationService } from 'src/app/core/services/biometric-verification/biometric-verification.service';
 
 export type WorkflowStatus = 'active' | 'disabled';
 
@@ -30,6 +33,25 @@ export interface CheckersWorkflow {
   lastviewed: string;
 }
 
+export function CustomPaginator() {
+  const customPaginatorIntl = new MatPaginatorIntl();
+
+  customPaginatorIntl.itemsPerPageLabel = '';
+
+  customPaginatorIntl.getRangeLabel = (page: number, pageSize: number, length: number) => {
+    if (length === 0 || pageSize === 0) {
+      return `0 of ${length }`;
+    }
+    length = Math.max(length, 0);
+    const startIndex = page * pageSize;
+    // If the start index exceeds the list length, do not try and fix the end index to the end.
+    const endIndex = startIndex < length ? Math.min(startIndex + pageSize, length) : startIndex + pageSize;
+    return `${startIndex + 1} - ${endIndex} of ${length} items`;
+  };
+
+  return customPaginatorIntl;
+}
+
 @Component({
   selector: 'app-create-workflow',
   templateUrl: './create-workflow.component.html',
@@ -44,11 +66,18 @@ export class CreateWorkflowComponent implements OnInit, AfterViewInit {
     signatories: false
   };
 
+  pageSize = 10;
+  pageSizes = [5,10,20];
+
   id: number;
   mode: any;
 
   @ViewChild(MatSort)
   private sort: MatSort;
+
+  @ViewChild('paginator') paginator: MatPaginator;
+
+  @ViewChild('checkersPaginator') checkersPaginator: MatPaginator;
 
   usersDisplayedColumns: string[] = [
     'select',
@@ -118,7 +147,9 @@ export class CreateWorkflowComponent implements OnInit, AfterViewInit {
   constructor(
     private fb: FormBuilder,
     private readonly route: ActivatedRoute,
-    private readonly sequentialApprovalService: SequentialApprovalService
+    private readonly sequentialApprovalService: SequentialApprovalService,
+    private readonly router: Router,
+    private readonly biometricVerificationService: BiometricVerificationService,
   ) { 
     this.id = route.snapshot.params['id'];
     this.mode = route.snapshot.params['mode'];
@@ -128,12 +159,6 @@ export class CreateWorkflowComponent implements OnInit, AfterViewInit {
     this.initForm();
     this.addCheckersWorkflow();
     this.addUsersWorkflow();
-  }
-
-  
-  ngAfterViewInit(): void {
-    this.usersDataSource.sort = this.sort;
-    this.checkersDataSource.sort = this.sort;
   }
 
   initForm(): void {
@@ -164,7 +189,7 @@ export class CreateWorkflowComponent implements OnInit, AfterViewInit {
 
   addCheckersWorkflow() {
     this.checkersDataSource = new MatTableDataSource();
-      const data: AddCheckersWorkflowModel[] = Array(3).fill(0).map((x,i) => ({
+      const data: AddCheckersWorkflowModel[] = Array(5).fill(0).map((x,i) => ({
           name: 'George Okonjo',
           id: '23546987',
           profiletype: 'Individual',
@@ -174,6 +199,15 @@ export class CreateWorkflowComponent implements OnInit, AfterViewInit {
     
       this.checkersDataSource.data = data;
   }
+
+    
+  ngAfterViewInit(): void {
+    this.usersDataSource.sort = this.sort;
+    this.checkersDataSource.sort = this.sort;
+    this.usersDataSource.paginator = this.paginator;
+    this.checkersDataSource.paginator = this.checkersPaginator;
+  }
+
 
   usersIsAllSelected() {
     const numSelected = this.usersSelection.selected.length;
@@ -201,6 +235,18 @@ export class CreateWorkflowComponent implements OnInit, AfterViewInit {
 
   openSequentialApproval() {
     this.sequentialApprovalService.open();
+  }
+
+  quit() {
+    this.router.navigate(['/customer-services/corporate-360/configurations/workflow-management']);
+  }
+
+  back() {
+    this.router.navigate(['/customer-services/corporate-360/configurations/workflow-management']);
+  }
+
+  submit() {
+    this.biometricVerificationService.open();
   }
 
 }

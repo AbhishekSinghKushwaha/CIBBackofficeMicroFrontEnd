@@ -20,13 +20,17 @@
     
     <div class="text-center mt-5" *ngIf="!existingWorkflow">
         <div>
-            <img src="assets/images/backgrounds/visual-support-icons-virtual-account-submission-avatar.svg" alt="" />
+          <img
+          width="450px"
+          src="assets/images/visual-support-icons-empty-data.svg"
+          class="img-fluid"
+        />
         </div>
         <div class="mt-5">
             <span>There are currently no workflow configured</span>
         </div>
         <div class="mt-4">
-            <button mat-raised-button color="primary" class="px-5">Add a workflow</button>
+            <button mat-raised-button color="primary" class="px-5" (click)="createWorkflow()">Add a workflow</button>
         </div>
     </div>
 
