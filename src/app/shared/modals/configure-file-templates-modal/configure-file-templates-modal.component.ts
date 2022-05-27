@@ -50,6 +50,7 @@ export class ConfigureFileTemplatesModalComponent implements OnInit {
   }
 
   setdataTable() {
+    console.log(this.formDataArray.controls);
     this.dataSource.data = this.formDataArray.controls;
     this.dataSource.sortingDataAccessor = (data: AbstractControl, sortHeaderId: string) => {
       const value: any = data.value[sortHeaderId];

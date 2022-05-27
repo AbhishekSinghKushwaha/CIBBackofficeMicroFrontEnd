@@ -1,3 +1,4 @@
+import { CifService } from './../../../core/services/cif/cif.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -31,27 +32,6 @@ export class CorporateSearchModalComponent implements OnInit {
   ];
 
   customerData: CustomerSearchResult[] = [
-    {
-      name: 'George Okonjo',
-      idNumber: 123456789,
-      profileType: 'Individual',
-      status: 'Active',
-      lastViewed: '12/02/2020'
-    },
-    {
-      name: 'George Okonjo',
-      idNumber: 234343,
-      profileType: 'Individual',
-      status: 'Active',
-      lastViewed: '12/02/2020'
-    },
-    {
-      name: 'George Okonjo',
-      idNumber: 234343,
-      profileType: 'Individual',
-      status: 'Active',
-      lastViewed: '12/02/2020'
-    }
   ];
   highRiskCustomer: CustomerSearchResult[] = [
     {
@@ -72,8 +52,9 @@ export class CorporateSearchModalComponent implements OnInit {
   constructor(
     private readonly fb: FormBuilder,
     private router: Router,
-    private corporateSearchService: CorporateSearchService
-  ) {}
+    private corporateSearchService: CorporateSearchService,
+    private cifService: CifService
+  ) { }
 
   ngOnInit(): void {
     this.initializeSearchForm();
@@ -104,6 +85,21 @@ export class CorporateSearchModalComponent implements OnInit {
     setTimeout(() => {
       this.showSearchTable = true;
     }, 2000);
+    console.log(this.searchForm.controls)
+    this.cifService.getCorporateByCif(this.searchForm.controls.searchText.value).subscribe((res: any) => {
+      if (res.isSuccessful) {
+        this.customerData = [res.data].map((corporate: any) => {
+          return {
+            name: corporate.corporateName,
+            idNumber: corporate.cif,
+            profileType: 'Corporate',
+            status: 'Active',
+            lastViewed: '12/02/2020'
+          }
+        })
+        this.cifService.setCorporate(res.data);
+      }
+    })
   }
 
   clearSearchText(): void {

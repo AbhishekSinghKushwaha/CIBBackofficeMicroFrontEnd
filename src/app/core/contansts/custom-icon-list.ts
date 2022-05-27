@@ -175,7 +175,10 @@ export const SVG_ICONS = [
   'avatar.svg',
   'user.svg',
   'big-circular-plus.svg',
-  'three-dots-circled.svg'
+  'three-dots-circled.svg',
+  'equity-logo.svg',
+  'home.svg',
+  'someone.svg'
 ];
 
 export const PROVIDER_ICONS = [

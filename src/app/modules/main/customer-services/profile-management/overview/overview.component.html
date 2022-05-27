@@ -28,7 +28,7 @@
         <div class="d-flex justify-content-between m-3">
           <div class="">
             <div class="d-flex flex-column">
-              <h3>Barcelona Fc</h3>
+              <h3>{{ currentCorporateData?.corporateName }}</h3>
               <p class="text-grey mb-0">Customer Channels</p>
               <div class="customer-channels">
                 <p>Web</p>
@@ -50,15 +50,15 @@
           <div class="row">
             <div class="col-md-3 mb-3">
               <p class="text-grey">CIF</p>
-              <p>265456466</p>
+              <p>{{ currentCorporateData?.cif }}</p>
             </div>
             <div class="col-md-3 mb-3">
               <p class="text-grey">GCIF</p>
-              <p>6546546546</p>
+              <p>{{ currentCorporateData?.defaultCorporateAccount }}</p>
             </div>
             <div class="col-md-3 mb-3">
               <p class="text-grey">Nationalilty</p>
-              <p>Kenyan</p>
+              <p>{{ currentCorporateData?.countryId }}</p>
             </div>
             <div class="col-md-3 mb-3">
               <p class="text-grey">KRA Pin Number</p>
@@ -66,15 +66,15 @@
             </div>
             <div class="col-md-3 mb-3">
               <p class="text-grey">Currency</p>
-              <p>KES</p>
+              <p>{{ currentCorporateData?.defaultCurrency }}</p>
             </div>
             <div class="col-md-3 mb-3">
               <p class="text-grey">Mobile Number</p>
-              <p>+000 0000 0000</p>
+              <p>{{ currentCorporateData?.phoneNumber }}</p>
             </div>
             <div class="col-md-3 mb-3">
               <p class="text-grey">Email Address</p>
-              <p>info@barcelonafc.com</p>
+              <p>{{ currentCorporateData?.emailAddress }}</p>
             </div>
           </div>
         </div>
