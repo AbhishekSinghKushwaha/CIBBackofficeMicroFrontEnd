@@ -1,3 +1,5 @@
+import { ListTransactionConfigurationComponent } from './transaction-configuration/list-transaction-configuration/list-transaction-configuration.component';
+import { TransactionConfigurationComponent } from './transaction-configuration/transaction-configuration.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ConfigurationsComponent } from './configurations.component';
@@ -31,6 +33,14 @@ const routes: Routes = [
           { path: '', redirectTo: 'list' },
           { path: 'list', component: ListFileTemplatesComponent },
           { path: 'new', component: NewFileTemplatesComponent },
+        ]
+      },
+      {
+        path: 'transaction-configuration',
+        component: TransactionConfigurationComponent,
+        children: [
+          { path: '', redirectTo: 'list' },
+          { path: 'list', component: ListTransactionConfigurationComponent }
         ]
       },
     ]

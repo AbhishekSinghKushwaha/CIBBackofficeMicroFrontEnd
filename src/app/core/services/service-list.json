@@ -12,17 +12,30 @@
     "getMerchantDetails": "/cibpaymentservice-v1/api/v1/BuyGoods/MerchantDetail/",
     "getFavouriteMerchantDetails": "/cibpaymentservice-v1/api/v1/BuyGoods/FavoriteMerchants/"
   },
+  "cif": {
+    "getCorporateByCif": "/cibcore/api/Corporates/Cif/"
+  },
   "customerOnboarding": {
     "getRoles": "/cibonboarding-v1/api/Registration/get-roles/",
     "getProductsAndServices": "/cibonboarding-v1/api/Registration/get-products-and-services",
     "getUserAccounts": "/cibaccountservice-v1/api/v1/Accounts/GetUserMappedAccounts"
   },
-  "fileTemplate":{
+  "fileTemplate": {
     "submitFileTemplate": "https://api-dev.equitygroupholdings.com/v1/cibbackoffice-v1/api/FileTemplate"
   },
-  "holidayConfiguration":{
+  "holidayConfiguration": {
     "getHolidays": "https://api-dev.equitygroupholdings.com/v1/cibbackoffice-v1/api/HolidayConfiguration",
     "postHolidays": "https://api-dev.equitygroupholdings.com/v1/cibbackoffice-v1/api/HolidayConfiguration",
-    "deleteHoliday":"https://api-dev.equitygroupholdings.com/v1/cibbackoffice-v1/api/HolidayConfiguration/delete"
+    "deleteHoliday": "https://api-dev.equitygroupholdings.com/v1/cibbackoffice-v1/api/HolidayConfiguration/delete"
+  },
+  "transactionConfiguration": {
+    "postTransactionConfiguration": "/cibbackoffice-v1/api/TransactionConfiguration",
+    "getTransactionConfigurationType": "/cibbackoffice-v1/api/TransactionConfiguration/",
+
+    "getTransactionConfigurationArea": "/cibbackoffice-v1/api/TransactionConfiguration/area",
+    "getTransactionConfigurationChargeEvent": "/cibbackoffice-v1/api/TransactionConfiguration/charge-event",
+    "getTransactionConfigurationChargeGrid": "/cibbackoffice-v1/api/TransactionConfiguration/grid",
+    "getTransactionConfigurationChargeSubsidiary": "/cibbackoffice-v1/api/TransactionConfiguration/subsidiary",
+    "getTransactionConfigurationChargeTranstype": "/cibbackoffice-v1/api/TransactionConfiguration/trans-type"
   }
 }

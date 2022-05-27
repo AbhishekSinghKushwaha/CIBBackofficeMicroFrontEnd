@@ -27,6 +27,11 @@ const routes: Routes = [
     path: 'transaction-approvals',
     loadChildren: (): Promise<any> =>
       import('./transaction-approvals/transaction-approvals.module').then(m => m.TransactionApprovalsModule),
+  },
+  {
+    path: 'configure-transaction',
+    loadChildren: (): Promise<any> =>
+      import('./configure-transaction/configure-transaction.module').then(m => m.ConfigureTransactionModule),
   }
 ];
 
@@ -34,4 +39,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class CustomerServicesRoutingModule {}
+export class CustomerServicesRoutingModule { }
