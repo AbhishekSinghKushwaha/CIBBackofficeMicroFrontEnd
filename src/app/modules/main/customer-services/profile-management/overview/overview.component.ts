@@ -1,3 +1,4 @@
+import { CifService } from './../../../../../core/services/cif/cif.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -12,9 +13,16 @@ export class OverviewComponent implements OnInit {
     mandate: true,
     signatories: false
   };
-  constructor(private router: Router) {}
+  currentCorporateData: any;
+  constructor(private router: Router, private cifService: CifService) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.cifService.selectedCorproate$.subscribe(data => {
+      this.currentCorporateData = data;
+    })
+
+    console.log(this.currentCorporateData);
+  }
 
   navigate() {
     this.router.navigate(['/customer-services/corporate-onboarding']);

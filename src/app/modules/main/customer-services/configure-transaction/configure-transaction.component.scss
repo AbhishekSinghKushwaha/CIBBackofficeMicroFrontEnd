@@ -1,0 +1,90 @@
+hr {
+  margin: 0px !important;
+}
+
+.status {
+  text-transform: capitalize;
+  border-radius: 15px;
+
+  &.approved {
+    background-color: rgba(47, 152, 3, 0.04);
+    color: var(--green);
+  }
+
+  &.pending {
+    background-color: rgba(243, 135, 7, 0.04);
+    color: var(--orange);
+  }
+
+  &.rejected {
+    background-color: rgba(243, 7, 7, 0.04);
+    color: var(--red);
+  }
+}
+
+@mixin mat-table-columns($columns) {
+  .mat-column- {
+
+    @each $colName,
+    $props in $columns {
+
+
+      $width: map-get($props, 'width');
+
+      &#{$colName} {
+        flex: $width;
+        max-width: $width;
+        text-align: center;
+        align-items: center;
+        @if map-has-key($props, 'color') {
+          color: map-get($props, 'color');
+        }
+      }
+    }
+  }
+}
+
+@include mat-table-columns((
+  id:(width: 4rem),
+  min:(width: 6rem),
+  max:(width: 6rem),
+  amountPercentage:(width: 6rem),
+  fixed:(width: 6rem),
+  multiplicity:(width: 6rem),
+  glAccount:(width: 6rem),
+  action:(width: 6rem)
+));
+
+.input-width {
+  width: 100%;
+}
+
+.eyeicon {
+  color: #A32A29;
+}
+
+.strech-img {
+  object-fit: cover;
+}
+
+::ng-deep .mat-select-panel .mat-option {
+  height: 5em !important;
+  padding-bottom: 5px !important;
+}
+
+:host ::ng-deep .mat-select-arrow {
+  opacity: 0;
+}
+
+::ng-deep .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle{
+  border-color: #a32a29 !important;
+}
+ ::ng-deep .mat-radio-button.mat-accent .mat-radio-inner-circle,
+.mat-radio-button.mat-accent .mat-radio-ripple .mat-ripple-element:not(.mat-radio-persistent-ripple),
+.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-persistent-ripple,
+.mat-radio-button.mat-accent:active .mat-radio-persistent-ripple, .mat-radio-button.mat-accent .mat-radio-inner-circle,
+.mat-radio-button.mat-accent .mat-radio-ripple .mat-ripple-element:not(.mat-radio-persistent-ripple),
+.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-persistent-ripple,
+.mat-radio-button.mat-accent:active .mat-radio-persistent-ripple {
+  background-color: #A32A29 !important;
+}

@@ -29,12 +29,18 @@ const routes: Routes = [
       import('./transaction-approvals/transaction-approvals.module').then(m => m.TransactionApprovalsModule),
   },
   {
+    path: 'configure-transaction',
+    loadChildren: (): Promise<any> =>
+      import('./configure-transaction/configure-transaction.module').then(m => m.ConfigureTransactionModule),
+  },
+  {
     path: 'create-workflow-management',
     loadChildren: () => import('./profile-management/configurations/workflow-management/create-workflow/create-workflow.module').then(m => m.CreateWorkflowModule)
   },
   {
     path: 'workflow-management/:id/:mode',
     loadChildren: () => import('./profile-management/configurations/workflow-management/create-workflow/create-workflow.module').then(m => m.CreateWorkflowModule)
+
   }
 ];
 
@@ -42,4 +48,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class CustomerServicesRoutingModule {}
+export class CustomerServicesRoutingModule { }

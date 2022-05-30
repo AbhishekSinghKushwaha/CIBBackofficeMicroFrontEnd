@@ -18,6 +18,18 @@
           <mat-list-item
             role="listitem"
             class="row-fluid cursor-pointer"
+            [routerLink]="['transaction-configuration']"
+            routerLinkActive="router-link-active"
+          >
+            <div class="col-10 strong-text">Transaction</div>
+            <div class="col-1">
+              <mat-icon color="primary" svgIcon="caret-right"></mat-icon>
+            </div>
+            <mat-divider mat-inset></mat-divider>
+          </mat-list-item>
+          <mat-list-item
+            role="listitem"
+            class="row-fluid cursor-pointer"
             [routerLink]="['file-template-configuration']"
             routerLinkActive="router-link-active"
           >
