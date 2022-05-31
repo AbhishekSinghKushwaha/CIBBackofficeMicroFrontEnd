@@ -205,7 +205,7 @@
                 <mat-card-content class="list-table">
                     <div class="pt-2 ps-2">
                         <mat-form-field appearance="outline" class="p-0">
-                            <input matInput placeholder="Search"/>
+                            <input matInput placeholder="Search" (keyup)="applyFilter($event)"/>
                             <mat-icon matSuffix>search</mat-icon>
                         </mat-form-field>
                     </div>

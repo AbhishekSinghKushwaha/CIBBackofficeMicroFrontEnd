@@ -221,6 +221,12 @@ export class CreateWorkflowComponent implements OnInit, AfterViewInit {
         this.usersDataSource.data.forEach(row => this.usersSelection.select(row));
   }
 
+  applyFilter(event: Event) {
+    let filterValue = (event.target as HTMLInputElement).value;
+    filterValue = filterValue.trim().toLowerCase();
+    this.usersDataSource.filter = filterValue;
+  }
+
   checkersIsAllSelected() {
     const numSelected = this.checkersSelection.selected.length;
     const numRows = this.checkersDataSource.data.length;

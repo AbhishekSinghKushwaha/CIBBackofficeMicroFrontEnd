@@ -85,13 +85,29 @@ export class SequentialApprovalDataComponent implements OnInit, AfterViewInit {
 
   addUsersWorkflow() {
     this.usersDataSource = new MatTableDataSource();
-      const data: AddUsersWorkflowModel[] = Array(3).fill(0).map((x,i) => ({
+      const data: AddUsersWorkflowModel[] = [
+        {
           name: 'George Okonjo',
           id: '23546987',
           role: 'Approver',
           status: 'Active',
           lastviewed: '12/02/20'
-      }));
+        },
+        {
+          name: 'Okonjo',
+          id: '987456321',
+          role: 'Approver',
+          status: 'Active',
+          lastviewed: '12/02/20'
+        },
+        {
+          name: 'George',
+          id: '123456789',
+          role: 'Approver',
+          status: 'Active',
+          lastviewed: '12/02/20'
+        },
+      ];
     
       this.usersDataSource.data = data;
   }
@@ -108,13 +124,21 @@ export class SequentialApprovalDataComponent implements OnInit, AfterViewInit {
         this.usersDataSource.data.forEach(row => this.usersSelection.select(row));
   }
 
-  incrementValue(index: number) {
+  applyFilter(event: Event) {
+    let filterValue = (event.target as HTMLInputElement).value;
+    filterValue = filterValue.trim().toLowerCase();
+    this.usersDataSource.filter = filterValue;
+  }
+  
+  incrementValue(event: Event) {
     // this.value = i;
-    this.usersDataSource.data.map((x, i) => {
-      if(i === index) {
-        this.value = this.value + 1;
-      }
-    });
+    // this.usersDataSource.data.map((x, i) => {
+    //   if(i === index) {
+    //     this.value = this.value + 1;
+    //   }
+    // });
+    // event.stopPropagation();
+    this.value = this.value + 1;
   }
 
 }
