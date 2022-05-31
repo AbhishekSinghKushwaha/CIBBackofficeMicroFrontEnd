@@ -3,31 +3,30 @@ import { RouterModule, Routes } from '@angular/router';
 import { NewUserComponent } from './new-user/new-user.component';
 import { UsersComponent } from './users.component';
 import { ProfileAddUserComponent } from './add-user/add-user.component';
+import { UserListComponent } from 'src/app/shared/components/user-list/user-list.component';
 
 const routes: Routes = [
   {
     path: '', component: UsersComponent,
     children: [
-      { path: '', redirectTo: 'new-user',pathMatch:'full' },
       {
-        path: 'new-user',
-        component: NewUserComponent
+        path: '',
+        redirectTo: 'initiators/list'
       },
       {
-        path: 'add-user',
-        component: ProfileAddUserComponent
+        path: ':category/list',
+        component: UserListComponent,
+      },
+      {
+        path: ':category/add',
+        component: ProfileAddUserComponent,
       },
     ],
-   
-  },
-  {
-    path: 'nadd-user',
-    component: ProfileAddUserComponent
-  },
+  }
 ];
-
+// NewUserComponent
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class UsersRoutingModule {}
+export class UsersRoutingModule { }

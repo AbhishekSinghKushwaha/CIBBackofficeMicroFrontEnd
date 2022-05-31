@@ -14,6 +14,7 @@ import { ListHolidaysComponent } from './holiday-configuration/list-holidays/lis
 import { ConfirmDialogModule } from 'src/app/shared/modals/confirm-dialog/confirm-dialog.module';
 import { TransactionConfigurationComponent } from './transaction-configuration/transaction-configuration.component';
 import { ListTransactionConfigurationComponent } from './transaction-configuration/list-transaction-configuration/list-transaction-configuration.component';
+import { SharedComponentsModule } from 'src/app/shared/components/shared-components.module';
 
 
 @NgModule({
@@ -23,7 +24,6 @@ import { ListTransactionConfigurationComponent } from './transaction-configurati
     FileTemplateComponent,
     ListFileTemplatesComponent,
     NewFileTemplatesComponent,
-    ConfirmationCompletionComponent,
     ListHolidaysComponent,
     TransactionConfigurationComponent,
     ListTransactionConfigurationComponent,
@@ -34,7 +34,8 @@ import { ListTransactionConfigurationComponent } from './transaction-configurati
     MatStyleModule,
     SharedModalsModule,
     ReactiveFormsModule,
-    ConfirmDialogModule
+    ConfirmDialogModule,
+    SharedComponentsModule
   ],
 })
 export class ConfigurationsModule { }
