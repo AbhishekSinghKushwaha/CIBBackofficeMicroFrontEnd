@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { BehaviorSubject, of } from 'rxjs';
 import { CreateHolidayModalComponent } from 'src/app/shared/modals/create-holiday-modal/create-holiday-modal.component';
+import { environment } from 'src/environments/environment';
 import { HolidayConfigurationModel } from '../../domain/holiday-config.model';
 import urlList from '../service-list.json';
 
@@ -34,15 +35,15 @@ export class HolidayConfigurationService {
   }
 
   saveHoliday(payload: any, corporateId: string) {
-    return this.http.post(`${urlList.holidayConfiguration.postHolidays}/${corporateId}`, payload);
+    return this.http.post(`${environment.apiUrl}${urlList.holidayConfiguration.postHolidays}/${corporateId}`, payload);
   }
 
   getHolidays(corporateId: string) {
-    return this.http.get(`${urlList.holidayConfiguration.getHolidays}/${corporateId}`);
+    return this.http.get(`${environment.apiUrl}${urlList.holidayConfiguration.getHolidays}/${corporateId}`);
   }
 
   deleteHoliday( holidayId: string, corporateId: string) {
-    return this.http.put(`${urlList.holidayConfiguration.deleteHoliday}/${holidayId}`, {});
+    return this.http.put(`${environment.apiUrl}${urlList.holidayConfiguration.deleteHoliday}/${holidayId}`, {});
   }
 
 }
