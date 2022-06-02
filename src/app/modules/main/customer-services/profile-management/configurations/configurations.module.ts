@@ -14,6 +14,7 @@ import { ListHolidaysComponent } from './holiday-configuration/list-holidays/lis
 import { ConfirmDialogModule } from 'src/app/shared/modals/confirm-dialog/confirm-dialog.module';
 import { TransactionConfigurationComponent } from './transaction-configuration/transaction-configuration.component';
 import { ListTransactionConfigurationComponent } from './transaction-configuration/list-transaction-configuration/list-transaction-configuration.component';
+import { SharedComponentsModule } from 'src/app/shared/components/shared-components.module';
 import { WorkflowManagementModule } from './workflow-management/workflow-management.module';
 import { CreateWorkflowModule } from './workflow-management/create-workflow/create-workflow.module';
 
@@ -25,7 +26,6 @@ import { CreateWorkflowModule } from './workflow-management/create-workflow/crea
     FileTemplateComponent,
     ListFileTemplatesComponent,
     NewFileTemplatesComponent,
-    ConfirmationCompletionComponent,
     ListHolidaysComponent,
     TransactionConfigurationComponent,
     ListTransactionConfigurationComponent,
@@ -37,6 +37,7 @@ import { CreateWorkflowModule } from './workflow-management/create-workflow/crea
     SharedModalsModule,
     ReactiveFormsModule,
     ConfirmDialogModule,
+    SharedComponentsModule,
     WorkflowManagementModule,
     CreateWorkflowModule
   ],

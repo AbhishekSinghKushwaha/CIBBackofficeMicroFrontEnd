@@ -1,0 +1,283 @@
+<form [formGroup]="userForm" (submit)="submitUser()" autocomplete="off">
+  <mat-accordion multi>
+    <mat-expansion-panel
+      [expanded]="panelOpenState.userDetails === true"
+      (opened)="(panelOpenState.userDetails === true)"
+    >
+      <mat-expansion-panel-header class="panel-header">
+        <mat-panel-title>
+          <h2 class="bullets">1</h2>
+          <h2>User 1</h2>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-divider></mat-divider>
+      <!-- User Details -->
+      <div class="d-flex flex-column mt-3 mb-3">
+        <div class="row pt-4">
+          <div class="col-md-3">
+            <mat-form-field
+              appearance="fill"
+              style="width: 100%"
+              floatLabel="always"
+            >
+              <mat-label>Full Name</mat-label>
+              <input
+                matInput
+                type="text"
+                formControlName="fullName"
+                placeholder="Enter fullname"
+              />
+            </mat-form-field>
+          </div>
+          <div class="col-md-3">
+            <mat-form-field
+              appearance="fill"
+              style="width: 100%"
+              floatLabel="always"
+            >
+              <mat-label>Email</mat-label>
+              <input
+                matInput
+                type="email"
+                formControlName="email"
+                placeholder="Enter email"
+              />
+            </mat-form-field>
+          </div>
+          <div class="col-md-3">
+            <mat-form-field
+              appearance="fill"
+              style="width: 100%"
+              floatLabel="always"
+            >
+              <mat-label>ID/PP</mat-label>
+              <input
+                matInput
+                type="idpp"
+                formControlName="idpp"
+                placeholder="Enter ID/PP"
+              />
+            </mat-form-field>
+          </div>
+          <div class="col-md-3">
+            <mat-form-field
+              appearance="fill"
+              style="width: 100%"
+              floatLabel="always"
+            >
+              <mat-label>Phone Number</mat-label>
+              <input
+                matInput
+                type="phoneNumber"
+                formControlName="phoneNumber"
+                placeholder="Enter phone number"
+              />
+            </mat-form-field>
+          </div>
+          <div class="col-md-3">
+            <mat-form-field
+              appearance="fill"
+              style="width: 100%"
+              floatLabel="always"
+            >
+              <mat-label>Phone Office</mat-label>
+              <input
+                matInput
+                type="phoneOffice"
+                formControlName="phoneOffice"
+                placeholder="Enter office phone"
+              />
+            </mat-form-field>
+          </div>
+          <div class="col-md-3">
+            <mat-form-field
+              appearance="fill"
+              style="width: 100%"
+              floatLabel="always"
+            >
+              <mat-label>CIF Number</mat-label>
+              <input
+                matInput
+                type="cifNumber"
+                formControlName="cifNumber"
+                placeholder="Enter CIF Number"
+              />
+            </mat-form-field>
+          </div>
+          <div class="col-md-3">
+            <mat-form-field
+              appearance="fill"
+              style="width: 100%"
+              floatLabel="always"
+            >
+              <mat-label>GCIF</mat-label>
+              <input
+                matInput
+                type="globalCif"
+                formControlName="globalCif"
+                placeholder="Enter Global CIF"
+              />
+            </mat-form-field>
+          </div>
+          <div class="col-md-3">
+            <mat-form-field
+              appearance="fill"
+              style="width: 100%"
+              floatLabel="always"
+            >
+              <mat-label>Corporate Profile</mat-label>
+              <input
+                matInput
+                type="corporateProfile"
+                formControlName="corporateProfile"
+                placeholder="Enter Corporate Profile"
+              />
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+
+      <mat-divider></mat-divider>
+
+      <!-- Roles -->
+      <div class="mt-3 mb-5">
+        <h3 class="mb-3">Roles</h3>
+        <app-corporate-user-roles
+          [userId]="userId"
+          [roles]="roles"
+          (selectedRoles)="onSelectedRoles($event)"
+        ></app-corporate-user-roles>
+      </div>
+
+      <mat-divider></mat-divider>
+
+      <!-- Products -->
+      <div class="mt-3 mb-5">
+        <h3 class="mb-3">
+          Please select the products you want the user to access
+        </h3>
+        <app-corporate-user-products
+          [username]="username"
+          [products]="products"
+          (selectedProducts)="onSelectProduct($event)"
+        ></app-corporate-user-products>
+      </div>
+
+      <mat-divider></mat-divider>
+
+      <!-- Accounts -->
+      <div class="mt-3 mb-5">
+        <h3 class="mb-3">Please select the accounts the user can access</h3>
+        <app-corporate-user-accounts
+          [username]="username"
+          [accounts]="accounts"
+          (selectedAccounts)="onSelectAccount($event)"
+        >
+        </app-corporate-user-accounts>
+      </div>
+
+      <mat-divider></mat-divider>
+
+      <!-- Transaction Limits -->
+      <div class="mt-3 mb-3">
+        <h3 class="mb-3">Please assign user transaction limits</h3>
+        <div class="d-flex flex-column mt-3 mb-3">
+          <div class="row pt-4">
+            <div class="col-md-3">
+              <app-currency-input
+                [parentForm]="userForm"
+                fieldName="currency"
+                label="Currency"
+                placeholder="Select currency"
+                formControlName="currency"
+              >
+              </app-currency-input>
+            </div>
+            <div class="col-md-3">
+              <mat-form-field
+                appearance="fill"
+                style="width: 100%"
+                floatLabel="always"
+              >
+                <mat-label>Maximum Per Transaction</mat-label>
+                <input
+                  matInput
+                  type="text"
+                  formControlName="maxLimit"
+                  placeholder="Enter Maximum Amount Per Transaction"
+                />
+              </mat-form-field>
+            </div>
+            <div class="col-md-3">
+              <mat-form-field
+                appearance="fill"
+                style="width: 100%"
+                floatLabel="always"
+              >
+                <mat-label>Daily Limit</mat-label>
+                <input
+                  matInput
+                  type="text"
+                  formControlName="dailyLimit"
+                  placeholder="Enter Daily Limit"
+                />
+              </mat-form-field>
+            </div>
+            <div class="col-md-3">
+              <mat-form-field
+                appearance="fill"
+                style="width: 100%"
+                floatLabel="always"
+              >
+                <mat-label>Weekly Limit</mat-label>
+                <input
+                  matInput
+                  type="text"
+                  formControlName="weeklyLimit"
+                  placeholder="Enter Weekly Limit"
+                />
+              </mat-form-field>
+            </div>
+            <div class="col-md-3">
+              <mat-form-field
+                appearance="fill"
+                style="width: 100%"
+                floatLabel="always"
+              >
+                <mat-label>Monthly Limit</mat-label>
+                <input
+                  matInput
+                  type="text"
+                  formControlName="monthlyLimit"
+                  placeholder="Enter Weekly Limit"
+                />
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+  <div class="mt-4 mb-4">
+    <mat-card>
+      <mat-card-header class="addition-button">
+        <div class="d-flex flex-row pt-2" style="color: var(--equity)">
+          <mat-icon>add</mat-icon>
+          <p class="mx-3">Add Additional User</p>
+        </div>
+      </mat-card-header>
+    </mat-card>
+  </div>
+
+  <div class="d-flex flex-row justify-content-between mt-4 mb-4">
+    <div class="">
+      <button mat-stroked-button color="primary">Quit</button>
+    </div>
+    <div>
+      <button mat-raised-button type="submit" color="primary">
+        Save & Continue
+      </button>
+    </div>
+  </div>
+</form>

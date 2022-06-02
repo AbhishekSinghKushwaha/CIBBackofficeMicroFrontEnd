@@ -12,6 +12,7 @@ import { AddWorkflowComponent } from './add-workflow/add-workflow.component';
 import { MatStyleModule } from 'src/app/mat-style.module';
 import { FormElementsModule } from 'src/app/shared/form-elements/form-elements.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AddUserModule } from 'src/app/shared/components/add-user/add-user.module';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     CorporateOnboardingRoutingModule,
     MatStyleModule,
     ProfileManagementTopNavModule,
+    AddUserModule,
+
     FormElementsModule,
     FormsModule,
     ReactiveFormsModule
