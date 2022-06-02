@@ -15,19 +15,19 @@
                     <div class="row">
                       <div class="col-md-6 mb-3">
                         <p class="text-grey">Account name</p>
-                        <p>George Ojwang</p>
+                        <p>{{transactionDetails?.accountName}}</p>
                       </div>
                       <div class="col-md-6 mb-3">
                         <p class="text-grey">Batch payment total</p>
-                        <p>2,000,000.00 KES</p>
+                        <p>{{transactionDetails?.amount}} {{transactionDetails?.currency}}</p>
                       </div>
                       <div class="col-md-6 mb-3">
                         <p class="text-grey">Total charges</p>
-                        <p>90,000.00 KES</p>
+                        <p>{{transactionDetails?.transferCharge}} {{transactionDetails?.currency}}</p>
                       </div>
                       <div class="col-md-6 mb-3">
                         <p class="text-grey">CIF</p>
-                        <p>23568974</p>
+                        <p>{{transactionDetails?.cif}}</p>
                       </div>
                     </div>
                   </div>

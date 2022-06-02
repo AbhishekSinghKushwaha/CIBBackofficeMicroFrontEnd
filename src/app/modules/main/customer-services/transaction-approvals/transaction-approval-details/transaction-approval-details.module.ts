@@ -6,7 +6,6 @@ import { TransactionApprovalDetailsComponent } from './transaction-approval-deta
 import { MatStyleModule } from 'src/app/mat-style.module';
 import { BiometricVerificationModule } from 'src/app/shared/modals/biometric-verification/biometric-verification.module';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { TransactionApprovalService } from 'src/app/core/services/transaction-approval/transaction-approval.service';
 
 @NgModule({
   declarations: [
@@ -19,9 +18,6 @@ import { TransactionApprovalService } from 'src/app/core/services/transaction-ap
     BiometricVerificationModule,
     FormsModule,
     ReactiveFormsModule
-  ],
-  providers: [
-    TransactionApprovalService
   ]
 })
 export class TransactionApprovalDetailsModule { }

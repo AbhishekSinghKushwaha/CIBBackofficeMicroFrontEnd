@@ -35,7 +35,7 @@ export function CustomPaginator() {
 
   customPaginatorIntl.getRangeLabel = (page: number, pageSize: number, length: number) => {
     if (length === 0 || pageSize === 0) {
-      return `0 à ${length }`;
+      return `0 of ${length }`;
     }
     length = Math.max(length, 0);
     const startIndex = page * pageSize;
@@ -94,6 +94,11 @@ export class TransactionApprovalsComponent implements OnInit, AfterViewInit  {
 
   searchType: any;
 
+  requestReference: any
+  approvalStatus: any;
+  accountNumber: any;
+  bankId: any;
+
   constructor(
     private router: Router,
     private readonly transactionApprovalService: TransactionApprovalService
@@ -122,55 +127,44 @@ export class TransactionApprovalsComponent implements OnInit, AfterViewInit  {
     });
   }
 
-  // onLoadData() {
-  //   this.dataSource = new MatTableDataSource();
-  //     const data: UserListModel[] = [
-  //       {
-  //         name: 'Apple',
-  //         date: '01/01/2020',
-  //         paymentType: 'Bulk Transfer',
-  //         bankReference: '123456789',
-  //         corporateReference: '235689741',
-  //         recepientName: 'Jacques Muller',
-  //         amount: '100',
-  //         transactionType: 'Bulk Transfer',
-  //         status: 'Pending'
-  //       },
-  //       {
-  //         name: 'John Doe',
-  //         date: '03/03/2020',
-  //         paymentType: 'Bulk Transfer',
-  //         bankReference: '123456789',
-  //         corporateReference: '123456789',
-  //         recepientName: 'Jacques Muller',
-  //         amount: '300',
-  //         transactionType: 'Bulk Transfer',
-  //         status: 'Approved'
-  //       },
-  //       {
-  //         name: 'Mike Smith',
-  //         date: '02/02/2020',
-  //         paymentType: 'Bulk Transfer',
-  //         bankReference: '123456789',
-  //         corporateReference: '987456321',
-  //         recepientName: 'Jacques Muller',
-  //         amount: '200',
-  //         transactionType: 'Bulk Transfer',
-  //         status: 'Rejected'
-  //       },
-  //     ];
-       
-  //     this.dataSource.data = data;
-  // }
-
   ngAfterViewInit(): void {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
   }
 
-  openActionsMenu(user: User) {
+  openActionsMenu(user: any) {
     console.log(user);
-    this.router.navigate(['/customer-services/transaction-approvals/details']);
+
+    const payload = {
+      requestReference : user.requestReference,
+      approvalStatus : user.approvalStatus,
+      accountName: user.sourceAccountName,
+      accountNumber : user.sourceAccount,
+      bankId : user.bankId,
+      cif : user.cif,
+      transferCharge: user.transferCharge,
+      amount: user.amount,
+      currency: user.currency,
+      // documents: user.documents,
+      documents: [
+        {
+          name: 'test 1',
+          size: '1.2mb'
+        },
+        {
+          name: 'test 2',
+          size: '1.2mb'
+        },
+        {
+          name: 'test 3',
+          size: '1.2mb'
+        },
+      ]
+    }
+
+    this.transactionApprovalService.accountDetails(payload);
+    this.requestReference = user.requestReference;
+    this.router.navigate([`/customer-services/transaction-approvals/details/${this.requestReference}`]);
   }
 
   isAllSelected() {
@@ -183,10 +177,6 @@ export class TransactionApprovalsComponent implements OnInit, AfterViewInit  {
     this.isAllSelected() ?
         this.selection.clear() :
         this.dataSource.data.forEach(row => this.selection.select(row));
-  }
-
-  openFilterModal(){
-
   }
 
   approve() {
