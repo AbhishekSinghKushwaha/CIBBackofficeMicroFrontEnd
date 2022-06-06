@@ -1,0 +1,274 @@
+trigger:
+- develop
+- rel
+- main
+
+variables:
+  # Container registry service connection established during pipeline creation
+  dockerRegistryServiceConnection: 'acromnichannel'
+  DEVImageRepository: 'omnichannel/cibbackoffice-frontend-dev'
+  UATImageRepository: 'omnichannel/cibbackoffice-frontend-uat'
+  PRODImageRepository: 'omnichannel/cibbackoffice-frontend-prod'
+  containerRegistry: 'acromnichannel.azurecr.io'
+  dockerfilePath: '**/Dockerfile'
+  azureSubscription: 'OMNICHANNEL-DEV'
+  # devKeyVaultName: 'kv-dev-omnichannel'
+  # uatKeyVaultName: 'kv-uat-omnichannel'
+  # prodKeyVaultName: 'kv-prod-omnichannel'
+  tag: '$(Build.BuildId)'
+  appName: 'cibbackoffice-frontend'
+
+  # Agent VM image name
+  vmImageName: 'ubuntu-latest'
+
+stages:
+- stage: PRBuild
+  condition: and(always(), eq(variables['Build.Reason'], 'PullRequest'))
+  displayName: Validate PR
+  jobs:
+  - job: Build
+    displayName: Build
+    pool:
+      vmImage: $(vmImageName)
+    steps:
+    # - task: AzureKeyVault@2
+    #   inputs:
+    #     azureSubscription: $(azureSubscription)
+    #     KeyVaultName: $(devKeyVaultName)
+    #     SecretsFilter: '*'
+    #     RunAsPreJob: false
+
+    - task: replacetokens@3
+      inputs:
+        targetFiles: |
+          **/*dev.yml
+          **/*dev.yaml
+          **/*dev.properties
+          **/.env
+          **/*consumer.config
+        encoding: 'auto'
+        writeBOM: true
+        actionOnMissing: 'warn'
+        keepToken: false
+        tokenPrefix: '#{'
+        tokenSuffix: '}#'
+
+    # - script: |
+    #     wget https://download.defensecode.com/latest/clients/tscli.tar.gz -O tscli.tar.gz
+    #     tar xvzf tscli.tar.gz
+    #   displayName: 'Download/Extract ThunderScan API CLI'
+
+    # - script: |
+    #     ./tscli --upload $(system.defaultworkingdirectory) --threshold "high:10" --engines 8 --report --formats "html,json" --filename "$(appName)-report" --name "$(appName)-$(tag)"
+    #   displayName: 'ThunderScan Scan'
+    # - publish: $(appName)-report.html
+    #   condition: succeededOrFailed()
+    #   artifact: ThunderScan HTML Report
+    
+    - task: Docker@2
+      displayName: Build and push an image to container registry
+      inputs:
+        command: buildAndPush
+        repository: $(DEVImageRepository)
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          $(tag)
+
+- stage: BuildDEV
+  displayName: DEV
+  condition: and(always(), contains(variables['Build.SourceBranch'], 'refs/heads/develop'))
+  jobs:
+  - job: Build
+    displayName: Build
+    pool:
+      vmImage: $(vmImageName)
+    steps:
+    # - task: AzureKeyVault@2
+    #   inputs:
+    #     azureSubscription: $(azureSubscription)
+    #     KeyVaultName: $(devKeyVaultName)
+    #     SecretsFilter: '*'
+    #     RunAsPreJob: false
+              
+    - task: replacetokens@3
+      inputs:
+        targetFiles: |
+          **/*dev.yml
+          **/*dev.yaml
+          **/*dev.properties
+          **/.env
+          **/*consumer.config
+        encoding: 'auto'
+        writeBOM: true
+        actionOnMissing: 'warn'
+        keepToken: false
+        tokenPrefix: '#{'
+        tokenSuffix: '}#'
+
+    # - script: |
+    #     wget https://download.defensecode.com/latest/clients/tscli.tar.gz -O tscli.tar.gz
+    #     tar xvzf tscli.tar.gz
+    #   displayName: 'Download/Extract ThunderScan API CLI'
+
+    # - script: |
+    #     ./tscli --upload $(system.defaultworkingdirectory) --threshold "high:10" --engines 8 --report --formats "html,json" --filename "$(appName)-report" --name "$(appName)-$(tag)"
+    #   displayName: 'ThunderScan Scan'
+    # - publish: $(appName)-report.html
+    #   condition: succeededOrFailed()
+    #   artifact: ThunderScan HTML Report
+    
+    - task: CopyFiles@2
+      inputs:
+        SourceFolder: '$(system.defaultworkingdirectory)'
+        Contents: |
+          **/*.yml
+          **/*.yaml
+        TargetFolder: '$(build.artifactstagingdirectory)'
+
+    - task: PublishBuildArtifacts@1
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+        ArtifactName: 'dev_drop'
+        publishLocation: 'Container'
+
+    - task: Docker@2
+      displayName: Build and push an image to container registry
+      inputs:
+        command: buildAndPush
+        repository: $(DEVImageRepository)
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          $(tag)
+
+- stage: BuildUAT
+  displayName: UAT
+  condition: and(always(), contains(variables['Build.SourceBranch'], 'refs/heads/rel'))
+  jobs:
+  - job: Build
+    displayName: Build
+    pool:
+      vmImage: $(vmImageName)
+    steps:
+    # - task: AzureKeyVault@2
+    #   inputs:
+    #     azureSubscription: $(azureSubscription)
+    #     KeyVaultName: $(uatKeyVaultName)
+    #     SecretsFilter: '*'
+    #     RunAsPreJob: false
+        
+    - task: replacetokens@3
+      inputs:
+        targetFiles: |
+          **/*uat.yml
+          **/*uat.yaml
+          **/*uat.properties
+          **/.env
+          **/*consumer.config
+        encoding: 'auto'
+        writeBOM: true
+        actionOnMissing: 'warn'
+        keepToken: false
+        tokenPrefix: '#{'
+        tokenSuffix: '}#'
+
+    # - script: |
+    #     wget https://download.defensecode.com/latest/clients/tscli.tar.gz -O tscli.tar.gz
+    #     tar xvzf tscli.tar.gz
+    #   displayName: 'Download/Extract ThunderScan API CLI'
+
+    # - script: |
+    #     ./tscli --upload $(system.defaultworkingdirectory) --threshold "high:10" --engines 8 --report --formats "html,json" --filename "$(appName)-report" --name "$(appName)-$(tag)"
+    #   displayName: 'ThunderScan Scan'
+    # - publish: $(appName)-report.html
+    #   condition: succeededOrFailed()
+    #   artifact: ThunderScan HTML Report
+
+    - task: CopyFiles@2
+      inputs:
+        SourceFolder: '$(system.defaultworkingdirectory)'
+        Contents: |
+          **/*.yml
+          **/*.yaml
+        TargetFolder: '$(build.artifactstagingdirectory)'
+    - task: PublishBuildArtifacts@1
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+        ArtifactName: 'uat_drop'
+        publishLocation: 'Container'
+    - task: Docker@2
+      displayName: Build and push an image to container registry
+      inputs:
+        command: buildAndPush
+        repository: $(UATImageRepository)
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          $(tag)
+
+- stage: BuildPROD
+  displayName: PROD
+  condition: and(always(), contains(variables['Build.SourceBranch'], 'refs/heads/master'))
+  jobs:
+  - job: Build
+    displayName: Build
+    pool:
+      vmImage: $(vmImageName)
+    steps:
+    # - task: AzureKeyVault@2
+    #   inputs:
+    #     azureSubscription: $(azureSubscription)
+    #     KeyVaultName: $(prodKeyVaultName)
+    #     SecretsFilter: '*'
+    #     RunAsPreJob: false
+              
+    - task: replacetokens@3
+      inputs:
+        targetFiles: |
+          **/*prod.yml
+          **/*prod.yaml
+          **/*prod.properties
+          **/.env
+          **/*consumer.config
+        encoding: 'auto'
+        writeBOM: true
+        actionOnMissing: 'warn'
+        keepToken: false
+        tokenPrefix: '#{'
+        tokenSuffix: '}#'
+    
+    # - script: |
+    #     wget https://download.defensecode.com/latest/clients/tscli.tar.gz -O tscli.tar.gz
+    #     tar xvzf tscli.tar.gz
+    #   displayName: 'Download/Extract ThunderScan API CLI'
+
+    # - script: |
+    #     ./tscli --upload $(system.defaultworkingdirectory) --threshold "high:10" --engines 8 --report --formats "html,json" --filename "$(appName)-report" --name "$(appName)-$(tag)"
+    #   displayName: 'ThunderScan Scan'
+    # - publish: $(appName)-report.html
+    #   condition: succeededOrFailed()
+    #   artifact: ThunderScan HTML Report
+
+    - task: CopyFiles@2
+      inputs:
+        SourceFolder: '$(system.defaultworkingdirectory)'
+        Contents: |
+          **/*.yml
+          **/*.yaml
+        TargetFolder: '$(build.artifactstagingdirectory)'
+    - task: PublishBuildArtifacts@1
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+        ArtifactName: 'prod_drop'
+        publishLocation: 'Container'
+    - task: Docker@2
+      displayName: Build and push an image to container registry
+      inputs:
+        command: buildAndPush
+        repository: $(PRODImageRepository)
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          $(tag)
+
