@@ -4,4 +4,5 @@ export interface AddUsersWorkflowModel {
     role: string;
     status?: string;
     lastviewed?: string;
+    checked?: false;
   }

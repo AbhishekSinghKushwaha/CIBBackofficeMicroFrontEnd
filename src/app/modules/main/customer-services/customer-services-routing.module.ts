@@ -38,7 +38,7 @@ const routes: Routes = [
     loadChildren: () => import('./profile-management/configurations/workflow-management/create-workflow/create-workflow.module').then(m => m.CreateWorkflowModule)
   },
   {
-    path: 'workflow-management/:id/:mode',
+    path: 'workflow-management/:mode',
     loadChildren: () => import('./profile-management/configurations/workflow-management/create-workflow/create-workflow.module').then(m => m.CreateWorkflowModule)
 
   }

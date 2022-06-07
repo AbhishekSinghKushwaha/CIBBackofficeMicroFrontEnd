@@ -3,6 +3,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { WorkflowManagementModel } from 'src/app/core/domain/workflow-management.model';
 import { Router } from '@angular/router';
+import { WorkflowManagementService } from 'src/app/core/services/workflow-management/workflow-management.service';
 
 export type WorkflowStatus = 'active' | 'disabled';
 
@@ -21,6 +22,8 @@ export interface Workflow {
 
 export class WorkflowManagementComponent implements OnInit, AfterViewInit {
 
+  companyId= "16bdac12-7117-4c43-9389-851e9d039086";
+
   existingWorkflow: boolean;
 
   @ViewChild(MatSort)
@@ -36,38 +39,37 @@ export class WorkflowManagementComponent implements OnInit, AfterViewInit {
 
   dataSource: MatTableDataSource<WorkflowManagementModel>;
 
+  payload: any;
+
   constructor(
-    private router: Router
+    private router: Router,
+    private workflowManagementService: WorkflowManagementService
   ) { }
 
   ngOnInit(): void {
-    this.existingWorkflow = true;
+    this.getDataByCompanyId();
+  }
 
+  getDataByCompanyId() {
     this.dataSource = new MatTableDataSource();
-      const data: WorkflowManagementModel[] = [
-        {
-          workflowname: 'Bulk Payment',
-          product: 'Transact',
-          account: 'John Ogbu',
-          status: 'Active'
-        },
-        {
-          workflowname: 'Beneficiary',
-          product: 'Beneficiary',
-          account: 'Teslim James',
-          status: 'Disabled'
-        }
-    ];
-       
-      this.dataSource.data = data;
+
+    this.workflowManagementService.getWorkflows(this.companyId).subscribe((res: any) => {
+      this.existingWorkflow = true;
+      this.dataSource.data = res.data;
+    });
   }
 
   ngAfterViewInit(): void {
     this.dataSource.sort = this.sort;
   }
 
-  openActionsMenu(workflow: Workflow) {
+  openActionsMenu(workflow: any) {
     console.log(workflow);
+    this.payload = {
+      companyId: this.companyId,
+      workflowSettingsId: workflow.id
+    }
+    this.workflowManagementService.getWorkFlowById(this.payload);
   }
 
   createWorkflow() {
@@ -75,11 +77,17 @@ export class WorkflowManagementComponent implements OnInit, AfterViewInit {
   }
 
   viewWorkflow() {
-    this.router.navigate(['/customer-services/workflow-management/1/view']);
+    this.router.navigate(['/customer-services/workflow-management/view']);
   }
 
   updateWorkflow() {
-    this.router.navigate(['/customer-services/workflow-management/1/update']);
+    this.router.navigate(['/customer-services/workflow-management/update']);
+  }
+
+  deleteWorkflow() {
+    this.workflowManagementService.deleteWorkflow(this.payload.workflowSettingsId).subscribe((res: any) => {
+      console.log(res, 'delete');
+    });
   }
 
 }

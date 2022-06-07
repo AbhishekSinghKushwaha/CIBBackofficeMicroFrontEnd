@@ -4,4 +4,5 @@ export interface AddCheckersWorkflowModel {
     profiletype: string;
     status?: string;
     lastviewed?: string;
+    checked: false
   }

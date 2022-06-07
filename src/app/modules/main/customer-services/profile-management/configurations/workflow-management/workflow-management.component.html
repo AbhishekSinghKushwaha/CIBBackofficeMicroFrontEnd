@@ -43,7 +43,7 @@
                         
                   <ng-container matColumnDef="workflowname">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header>Workflow name</th>
-                    <td mat-cell *matCellDef="let row">{{ row.workflowname }}</td>
+                    <td mat-cell *matCellDef="let row">{{ row.name }}</td>
                   </ng-container>
           
                   <ng-container matColumnDef="product">
@@ -80,7 +80,10 @@
                         matSuffix
                         (click)="openActionsMenu(element)"
                       >
-                        <mat-icon [matMenuTriggerFor]="menu" class="eyeicon">more_horiz</mat-icon>
+                      <mat-icon
+                      svgIcon="three-dots-circled"
+                      [matMenuTriggerFor]="menu"
+                    ></mat-icon>
                       </button>
                     </td>
                   </ng-container>
@@ -117,6 +120,17 @@
             </div>
             <div class="col-md-8 card card-block justify-content-center">
               <span>Update workflow</span>
+            </div>
+          </div>
+          <mat-divider class="pb-1"></mat-divider>
+          <div class="row cursor-pointer" (click)="deleteWorkflow()">
+            <div class="col-md-3">
+              <button mat-fab class="button_icon ms-1">
+                <mat-icon class="material-symbols-outlined eyeicon">delete</mat-icon>
+              </button>
+            </div>
+            <div class="col-md-8 card card-block justify-content-center">
+              <span>Delete workflow</span>
             </div>
           </div>    
         </mat-menu>

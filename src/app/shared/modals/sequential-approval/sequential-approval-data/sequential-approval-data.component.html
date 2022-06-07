@@ -28,6 +28,10 @@
                 </mat-checkbox>
                 </th>
                 <td mat-cell *matCellDef="let row; let i = index">
+                <mat-checkbox (click)="$event.stopPropagation()"
+                            (change)="updateCheckedList($event,i, row)"
+                            [checked]="getWorkflowIdData?.companyId ? row.checked : usersSelection.isSelected(row)">
+                </mat-checkbox>
                 <!-- <mat-checkbox (click)="$event.stopPropagation()"
                                 (change)="$event ? usersSelection.toggle(row) : null"
                                 [checked]="usersSelection.isSelected(row)">
@@ -37,11 +41,11 @@
                     <span *ngIf="!value">&nbsp;</span>
                 </div>
                 <input type="number" hidden [(ngModel)]="value" /> -->
-                <div class="checkbox" [class.checked]="value > 0" (click)="incrementValue(i)">
+                <!-- <div class="checkbox" [class.checked]="value > 0" (click)="incrementValue(i)">
                     <span *ngIf="value > 0">{{value}}</span>
                     <span *ngIf="!value">&nbsp;</span>
                 </div>
-                <input type="number" hidden [(ngModel)]="value" />
+                <input type="number" hidden [(ngModel)]="value" /> -->
                 </td>
             </ng-container>
                 
@@ -93,10 +97,10 @@
     <div class="py-4">
         <div class="d-flex justify-content-between">
           <div>
-            <button mat-stroked-button color="primary" class="px-5">Cancel</button>
+            <button mat-stroked-button color="primary" class="px-5" (click)="cancel()">Cancel</button>
           </div>
           <div>
-            <button mat-raised-button color="primary" class="px-5">Confirm</button>
+            <button mat-raised-button color="primary" class="px-5" (click)="confirm()">Confirm</button>
           </div>
         </div>
     </div>

@@ -76,5 +76,11 @@
     "getConversionRate": "/cibpaymentservice-v1/api/v1/Transfer/GetExchangeRates",
     "bulkTransfer": "/cibpaymentservice-v1/api/v1/BulkTransfer/InterBank",
     "bulkTransferMultipleMode": "/cibpaymentservice-v1/api/v1/BulkTransfer/MultipleModePayment"
+  },
+  "workflowManagement": {
+    "getWorkflows": "/cibbackoffice-v1/api/WorkflowSettings",
+    "createWorkflow": "/cibbackoffice-v1/api/WorkflowSettings",
+    "deleteWorkflow": "/cibbackoffice-v1/api/WorkflowSettings/delete",
+    "getWorkflowId": "/cibbackoffice-v1/api/WorkflowSettings"
   }
 }

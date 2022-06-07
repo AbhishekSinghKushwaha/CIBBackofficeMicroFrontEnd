@@ -66,9 +66,6 @@ table {
 :host ::ng-deep .mat-form-field-appearance-outline .mat-form-field-label {
     margin-top: -15px;
   }
-:host ::ng-deep label.ng-star-inserted {
-    transform: translateY(-0.59375em) scale(0.75) !important;
-  }  
 
 :host ::ng-deep .mat-paginator-navigation-previous {
     display: none !important;
@@ -77,3 +74,7 @@ table {
 :host ::ng-deep .mat-paginator-navigation-next {
     display: none !important;
 }  
+
+:host ::ng-deep .mat-select-arrow {
+  opacity: 0;
+}

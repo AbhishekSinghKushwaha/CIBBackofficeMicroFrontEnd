@@ -1,11 +1,13 @@
 import { AfterViewInit, Component, OnInit, ViewChild  } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { AddUsersWorkflowModel } from 'src/app/core/domain/add-users-workflow.model';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatPaginatorIntl } from '@angular/material/paginator';
 import { MatPaginator } from '@angular/material/paginator';
+import { SequentialApprovalService } from 'src/app/core/services/sequential-approval/sequential-approval.service';
+import { WorkflowManagementService } from 'src/app/core/services/workflow-management/workflow-management.service';
 
 export type WorkflowStatus = 'active' | 'disabled';
 
@@ -61,17 +63,55 @@ export class SequentialApprovalDataComponent implements OnInit, AfterViewInit {
     'lastviewed'
   ];
 
+  orderedCheckerIdList: any = [];
+
   usersDataSource: MatTableDataSource<AddUsersWorkflowModel>;
 
   usersSelection = new SelectionModel<AddUsersWorkflowModel>(true, []);
 
+  getWorkflowIdDetails: any;
+
+  getWorkflowIdData: any;
+
 
   constructor(
+    private dialogAll: MatDialog,
     private readonly dialogRef: MatDialogRef<SequentialApprovalDataComponent>,
+    private readonly sequentialApprovalService: SequentialApprovalService,
+    private readonly workflowManagementService: WorkflowManagementService
   ) { }
 
   ngOnInit(): void {
     this.addUsersWorkflow();
+
+    if(this.getWorkflowIdData?.companyId) {
+      this.getDetails();
+    }
+  }
+
+  getDetails() {
+    this.workflowManagementService.currentData.subscribe(data => {
+      console.log(data);
+      this.getWorkflowIdData = data;
+    });
+    this.workflowManagementService.
+    getWorkflowId(this.getWorkflowIdData?.companyId, this.getWorkflowIdData?.workflowSettingsId).
+    subscribe((res: any) => {
+      if(res.isSuccessful){
+        this.getWorkflowIdDetails = res.data;
+        this.setUsers();
+      }
+    });
+  }
+
+  setUsers() {
+    this.getWorkflowIdDetails.workflowUsers.map((data: any) => {
+      this.usersDataSource.data.map((user: any) => {
+        if(data.userId === user.id) {
+          user.checked = true;
+        }
+      })
+    });
   }
 
   close() {
@@ -88,25 +128,28 @@ export class SequentialApprovalDataComponent implements OnInit, AfterViewInit {
       const data: AddUsersWorkflowModel[] = [
         {
           name: 'George Okonjo',
-          id: '23546987',
+          id: 'c1b5f19f-cf7b-4e1d-99bc-b7c7da365872',
           role: 'Approver',
           status: 'Active',
-          lastviewed: '12/02/20'
-        },
-        {
-          name: 'Okonjo',
-          id: '987456321',
-          role: 'Approver',
-          status: 'Active',
-          lastviewed: '12/02/20'
+          lastviewed: '12/02/20',
+          checked: false
         },
         {
           name: 'George',
-          id: '123456789',
+          id: 'b9447e11-0340-487b-aabd-9c65f87bdaac',
           role: 'Approver',
           status: 'Active',
-          lastviewed: '12/02/20'
+          lastviewed: '12/02/20',
+          checked: false
         },
+        {
+          name: 'Okonjo',
+          id: 'e7d20293-6782-4ffd-bd3f-3486c9fa609d',
+          role: 'Approver',
+          status: 'Active',
+          lastviewed: '12/02/20',
+          checked: false
+        }
       ];
     
       this.usersDataSource.data = data;
@@ -139,6 +182,25 @@ export class SequentialApprovalDataComponent implements OnInit, AfterViewInit {
     // });
     // event.stopPropagation();
     this.value = this.value + 1;
+  }
+
+  updateCheckedList(event: any,index: number, row: any)
+  {
+    if(event.checked){
+      this.usersSelection.toggle(row);
+      // console.log(this.usersDataSource.data[index].id);
+      this.orderedCheckerIdList.push(this.usersDataSource.data[index].id);
+    }
+    console.log(this.orderedCheckerIdList, 'orderedCheckerIdList');
+  }
+
+  confirm() {
+    this.sequentialApprovalService.orderSequence(this.orderedCheckerIdList);
+    this.dialogAll.closeAll();
+  }
+
+  cancel() {
+    this.dialogAll.closeAll();
   }
 
 }

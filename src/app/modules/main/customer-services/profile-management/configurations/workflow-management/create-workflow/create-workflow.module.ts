@@ -10,6 +10,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SequentialApprovalModule } from 'src/app/shared/modals/sequential-approval/sequential-approval.module';
 import { MatPaginatorIntl } from '@angular/material/paginator';
 import { BiometricVerificationModule } from 'src/app/shared/modals/biometric-verification/biometric-verification.module';
+import { SharedModalsModule } from 'src/app/shared/modals/shared-modals.module';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { BiometricVerificationModule } from 'src/app/shared/modals/biometric-ver
     FormsModule,
     ReactiveFormsModule,
     SequentialApprovalModule,
-    BiometricVerificationModule
+    BiometricVerificationModule,
+    SharedModalsModule
   ],
   providers: [
     { provide: MatPaginatorIntl, useValue: CustomPaginator() }

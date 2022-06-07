@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { SequentialApprovalComponent } from 'src/app/shared/modals/sequential-approval/sequential-approval.component';
 import { Subject } from 'rxjs';
 import { SequentialApprovalDataComponent } from 'src/app/shared/modals/sequential-approval/sequential-approval-data/sequential-approval-data.component';
+import { Observable, BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,15 @@ export class SequentialApprovalService {
 
   seqDialogRef: any;
 
+  private dataSource = new BehaviorSubject<string>("service");
+  public currentData = this.dataSource.asObservable();
+
   constructor(private readonly dialog: MatDialog) { }
+
+  orderSequence(payload: any): void {
+    this.dataSource.next(payload);
+    console.log(payload, "payload");
+  }
 
   open() {
     this.dialogRef =  this.dialog.open<SequentialApprovalComponent>(SequentialApprovalComponent, {
@@ -36,4 +45,5 @@ export class SequentialApprovalService {
   closeSequentialData() {
     this.seqDialogRef.close()
   }
+  
 }
