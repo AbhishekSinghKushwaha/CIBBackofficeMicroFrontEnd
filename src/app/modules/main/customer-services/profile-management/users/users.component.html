@@ -1,1 +1,49 @@
-<p>users works!</p>
+<div class="row screen">
+  <div class="col-md-3 ps-0 inner-content">
+    <mat-card class="mat-elevation-z20 ps-0 h-100 pt-0 pe-0">
+      <mat-card-content>
+        <mat-list role="list" class="pt-0">
+          <mat-list-item
+            role="listitem"
+            class="row-fluid cursor-pointer"
+            [routerLink]="['initiators/list']"
+            routerLinkActive="router-link-active"
+          >
+            <div class="col-10 strong-text">Initiators</div>
+            <div class="col-1">
+              <mat-icon color="primary" svgIcon="caret-right"></mat-icon>
+            </div>
+            <mat-divider mat-inset></mat-divider>
+          </mat-list-item>
+          <mat-list-item
+            role="listitem"
+            class="row-fluid cursor-pointer"
+            [routerLink]="['approvers/list']"
+            routerLinkActive="router-link-active"
+          >
+            <div class="col-10 strong-text">Approvers</div>
+            <div class="col-1">
+              <mat-icon color="primary" svgIcon="caret-right"></mat-icon>
+            </div>
+            <mat-divider mat-inset></mat-divider>
+          </mat-list-item>
+          <mat-list-item
+            role="listitem"
+            class="row-fluid cursor-pointer"
+            [routerLink]="['super-admin/list']"
+            routerLinkActive="router-link-active"
+          >
+            <div class="col-10 strong-text">Super Admin</div>
+            <div class="col-1">
+              <mat-icon color="primary" svgIcon="caret-right"></mat-icon>
+            </div>
+            <mat-divider mat-inset></mat-divider>
+          </mat-list-item>
+        </mat-list>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div class="col-md-9 p-2 pt-0 inner-content">
+    <router-outlet></router-outlet>
+  </div>
+</div>

@@ -10,6 +10,11 @@ import { NewFileTemplatesComponent } from './file-template/new-file-templates/ne
 import { SharedModalsModule } from 'src/app/shared/modals/shared-modals.module';
 import { ConfirmationCompletionComponent } from 'src/app/shared/components/confirmation-completion/confirmation-completion.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ListHolidaysComponent } from './holiday-configuration/list-holidays/list-holidays.component';
+import { ConfirmDialogModule } from 'src/app/shared/modals/confirm-dialog/confirm-dialog.module';
+import { TransactionConfigurationComponent } from './transaction-configuration/transaction-configuration.component';
+import { ListTransactionConfigurationComponent } from './transaction-configuration/list-transaction-configuration/list-transaction-configuration.component';
+import { SharedComponentsModule } from 'src/app/shared/components/shared-components.module';
 
 
 @NgModule({
@@ -19,14 +24,18 @@ import { ReactiveFormsModule } from '@angular/forms';
     FileTemplateComponent,
     ListFileTemplatesComponent,
     NewFileTemplatesComponent,
-    ConfirmationCompletionComponent,
+    ListHolidaysComponent,
+    TransactionConfigurationComponent,
+    ListTransactionConfigurationComponent,
   ],
   imports: [
     CommonModule,
     ConfigurationsRoutingModule,
     MatStyleModule,
     SharedModalsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ConfirmDialogModule,
+    SharedComponentsModule
   ],
 })
 export class ConfigurationsModule { }

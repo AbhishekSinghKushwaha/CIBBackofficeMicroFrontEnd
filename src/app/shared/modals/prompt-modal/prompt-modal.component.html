@@ -1,0 +1,56 @@
+<div class="confirm-payment">
+  <div class="row gx-0">
+    <div class="col-md-12 pt-4">
+      <h3 class="strong-text col-md-12">{{ data.title }}</h3>
+    </div>
+  </div>
+  <div class="row gx-0 m-4">
+    <form
+      class="col ml-4"
+      autocomplete="off"
+      [formGroup]="promptForm"
+      (submit)="confirmationClicked()"
+    >
+      <mat-form-field
+        appearance="fill"
+        class=""
+        floatLabel="always"
+        style="width: 100%"
+      >
+        <mat-label>{{ data?.inputPlaceholder }}</mat-label>
+        <input
+          input
+          matInput
+          type="text"
+          id="promptField"
+          formControlName="promptField"
+          [placeholder]="data.inputPlaceholder"
+        />
+      </mat-form-field>
+    </form>
+  </div>
+  <div class="row gx-0 m-3">
+    <div class="col mx-3" style="margin-left: 0 !important">
+      <button
+        mat-raised-button
+        type="button"
+        color="primary"
+        class="px-5 mt-4"
+        [disabled]="promptForm.invalid"
+        (click)="confirmationClicked()"
+      >
+        {{ data.submitButtonText }}
+      </button>
+    </div>
+    <div class="col">
+      <button
+        mat-button
+        type="button"
+        class="px-5 mt-4"
+        (click)="refusalClicked()"
+      >
+        {{ data.refuseButtonText }}
+      </button>
+    </div>
+  </div>
+</div>

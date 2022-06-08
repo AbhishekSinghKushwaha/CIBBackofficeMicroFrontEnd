@@ -34,6 +34,10 @@ export class DataLookupService {
     );
   }
 
+  getAccounts(corporateID: string){
+    return this.http.get(`${environment.apiUrl}${urlList.userManagement.getAccounts}${corporateID}`);
+  }
+
   // Get telcos
   getTelcos(countryCode: string): Observable<any> {
     const params = {

@@ -1,0 +1,39 @@
+<mat-nav-list>
+  <div class="row">
+    <div class="col-sm-12">
+      <a routerLink="/home">
+        <img class="logo_img" [src]="returnLogoUrl()" alt="" />
+      </a>
+    </div>
+  </div>
+
+  <!-- Dashboard/Home -->
+  <a
+    mat-list-item
+    class="text-grey text-sm"
+    [routerLink]="['/dashboard']"
+    routerLinkActive="router-link-active"
+  >
+    <div class="row pl-3">
+      <div class="col-12">
+        <mat-icon class="menu-icon" svgIcon="home"></mat-icon>
+        <span class="pl-2">My dashboard</span>
+      </div>
+    </div>
+  </a>
+
+  <!-- Transact -->
+  <a
+    mat-list-item
+    class="text-grey text-sm"
+    [routerLink]="['/customer-services']"
+    routerLinkActive="router-link-active"
+  >
+    <div class="row pl-3">
+      <div class="col-12">
+        <mat-icon class="menu-icon" svgIcon="someone"></mat-icon>
+        <span class="pl-2"> Customer services </span>
+      </div>
+    </div>
+  </a>
+</mat-nav-list>

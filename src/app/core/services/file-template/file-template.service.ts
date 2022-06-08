@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { BehaviorSubject } from 'rxjs';
 import { ConfigureFileTemplatesModalComponent } from 'src/app/shared/modals/configure-file-templates-modal/configure-file-templates-modal.component';
+import { environment } from 'src/environments/environment';
 import { TemplateModel } from '../../domain/file-template.model';
 import urlList from '../service-list.json';
 
@@ -35,11 +36,11 @@ export class FileTemplateService {
   }
 
   saveTemplate(payload: any) {
-    return  this.http.post(`${urlList.fileTemplate.submitFileTemplate}/${payload.corporateId}`,payload)
+    return this.http.post(`${environment.apiUrl}${urlList.fileTemplate.submitFileTemplate}/${payload.corporateId}`, payload)
   }
 
   getTemplates(corporateId: string) {
-    return  this.http.get(`${urlList.fileTemplate.submitFileTemplate}/${corporateId}`)
+    return this.http.get(`${environment.apiUrl}${urlList.fileTemplate.submitFileTemplate}/${corporateId}`)
   }
 
 }

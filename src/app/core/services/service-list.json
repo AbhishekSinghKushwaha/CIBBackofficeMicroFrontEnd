@@ -12,17 +12,74 @@
     "getMerchantDetails": "/cibpaymentservice-v1/api/v1/BuyGoods/MerchantDetail/",
     "getFavouriteMerchantDetails": "/cibpaymentservice-v1/api/v1/BuyGoods/FavoriteMerchants/"
   },
+  "cif": {
+    "getCorporateByCif": "/cibcore/api/Corporates/Cif/"
+  },
   "customerOnboarding": {
     "getRoles": "/cibonboarding-v1/api/Registration/get-roles/",
     "getProductsAndServices": "/cibonboarding-v1/api/Registration/get-products-and-services",
-    "getUserAccounts": "/cibaccountservice-v1/api/v1/Accounts/GetUserMappedAccounts"
+    "getUserAccounts": "/cibaccountservice-v1/api/v1/Accounts/GetUserMappedAccounts",
+    "addCorporateProduct": "/cibonboarding-v1/api/Registration/add-corporate-products/",
+    "getCorporateProducts": "/cibonboarding-v1/api/Registration/get-corporate-products/",
+    "removeCorporateProduct": "/cibonboarding-v1/api/Registration/remove-corporate-products/",
+    "updateCorporateProduct": "/cibonboarding-v1/api/Registration/update-corporate-products/"
   },
-  "fileTemplate":{
-    "submitFileTemplate": "https://api-dev.equitygroupholdings.com/v1/cibbackoffice-v1/api/FileTemplate"
-  }, 
+  "fileTemplate": {
+    "submitFileTemplate": "/cibbackoffice-v1/api/FileTemplate"
+  },
+  "holidayConfiguration": {
+    "getHolidays": "/cibbackoffice-v1/api/HolidayConfiguration",
+    "postHolidays": "/cibbackoffice-v1/api/HolidayConfiguration",
+    "deleteHoliday": "/cibbackoffice-v1/api/HolidayConfiguration/delete"
+  },
+  "transactionConfiguration": {
+    "postTransactionConfiguration": "/cibbackoffice-v1/api/TransactionConfiguration",
+    "getTransactionConfigurationType": "/cibbackoffice-v1/api/TransactionConfiguration/",
+
+    "getTransactionConfigurationArea": "/cibbackoffice-v1/api/TransactionConfiguration/area",
+    "getTransactionConfigurationChargeEvent": "/cibbackoffice-v1/api/TransactionConfiguration/charge-event",
+    "getTransactionConfigurationChargeGrid": "/cibbackoffice-v1/api/TransactionConfiguration/grid",
+    "getTransactionConfigurationChargeSubsidiary": "/cibbackoffice-v1/api/TransactionConfiguration/subsidiary",
+    "getTransactionConfigurationChargeTranstype": "/cibbackoffice-v1/api/TransactionConfiguration/trans-type"
+  },
+  "userManagement": {
+    "getUserList": "/cibbackoffice-v1/api/CorporateUser/role/",
+    "setUserStat":"/cibbackoffice-v1/api/CorporateUser/",
+    "addUser": "/cibbackoffice-v1/api/CorporateUser",
+    "deleteUser": "/cibbackoffice-v1/api/CorporateUser/",
+    "getAccounts":"/cibcore/api/CorporateAccounts/"
+  },
+  "transfers": {
+    "sendOwnEquityAccount": "/cibpaymentservice-v1/api/v1/Transfer/Send",
+    "intraBankTransfer": "/cibpaymentservice-v1/api/v1/Transfer/Send",
+    "swiftTransfer": "/cibpaymentservice-v1/api/v1/Transfer/Send",
+    "sendToSubsidiary": "/cibpaymentservice-v1/api/v1/Transfer/Send",
+    "mobileMoneyTransfer": "/cibpaymentservice-v1/api/v1/Transfer/Send",
+    "buyAirtimeTransfer": "/cibpaymentservice-v1/api/v1/Transfer/Send",
+    "buyGoodsTransfer": "/cibpaymentservice-v1/api/v1/Transfer/Send",
+    "pesalinkTransfer": "/cibpaymentservice-v1/api/v1/Transfer/Send",
+    "getTransferCharges": "/cibpaymentservice-v1/api/v1/Transfer/GetTransferCharge",
+    "getAccountDetails": "/cibpaymentservice-v1/api/v1/Transfer/NameEnquiry",
+    "getCharges": "/cibpaymentservice-v1/api/v1/BuyGoods/Charges",
+    "transactionApproval": "/cibpaymentservice-v1/api/v1/Transactions/ApproveTransaction",
+    "bill": {
+      "getCountries": "/cibbillpayments-v1/api/v1/Bill/GetCountries",
+      "getCategories": "/cibbillpayments-v1/api/v1/Bill/GetCategories",
+      "getBillersByCountry": "/cibbillpayments-v1/api/v1/Bill/GetBillers",
+      "getBillersByCountryAndCategories": "/cibpaymentservice-v1/api/v1/Bill/GetBillersByCategories",
+      "postCompleteOtp": "/cibbillpayments-v1/api/v1/Bill/CompleteWithOTP",
+      "postResendOtp": "/cibbillpayments-v1/api/v1/Bill/ResendOTP",
+      "postValidateBill": "/cibbillpayments-v1/api/v1/Bill/Validate",
+      "postPayBill": "/cibbillpayments-v1/api/v1/Bill/pay"
+    },
+    "reinitiateTransaction": "/cibpaymentservice-v1/api/v1/Transfer/ReInitiate",
+    "getConversionRate": "/cibpaymentservice-v1/api/v1/Transfer/GetExchangeRates",
+    "bulkTransfer": "/cibpaymentservice-v1/api/v1/BulkTransfer/InterBank",
+    "bulkTransferMultipleMode": "/cibpaymentservice-v1/api/v1/BulkTransfer/MultipleModePayment"
+  },
   "transactionApproval": {
-    "submit": "https://api-dev.equitygroupholdings.com/v1/cibbackoffice-v1/api/TransactionApproval/Submit",
-    "getTransactions": "https://api-dev.equitygroupholdings.com/v1/cibbackoffice-v1/api/TransactionApproval/GetTransactions",
-    "getAccountDetails": "https://api-dev.equitygroupholdings.com/v1/cibbackoffice-v1/api/TransactionApproval/GetAccountDetails/"
+    "submit": "/cibbackoffice-v1/api/TransactionApproval/Submit",
+    "getTransactions": "/cibbackoffice-v1/api/TransactionApproval/GetTransactions",
+    "getAccountDetails": "/cibbackoffice-v1/api/TransactionApproval/GetAccountDetails/"
   }
 }

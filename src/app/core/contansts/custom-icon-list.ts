@@ -29,6 +29,7 @@ export const SVG_ICONS = [
   'call.svg',
   'camera-white.svg',
   'card.svg',
+  'caret-down.svg',
   'caret-right.svg',
   'cashcode-grey.svg',
   'chat.svg',
@@ -132,6 +133,7 @@ export const SVG_ICONS = [
   'plus-grey.svg',
   'preferences.svg',
   'qr-code.svg',
+  'radio-button-on.svg',
   'radio-button-off.svg',
   'rate-decrease.svg',
   'rate-increase.svg',
@@ -175,7 +177,13 @@ export const SVG_ICONS = [
   'avatar.svg',
   'user.svg',
   'big-circular-plus.svg',
-  'three-dots-circled.svg'
+  'three-dots-circled.svg',
+  'equity-logo.svg',
+  'home.svg',
+  'someone.svg',
+  'caret-left.svg',
+  'toggle-button-off.svg',
+  'toggle-button-on.svg'
 ];
 
 export const PROVIDER_ICONS = [
