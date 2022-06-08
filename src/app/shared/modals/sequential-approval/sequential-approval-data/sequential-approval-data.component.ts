@@ -83,17 +83,19 @@ export class SequentialApprovalDataComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.addUsersWorkflow();
-
+    this.getWorkflowId();
     if(this.getWorkflowIdData?.companyId) {
       this.getDetails();
     }
   }
 
-  getDetails() {
+  getWorkflowId() {
     this.workflowManagementService.currentData.subscribe(data => {
-      console.log(data);
       this.getWorkflowIdData = data;
     });
+  }
+
+  getDetails() {
     this.workflowManagementService.
     getWorkflowId(this.getWorkflowIdData?.companyId, this.getWorkflowIdData?.workflowSettingsId).
     subscribe((res: any) => {
@@ -105,12 +107,12 @@ export class SequentialApprovalDataComponent implements OnInit, AfterViewInit {
   }
 
   setUsers() {
-    this.getWorkflowIdDetails.workflowUsers.map((data: any) => {
+    this.getWorkflowIdDetails?.approvalSequence?.orderedCheckerIdList.map((data: any) => {
       this.usersDataSource.data.map((user: any) => {
-        if(data.userId === user.id) {
+        if(data === user.id) {
           user.checked = true;
         }
-      })
+      });
     });
   }
 
@@ -188,14 +190,17 @@ export class SequentialApprovalDataComponent implements OnInit, AfterViewInit {
   {
     if(event.checked){
       this.usersSelection.toggle(row);
-      // console.log(this.usersDataSource.data[index].id);
       this.orderedCheckerIdList.push(this.usersDataSource.data[index].id);
     }
-    console.log(this.orderedCheckerIdList, 'orderedCheckerIdList');
   }
 
   confirm() {
-    this.sequentialApprovalService.orderSequence(this.orderedCheckerIdList);
+    if(this.orderedCheckerIdList.length > 0) {
+      this.sequentialApprovalService.orderSequence(this.orderedCheckerIdList);
+    }
+    else {
+      this.sequentialApprovalService.orderSequence(this.getWorkflowIdDetails?.approvalSequence?.orderedCheckerIdList);
+    }
     this.dialogAll.closeAll();
   }
 

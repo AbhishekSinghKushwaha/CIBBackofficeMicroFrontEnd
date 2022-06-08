@@ -38,10 +38,19 @@
             <div class="d-flex flex-column">
                 <div class="row pt-4">
                   <div class="col-md-3">                    
-                    <mat-form-field appearance="fill" class="w-100" floatLabel="always">
+                    <!-- <mat-form-field appearance="fill" class="w-100" floatLabel="always">
                         <mat-label>Company name</mat-label>
                         <input matInput formControlName="companyname" name="companyname"/>
                         <mat-icon matSuffix>expand_more</mat-icon>
+                    </mat-form-field> -->
+                    <mat-form-field appearance="fill" class="w-100" floatLabel="always">
+                      <mat-label>Company name</mat-label>
+                      <mat-select formControlName="companyname" name="companyname">
+                        <mat-option *ngFor="let data of companyList" [value]="data">
+                          {{ data.name }}
+                        </mat-option>
+                      </mat-select>
+                      <mat-icon matSuffix>expand_more</mat-icon>
                     </mat-form-field>
                   </div>
                   <div class="col-md-3">

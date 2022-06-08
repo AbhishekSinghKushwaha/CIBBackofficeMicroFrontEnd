@@ -16,7 +16,6 @@ export class WorkflowManagementService {
 
   getWorkFlowById(payload: any): void {
     this.dataSource.next(payload);
-    console.log(payload, "getWorkFlowById payload");
   }
 
   createWorkflow(payload: any, companyId: string) {
@@ -28,7 +27,6 @@ export class WorkflowManagementService {
   }
 
   getWorkflows(companyId: string) {
-    console.log(companyId);
     return this.http.get(`${environment.apiUrl}${urlList.workflowManagement.getWorkflows}/${companyId}`);
   }
 

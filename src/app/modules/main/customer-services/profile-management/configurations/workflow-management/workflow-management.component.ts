@@ -64,7 +64,6 @@ export class WorkflowManagementComponent implements OnInit, AfterViewInit {
   }
 
   openActionsMenu(workflow: any) {
-    console.log(workflow);
     this.payload = {
       companyId: this.companyId,
       workflowSettingsId: workflow.id
@@ -86,7 +85,6 @@ export class WorkflowManagementComponent implements OnInit, AfterViewInit {
 
   deleteWorkflow() {
     this.workflowManagementService.deleteWorkflow(this.payload.workflowSettingsId).subscribe((res: any) => {
-      console.log(res, 'delete');
     });
   }
 

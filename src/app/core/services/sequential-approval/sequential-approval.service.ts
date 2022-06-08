@@ -14,14 +14,13 @@ export class SequentialApprovalService {
 
   seqDialogRef: any;
 
-  private dataSource = new BehaviorSubject<string>("service");
+  private dataSource = new BehaviorSubject([]);
   public currentData = this.dataSource.asObservable();
 
   constructor(private readonly dialog: MatDialog) { }
 
   orderSequence(payload: any): void {
     this.dataSource.next(payload);
-    console.log(payload, "payload");
   }
 
   open() {

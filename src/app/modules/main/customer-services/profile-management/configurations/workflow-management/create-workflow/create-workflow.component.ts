@@ -224,6 +224,13 @@ export class CreateWorkflowComponent implements OnInit, AfterViewInit {
     }
   ]
 
+  companyList: any = [
+    {
+      id: "16bdac12-7117-4c43-9389-851e9d039086",
+      name: "Test Company"
+    }
+  ]
+
   usersSelection = new SelectionModel<AddUsersWorkflowModel>(true, []);
   checkersSelection = new SelectionModel<AddCheckersWorkflowModel>(true, []);
 
@@ -257,9 +264,9 @@ export class CreateWorkflowComponent implements OnInit, AfterViewInit {
     this.initForm();
     this.addCheckersWorkflow();
     this.addUsersWorkflow();
+    this.getWorkflowId();
 
-    if(this.mode){
-      console.log("mode", this.mode);
+    if(this.getWorkflowIdData?.companyId){
       this.getWorkFlowById();
     }
   }
@@ -282,19 +289,19 @@ export class CreateWorkflowComponent implements OnInit, AfterViewInit {
     });
   }
 
-  getWorkFlowById() {
+  getWorkflowId() {
     this.workflowManagementService.currentData.subscribe(data => {
-      console.log(data);
       this.getWorkflowIdData = data;
     });
+  }
+
+  getWorkFlowById() {
     this.workflowManagementService.
-    getWorkflowId(this.getWorkflowIdData.companyId, this.getWorkflowIdData.workflowSettingsId).
+    getWorkflowId(this.getWorkflowIdData?.companyId, this.getWorkflowIdData?.workflowSettingsId).
     subscribe((res: any) => {
       if(res.isSuccessful){
-        console.log(res.data, 'res.data');
         this.getWorkflowIdDetails = res.data;
         this.createWorkflowMangementForm.patchValue({
-          companyname: res.data.companyId,
           workflowname: res.data.name,
           workflowdescription: res.data.description,
           currency: res.data.currency,
@@ -302,6 +309,7 @@ export class CreateWorkflowComponent implements OnInit, AfterViewInit {
           maximumamount: res.data.maxAmount,
           accountsaccess: res.data.accountsToAccess,
         });
+        this.setCompanyName(this.getWorkflowIdDetails.companyId);
         this.setCurrency();
         this.setApprovers(this.getWorkflowIdDetails.approversNumber);
         this.setAccountsAccess(this.getWorkflowIdDetails.accountsToAccess[0].accountId);
@@ -312,6 +320,17 @@ export class CreateWorkflowComponent implements OnInit, AfterViewInit {
         this.setUsers();
       }
     });
+  }
+
+  setCompanyName(companyId: any) {
+    
+    switch(companyId) {
+      case "16bdac12-7117-4c43-9389-851e9d039086":
+        this.createWorkflowMangementForm.controls.companyname.setValue(this.companyList[0]);
+        break;
+      default:
+      break;       
+    }
   }
 
   setCurrency() {
@@ -374,16 +393,20 @@ export class CreateWorkflowComponent implements OnInit, AfterViewInit {
   }
 
   setApprovalSequence() {
-    if(this.getWorkflowIdDetails.approvalSequence) {
-      this.getWorkflowIdDetails.approvalSequence.map((data: any) => {
-        this.approvalSequence.map((sequence: any) => {
-          if(data.aprovalSequenceType === sequence.name) {
-            sequence.checked = true;
-            this.createWorkflowMangementForm.controls.fxReference.setValue(data.approvalSequenceName);
-          }
-        });
-      });
-    }
+    this.approvalSequence.map((data: any) => {
+      if(data.name === this.getWorkflowIdDetails.approvalSequence.aprovalSequenceType) {
+        data.checked = true;
+        this.createWorkflowMangementForm.controls.approvalSequence.setValue(data.name);
+      }
+    });
+    // this.getWorkflowIdDetails.approvalSequence.map((data: any) => {
+    //   this.approvalSequence.map((sequence: any) => {
+    //     if(data.aprovalSequenceType === sequence.name) {
+    //       sequence.checked = true;
+    //       this.createWorkflowMangementForm.controls.fxReference.setValue(data.approvalSequenceName);
+    //     }
+    //   });
+    // });
   }
 
   setCheckers() {
@@ -535,7 +558,6 @@ export class CreateWorkflowComponent implements OnInit, AfterViewInit {
       const i = formUsersArray.controls.findIndex(x => x.value === event.source.value);
       formUsersArray.removeAt(i);
     }
-    console.log(this.usersCheckerIdList, 'usersCheckerIdList');
   }
 
   checkersCheckedList(event: any,index: number, row: any) {
@@ -554,7 +576,6 @@ export class CreateWorkflowComponent implements OnInit, AfterViewInit {
       const i = formCheckersArray.controls.findIndex(x => x.value === event.source.value);
       formCheckersArray.removeAt(i);
     }
-    console.log(this.checkersCheckerIdList, 'checkersCheckerIdList');
   }
 
   productsAccess(event: any,index: number) {
@@ -574,7 +595,6 @@ export class CreateWorkflowComponent implements OnInit, AfterViewInit {
       const i = formArray.controls.findIndex(x => x.value === event.source.value);
       formArray.removeAt(i);
     }
-    console.log(this.productsAccessList, 'productsAccessList');  
   }
 
   selectFxId(event: any,index: number) {
@@ -582,7 +602,6 @@ export class CreateWorkflowComponent implements OnInit, AfterViewInit {
       this.fxReferenceId = this.fxIdList[index].id;
       this.createWorkflowMangementForm.controls.fxReference.setValue(this.fxReferenceId);
     }
-    console.log(this.fxReferenceId, 'fxReferenceId');
   }
 
   selectApprovalSequence(event: any,index: number) {
@@ -590,7 +609,6 @@ export class CreateWorkflowComponent implements OnInit, AfterViewInit {
       this.approvalSequenceName = this.approvalSequence[index].name;
       this.createWorkflowMangementForm.controls.approvalSequence.setValue(this.approvalSequenceName);
     }
-    console.log(this.approvalSequenceName, 'approvalSequenceName');
     if(this.approvalSequenceName === 'Sequential'){
       this.openSequentialApproval();
     }
@@ -633,10 +651,7 @@ export class CreateWorkflowComponent implements OnInit, AfterViewInit {
       status: "Active"
     }
 
-    console.log(payload, "payload");
-
     this.workflowManagementService.createWorkflow(payload, payload.companyId).subscribe((res: any) => {
-      console.log(res, "res");
       if(res.isSuccessful) {
         this.biometricVerificationService.open();
       }
@@ -662,7 +677,7 @@ export class CreateWorkflowComponent implements OnInit, AfterViewInit {
       productsToAccess: this.getForm.productAccess.value,
       fxReferenceId: this.getForm.fxReference.value,
       approvalSequence: {
-        aprovalSequenceType: this.approvalSequenceName,
+        aprovalSequenceType: this.getForm.approvalSequence.value,
         orderedCheckerIdList: this.sequenceCheckerIdList,
       },
       workflowUsers: this.getForm.usersList.value,
@@ -670,10 +685,7 @@ export class CreateWorkflowComponent implements OnInit, AfterViewInit {
       status: this.getWorkflowIdDetails.status
     }
 
-    console.log(updatePayload, "Updatepayload");
-
     this.workflowManagementService.updateWorkflow(updatePayload, updatePayload.companyId).subscribe((res: any) => {
-      console.log(res, "res");
       if(res.isSuccessful) {
         this.biometricVerificationService.open();
       }
