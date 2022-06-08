@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import urlList from '../service-list.json';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -22,14 +23,14 @@ export class TransactionApprovalService {
   }
   
   submitTransaction(payload: any): Observable<any> {
-    return this.http.post(`${urlList.transactionApproval.submit}`,payload)
+    return this.http.post(`${environment.apiUrl}${urlList.transactionApproval.submit}`,payload)
   }
 
   getTransactions(): Observable<any> {
-    return this.http.get(`${urlList.transactionApproval.getTransactions}`)
+    return this.http.get(`${environment.apiUrl}${urlList.transactionApproval.getTransactions}`)
   }
 
   getAccountDetails(accountNumber: string, bankId: string): Observable<any> {
-    return this.http.get(`${urlList.transactionApproval.getAccountDetails + accountNumber + '/' + bankId}`)
+    return this.http.get(`${environment.apiUrl}${urlList.transactionApproval.getAccountDetails + accountNumber + '/' + bankId}`)
   }
 }
