@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { TransactionApprovalService } from 'src/app/core/services/transaction-approval/transaction-approval.service';
 
 @Component({
   selector: 'app-confirmation',
@@ -8,11 +9,21 @@ import { Router } from '@angular/router';
 })
 export class ConfirmationComponent implements OnInit {
 
+  transactionDetails: any;
+
   constructor(
-    private router: Router
+    private router: Router,
+    private transactionApprovalService: TransactionApprovalService
   ) { }
 
   ngOnInit(): void {
+    this.getAccountDetails();
+  }
+
+  getAccountDetails() {
+    this.transactionApprovalService.currentData.subscribe((data) => {
+      this.transactionDetails = data;
+    });
   }
 
   backToOverview() {

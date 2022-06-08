@@ -7,7 +7,7 @@ const routes: Routes = [
     component: TransactionApprovalsComponent,
   },
   {
-    path: 'details',
+    path: 'details/:id',
     loadChildren: (): Promise<any> => 
       import('./transaction-approval-details/transaction-approval-details.module').then(m => m.TransactionApprovalDetailsModule),
   },

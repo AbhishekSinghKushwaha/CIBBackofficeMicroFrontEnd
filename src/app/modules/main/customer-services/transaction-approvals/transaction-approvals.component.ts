@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatPaginatorIntl } from '@angular/material/paginator';
+import { TransactionApprovalService } from 'src/app/core/services/transaction-approval/transaction-approval.service';
 
 export type UserStatus = 'approved' | 'rejected' | 'pending';
 
@@ -38,7 +39,6 @@ export function CustomPaginator() {
     }
     length = Math.max(length, 0);
     const startIndex = page * pageSize;
-    // If the start index exceeds the list length, do not try and fix the end index to the end.
     const endIndex = startIndex < length ? Math.min(startIndex + pageSize, length) : startIndex + pageSize;
     return `${startIndex + 1} - ${endIndex} of ${length} items`;
   };
@@ -82,7 +82,7 @@ export class TransactionApprovalsComponent implements OnInit, AfterViewInit  {
     'date',
   ]
 
-  dataSource: MatTableDataSource<UserListModel>;
+  dataSource: MatTableDataSource<any>;
 
   searchControl: FormControl = new FormControl({ value: '', disabled: false });
 
@@ -94,8 +94,14 @@ export class TransactionApprovalsComponent implements OnInit, AfterViewInit  {
 
   searchType: any;
 
+  requestReference: any
+  approvalStatus: any;
+  accountNumber: any;
+  bankId: any;
+
   constructor(
-    private router: Router
+    private router: Router,
+    private readonly transactionApprovalService: TransactionApprovalService
   ) { }
 
   filterItems: Approval[] = [
@@ -109,20 +115,16 @@ export class TransactionApprovalsComponent implements OnInit, AfterViewInit  {
   ];
 
   ngOnInit(): void {
+    // this.onLoadData();
+    this.getTransactions();
+  }
+
+  getTransactions() {
     this.dataSource = new MatTableDataSource();
-      const data: UserListModel[] = Array(10).fill(0).map((x,i) => ({
-          name: 'Apple',
-          date: '01/01/2020',
-          paymentType: 'Bulk Transfer',
-          bankReference: '123456789',
-          corporateReference: '123456789',
-          recepientName: 'Jacques Muller',
-          amount: '100',
-          transactionType: 'Bulk Transfer',
-          status: i % 2 === 0 ? 'Pending' : 'Approved'
-      }));
-       
-      this.dataSource.data = data;
+    this.transactionApprovalService.getTransactions().subscribe((res: any) => {
+      console.log(res.data);
+      this.dataSource.data = res.data;
+    });
   }
 
   ngAfterViewInit(): void {
@@ -130,27 +132,51 @@ export class TransactionApprovalsComponent implements OnInit, AfterViewInit  {
     this.dataSource.paginator = this.paginator;
   }
 
-  openActionsMenu(user: User) {
+  openActionsMenu(user: any) {
     console.log(user);
-    this.router.navigate(['/customer-services/transaction-approvals/details']);
+
+    const payload = {
+      requestReference : user.requestReference,
+      approvalStatus : user.approvalStatus,
+      accountName: user.sourceAccountName,
+      accountNumber : user.sourceAccount,
+      bankId : user.bankId,
+      cif : user.cif,
+      transferCharge: user.transferCharge,
+      amount: user.amount,
+      currency: user.currency,
+      // documents: user.documents,
+      documents: [
+        {
+          name: 'test 1',
+          size: '1.2mb'
+        },
+        {
+          name: 'test 2',
+          size: '1.2mb'
+        },
+        {
+          name: 'test 3',
+          size: '1.2mb'
+        },
+      ]
+    }
+
+    this.transactionApprovalService.accountDetails(payload);
+    this.requestReference = user.requestReference;
+    this.router.navigate([`/customer-services/transaction-approvals/details/${this.requestReference}`]);
   }
 
-  /** Whether the number of selected elements matches the total number of rows. */
   isAllSelected() {
     const numSelected = this.selection.selected.length;
     const numRows = this.dataSource.data.length;
     return numSelected === numRows;
   }
 
-  /** Selects all rows if they are not all selected; otherwise clear selection. */
   masterToggle() {
     this.isAllSelected() ?
         this.selection.clear() :
         this.dataSource.data.forEach(row => this.selection.select(row));
-  }
-
-  openFilterModal(){
-
   }
 
   approve() {
@@ -164,6 +190,55 @@ export class TransactionApprovalsComponent implements OnInit, AfterViewInit  {
   onSelected(item: any) {
     console.log(item);
     this.searchType = item;
+    this.filterByType(item.text);
+  }
+
+  filterByType(filterValue: any) {
+    switch (filterValue) {
+      case 'Corporate name':
+        this.dataSource.filterPredicate = function(data, filter: string): boolean {
+          return data.sourceAccountName && data.sourceAccountName.toLowerCase().includes(filter);
+        };
+        break;
+      case 'Transaction type':
+        this.dataSource.filterPredicate = function(data, filter: string): boolean {
+          return data.transferType && data.transferType.toLowerCase().includes(filter);
+        }
+        break;  
+      case 'Account number':
+        this.dataSource.filterPredicate = function(data, filter: string): boolean {
+          return data.requestReference && data.requestReference.toLowerCase().includes(filter);
+        }
+        break;
+      case 'Corporate reference':
+        this.dataSource.filterPredicate = function(data, filter: string): boolean {
+          return data.requestReference && data.requestReference.toLowerCase().includes(filter);
+        }
+        break;
+      case 'Corporate CIiff':
+        this.dataSource.filterPredicate = function(data, filter: string): boolean {
+          return data.cif.toLowerCase().includes(filter);
+        }
+        break;
+      case 'Date':
+        this.dataSource.filterPredicate = function(data, filter: string): boolean {
+          return data.date && data.date.toLowerCase().includes(filter);
+        }
+        break;
+      case 'Company CIF':
+        this.dataSource.filterPredicate = function(data, filter: string): boolean {
+          return data.cif && data.cif.toLowerCase().includes(filter);
+        }
+        break;
+      default:
+        break;              
+    }
+  }
+
+  applyFilter(event: Event) {
+    let filterValue = (event.target as HTMLInputElement).value;
+    filterValue = filterValue.trim().toLowerCase();
+    this.dataSource.filter = filterValue;
   }
 
 }

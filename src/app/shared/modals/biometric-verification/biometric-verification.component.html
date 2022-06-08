@@ -10,11 +10,7 @@
     </div>
   <div>
     <p class="text-grey pt-4 mb-2">If the required signatory as per the mandate is not present, select skip bio and submit a bio-override request.</p>
-    <!-- <div class="user-action me-2">
-        <span class="user-action-short">BM</span>
-        <span class="user-action-username">Mathias Ojwang</span>
-    </div> -->
-    <div class="d-flex justify-content-start">
+    <div class="d-flex justify-content-start mt-4">
         <div>
             <span class="user-action-short">MO</span>
         </div>
@@ -68,7 +64,14 @@
     </div>
     <div class="d-flex justify-content-end pb-2">
         <div class="pe-3">
-            <button mat-stroked-button color="primary" class="px-5">Skip BIO</button>
+            <button 
+            mat-stroked-button 
+            color="primary" 
+            class="px-5"
+            (click)="skipBio()"
+            >
+            Skip BIO
+            </button>
         </div>
         <div>
             <button
