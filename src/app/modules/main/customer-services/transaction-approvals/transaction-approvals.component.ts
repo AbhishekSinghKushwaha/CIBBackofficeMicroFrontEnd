@@ -183,7 +183,7 @@ export class TransactionApprovalsComponent implements OnInit, AfterViewInit  {
   }
 
   approve() {
-    this.router.navigate(['/customer-services/transaction-approvals/success']);
+    this.router.navigate(['/customer-services/success']);
   }
 
   closeFilter(menuTrigger: MatMenuTrigger) {

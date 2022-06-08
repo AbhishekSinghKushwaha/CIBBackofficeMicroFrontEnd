@@ -10,11 +10,6 @@ const routes: Routes = [
     path: 'details/:id',
     loadChildren: (): Promise<any> => 
       import('./transaction-approval-details/transaction-approval-details.module').then(m => m.TransactionApprovalDetailsModule),
-  },
-  {
-    path: 'success',
-    loadChildren: (): Promise<any> =>
-      import('../confirmation/confirmation.module').then(m => m.ConfirmationModule),
   }
 ];
 

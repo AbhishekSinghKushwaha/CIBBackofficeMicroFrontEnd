@@ -40,7 +40,11 @@ const routes: Routes = [
   {
     path: 'workflow-management/:mode',
     loadChildren: () => import('./profile-management/configurations/workflow-management/create-workflow/create-workflow.module').then(m => m.CreateWorkflowModule)
-
+  },
+  {
+    path: 'success',
+    loadChildren: (): Promise<any> =>
+      import('./confirmation/confirmation.module').then(m => m.ConfirmationModule),
   }
 ];
 
