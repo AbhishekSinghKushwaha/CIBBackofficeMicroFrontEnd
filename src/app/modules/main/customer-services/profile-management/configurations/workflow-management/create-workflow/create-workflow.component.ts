@@ -669,7 +669,7 @@ export class CreateWorkflowComponent implements OnInit, AfterViewInit {
     
     const updatePayload = {
       corporateId: this.getWorkflowIdDetails.corporateId,
-      workflowSetttingsId: this.getWorkflowIdData?.workflowSettingsId,
+      workflowSettingsId: this.getWorkflowIdData?.workflowSettingsId,
       companyId: this.getForm.companyname.value.id,
       name:this.getForm.workflowname.value,
       description:this.getForm.workflowdescription.value,
