@@ -10,11 +10,11 @@
                 <hr width="1" size="25">
             </div>
             <div class="ps-2">
-                <small class="text-grey">Ticket ID 453345</small>
+                <small class="text-grey">Ticket ID {{requestReference}}</small>
             </div>
         </div>
         <div class="status" ngClass="pending">
-            pending
+            {{transactionDetails.approvalStatus}}
         </div>
     </div>    
 </mat-card>
@@ -41,27 +41,27 @@
                 <div class="row">
                   <div class="col-md-4 mb-3">
                     <p class="text-grey">Account name</p>
-                    <p>Mathias Ltd.</p>
+                    <p>{{accountDetails?.accountName}}</p>
                   </div>
                   <div class="col-md-4 mb-3">
                     <p class="text-grey">Account type</p>
-                    <p>Entity</p>
+                    <p>{{accountDetails?.accountType}}</p>
                   </div>
                   <div class="col-md-4 mb-3">
                     <p class="text-grey">Mandate type</p>
-                    <p>All to sign</p>
+                    <p>{{accountDetails?.mandate}}</p>
                   </div>
                   <div class="col-md-4 mb-3">
                     <p class="text-grey">CIF</p>
-                    <p>2342443</p>
+                    <p>{{accountDetails?.cif}}</p>
                   </div>
                   <div class="col-md-4 mb-3">
                     <p class="text-grey">Phone number</p>
-                    <p>+254 78955442</p>
+                    <p>{{accountDetails?.phoneNumber1}}</p>
                   </div>
                   <div class="col-md-4 mb-3">
                     <p class="text-grey">Email</p>
-                    <p>mathias@gmail.com</p>
+                    <p>{{accountDetails?.email}}</p>
                   </div>
                 </div>
               </div>
@@ -87,19 +87,19 @@
                     <div class="row">
                       <div class="col-md-3 mb-3">
                         <p class="text-grey">Total batch amount</p>
-                        <p>2,000,000.00 KES</p>
+                        <p></p>
                       </div>
                       <div class="col-md-3 mb-3">
                         <p class="text-grey">Total Charges</p>
-                        <p>90,000.00 </p>
+                        <p></p>
                       </div>
                       <div class="col-md-3 mb-3">
                         <p class="text-grey">Daily rate</p>
-                        <p>12%</p>
+                        <p></p>
                       </div>
                       <div class="col-md-3 mb-3">
                         <p class="text-grey">Bulk payment option</p>
-                        <p>Single debit</p>
+                        <p></p>
                       </div>
                     </div>
                   </div>
@@ -107,8 +107,8 @@
           </mat-tab>
           <mat-tab label="Uploaded documents">
               <div class="row col-md-12 ps-4">
-                <div class="col-md-4 my-4">
-                    <mat-card>
+                <div class="col-md-4 my-4" *ngFor="let data of transactionDetails.documents">
+                    <mat-card class="card-color">
                       <img
                         height="100vh"
                         mat-card-image
@@ -118,8 +118,8 @@
         
                       <div class="d-flex justify-content-between">
                           <div>
-                            <span>Transaction template</span><br>
-                            <small class="text-grey">1.2 mb</small>
+                            <span>{{data?.name}}</span><br>
+                            <small class="text-grey">{{data?.size}}</small>
                           </div>
                           <div>
                             <mat-icon class="material-symbols-outlined eyeicon">visibility</mat-icon>
@@ -127,8 +127,8 @@
                       </div>
                     </mat-card>
                   </div>
-                  <div class="col-md-4 my-4">
-                    <mat-card>
+                  <!-- <div class="col-md-4 my-4">
+                    <mat-card class="card-color">
                       <img
                         height="100vh"
                         mat-card-image
@@ -146,9 +146,9 @@
                           </div>
                       </div>
                     </mat-card>
-                  </div>
-                  <div class="col-md-4 my-4">
-                    <mat-card>
+                  </div> -->
+                  <!-- <div class="col-md-4 my-4">
+                    <mat-card class="card-color">
                       <img
                         height="100vh"
                         mat-card-image
@@ -166,7 +166,7 @@
                           </div>
                       </div>
                     </mat-card>
-                  </div>
+                  </div> -->
               </div>
           </mat-tab>
         </mat-tab-group>
@@ -247,9 +247,9 @@
                   <div class="col-md-6">
                     <mat-form-field appearance="fill" class="input-width">
                         <mat-label>Approve, return or reject ticket*</mat-label>
-                        <mat-select formControlName="approval" id="approval" name="approval">
+                        <mat-select formControlName="status" id="status" name="status">
                           <mat-select-trigger>
-                            {{transactionApprovalDetailsForm.get('approval')?.value}}
+                            {{transactionApprovalDetailsForm.get('status')?.value}}
                           </mat-select-trigger>
                           <mat-option *ngFor="let data of approval" [value]="data.text" class="p-4">
                             {{data.text}}
@@ -264,7 +264,7 @@
                   <div class="col-md-6">
                     <mat-form-field class="input-width" appearance="fill">
                         <mat-label>Comments</mat-label>
-                        <input matInput #message maxlength="100">
+                        <input matInput #message maxlength="100" formControlName="comments" id="comments" name="comments">
                         <mat-hint align="end">{{message.value.length}} / 100</mat-hint>
                     </mat-form-field>
                   </div>
