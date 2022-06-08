@@ -13,6 +13,7 @@ import { BiometricVerificationService } from 'src/app/core/services/biometric-ve
 import { WorkflowManagementService } from 'src/app/core/services/workflow-management/workflow-management.service';
 import { CurrencyModel } from "src/app/core/domain/transfer.models";
 import { CurrencySelectionService } from "src/app/core/services/modal-services/currency-selection.service";
+import { ConfirmationService } from 'src/app/core/services/confirmation/confirmation.service';
 
 export type WorkflowStatus = 'active' | 'disabled';
 
@@ -251,7 +252,8 @@ export class CreateWorkflowComponent implements OnInit, AfterViewInit {
     private readonly router: Router,
     private readonly biometricVerificationService: BiometricVerificationService,
     private readonly workflowManagementService: WorkflowManagementService,
-    private readonly currencySelectionService: CurrencySelectionService
+    private readonly currencySelectionService: CurrencySelectionService,
+    private readonly confirmationService: ConfirmationService,
   ) { 
     this.mode = route.snapshot.params['mode'];
   }
@@ -399,14 +401,6 @@ export class CreateWorkflowComponent implements OnInit, AfterViewInit {
         this.createWorkflowMangementForm.controls.approvalSequence.setValue(data.name);
       }
     });
-    // this.getWorkflowIdDetails.approvalSequence.map((data: any) => {
-    //   this.approvalSequence.map((sequence: any) => {
-    //     if(data.aprovalSequenceType === sequence.name) {
-    //       sequence.checked = true;
-    //       this.createWorkflowMangementForm.controls.fxReference.setValue(data.approvalSequenceName);
-    //     }
-    //   });
-    // });
   }
 
   setCheckers() {
@@ -632,7 +626,7 @@ export class CreateWorkflowComponent implements OnInit, AfterViewInit {
 
     const payload = {
       corporateId: "2bacf557-4b60-4e94-b300-ebfb6deaa4a8",
-      companyId: this.getForm.companyname.value,
+      companyId: this.getForm.companyname.value.id,
       name:this.getForm.workflowname.value,
       description:this.getForm.workflowdescription.value,
       approversNumber: Number(this.getForm.approvers.value.number),
@@ -651,6 +645,16 @@ export class CreateWorkflowComponent implements OnInit, AfterViewInit {
       status: "Active"
     }
 
+    const confirmationPayload = {
+      type: 'workflow',
+      accountName: this.getForm.accountsaccess.value.accountName,
+      accountNumber: this.getForm.accountsaccess.value.accountId,
+      currency: this.getForm.currency.value.currencyCode,
+      cif: "123456789",
+    }
+    
+    this.confirmationService.confirmationDetails(confirmationPayload);
+
     this.workflowManagementService.createWorkflow(payload, payload.companyId).subscribe((res: any) => {
       if(res.isSuccessful) {
         this.biometricVerificationService.open();
@@ -666,7 +670,7 @@ export class CreateWorkflowComponent implements OnInit, AfterViewInit {
     const updatePayload = {
       corporateId: this.getWorkflowIdDetails.corporateId,
       workflowSetttingsId: this.getWorkflowIdData?.workflowSettingsId,
-      companyId: this.getForm.companyname.value,
+      companyId: this.getForm.companyname.value.id,
       name:this.getForm.workflowname.value,
       description:this.getForm.workflowdescription.value,
       approversNumber: Number(this.getForm.approvers.value.number),
@@ -684,6 +688,16 @@ export class CreateWorkflowComponent implements OnInit, AfterViewInit {
       workflowCheckers: this.getForm.checkersList.value,
       status: this.getWorkflowIdDetails.status
     }
+
+    const confirmationPayload = {
+      type: 'workflow',
+      accountName: this.getForm.accountsaccess.value.accountName,
+      accountNumber: "1100194977404",
+      currency: this.getForm.currency.value.currencyCode,
+      cif: "123456789",
+    }
+    
+    this.confirmationService.confirmationDetails(confirmationPayload);
 
     this.workflowManagementService.updateWorkflow(updatePayload, updatePayload.companyId).subscribe((res: any) => {
       if(res.isSuccessful) {

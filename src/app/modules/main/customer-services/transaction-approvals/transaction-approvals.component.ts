@@ -9,6 +9,7 @@ import { MatMenuTrigger } from '@angular/material/menu';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatPaginatorIntl } from '@angular/material/paginator';
 import { TransactionApprovalService } from 'src/app/core/services/transaction-approval/transaction-approval.service';
+import { ConfirmationService } from 'src/app/core/services/confirmation/confirmation.service';
 
 export type UserStatus = 'approved' | 'rejected' | 'pending';
 
@@ -101,7 +102,8 @@ export class TransactionApprovalsComponent implements OnInit, AfterViewInit  {
 
   constructor(
     private router: Router,
-    private readonly transactionApprovalService: TransactionApprovalService
+    private readonly transactionApprovalService: TransactionApprovalService,
+    private readonly confirmationService: ConfirmationService
   ) { }
 
   filterItems: Approval[] = [
@@ -136,6 +138,7 @@ export class TransactionApprovalsComponent implements OnInit, AfterViewInit  {
     console.log(user);
 
     const payload = {
+      type: 'approval',
       requestReference : user.requestReference,
       approvalStatus : user.approvalStatus,
       accountName: user.sourceAccountName,
@@ -162,7 +165,7 @@ export class TransactionApprovalsComponent implements OnInit, AfterViewInit  {
       ]
     }
 
-    this.transactionApprovalService.accountDetails(payload);
+    this.confirmationService.confirmationDetails(payload);
     this.requestReference = user.requestReference;
     this.router.navigate([`/customer-services/transaction-approvals/details/${this.requestReference}`]);
   }
