@@ -1,0 +1,436 @@
+<div *ngIf="mode === 'view'">
+  <app-profile-management-top-nav
+    title="View a workflow"
+    toolbarPage="Corporate Onboarding"
+  ></app-profile-management-top-nav>
+</div>
+
+<div *ngIf="mode === 'update'">
+  <app-profile-management-top-nav
+    title="Update a workflow"
+    toolbarPage="Corporate Onboarding"
+  ></app-profile-management-top-nav>
+</div>
+
+<div *ngIf="!mode">
+  <app-profile-management-top-nav
+    title="Create a workflow"
+    toolbarPage="Corporate Onboarding"
+  ></app-profile-management-top-nav>
+</div>
+
+<form autocomplete="off" [formGroup]="createWorkflowMangementForm">
+<!-- 1 -->
+    <mat-card-actions class="mx-0">
+        <mat-accordion class="accordion customer-info-accordion">
+          <mat-expansion-panel
+            (opened)="panelOpenState.additionalInfo = true"
+            (closed)="panelOpenState.additionalInfo = false"
+            [expanded]="true"
+          >
+            <mat-expansion-panel-header>
+              <mat-panel-title class="d-flex justify-content-start">
+                <div class="numbers me-3">1</div>  
+                <h2>Please enter the workflow details</h2>
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <mat-divider class="pb-2"></mat-divider>
+            <div class="d-flex flex-column">
+                <div class="row pt-4">
+                  <div class="col-md-3">                    
+                    <!-- <mat-form-field appearance="fill" class="w-100" floatLabel="always">
+                        <mat-label>Company name</mat-label>
+                        <input matInput formControlName="companyname" name="companyname"/>
+                        <mat-icon matSuffix>expand_more</mat-icon>
+                    </mat-form-field> -->
+                    <mat-form-field appearance="fill" class="w-100" floatLabel="always">
+                      <mat-label>Company name</mat-label>
+                      <mat-select formControlName="companyname" name="companyname">
+                        <mat-option *ngFor="let data of companyList" [value]="data">
+                          {{ data.name }}
+                        </mat-option>
+                      </mat-select>
+                      <mat-icon matSuffix>expand_more</mat-icon>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-3">
+                    <app-input
+                      [parentForm]="createWorkflowMangementForm"
+                      fieldName="workflowname"
+                      placeholder=""
+                      formControlName="workflowname"
+                      label="Workflow name"
+                    ></app-input>
+                  </div>
+                  <div class="col-md-3">
+                    <app-input
+                      [parentForm]="createWorkflowMangementForm"
+                      fieldName="workflowdescription"
+                      placeholder=""
+                      formControlName="workflowdescription"
+                      label="Workflow description"
+                    ></app-input>
+                  </div>
+                  <div class="col-md-3">
+                    <mat-form-field appearance="fill" class="w-100" floatLabel="always">
+                      <mat-label>Number of approvers</mat-label>
+                      <mat-select formControlName="approvers" name="approvers">
+                        <mat-option *ngFor="let data of approvers" [value]="data">
+                          {{ data.number }}
+                        </mat-option>
+                      </mat-select>
+                      <mat-icon matSuffix>expand_more</mat-icon>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-3">
+                    <app-currency-input
+                      [parentForm]="createWorkflowMangementForm"
+                      fieldName="currency"
+                      label="Currency"
+                      placeholder="Select currency"
+                      formControlName="currency"
+                    >
+                    </app-currency-input>
+                  </div>
+                  <div class="col-md-3">
+                    <app-input
+                      [parentForm]="createWorkflowMangementForm"
+                      fieldName="minimumamount"
+                      placeholder=""
+                      formControlName="minimumamount"
+                      label="Minimum amount"
+                    ></app-input>
+                  </div>
+                  <div class="col-md-3">
+                    <app-input
+                      [parentForm]="createWorkflowMangementForm"
+                      fieldName="maximumamount"
+                      placeholder=""
+                      formControlName="maximumamount"
+                      label="Maximum amount"
+                    ></app-input>
+                  </div>
+                  <div class="col-md-3">
+                    <!-- <app-transfer-from
+                      [parentForm]="createWorkflowMangementForm"
+                      fieldName="accountsaccess"
+                      placeholder=""
+                      formControlName="accountsaccess"
+                      label="Accounts to access"
+                    ></app-transfer-from> -->
+                    <mat-form-field appearance="fill" class="w-100" floatLabel="always">
+                      <mat-label>Accounts to access</mat-label>
+                      <mat-select formControlName="accountsaccess" name="accountsaccess">
+                        <mat-option *ngFor="let data of accountsToAccess" [value]="data">
+                          {{ data.accountName }}
+                        </mat-option>
+                      </mat-select>
+                      <mat-icon matSuffix>expand_more</mat-icon>
+                    </mat-form-field>
+                  </div>
+                </div>
+              </div>
+              <div class="d-flex justify-content-end">
+                <button mat-stroked-button color="primary" class="px-5">
+                    <mat-icon>done</mat-icon>
+                </button>
+              </div>
+          </mat-expansion-panel>
+        </mat-accordion>
+    </mat-card-actions>
+
+    <!-- 2 -->
+    <mat-card-actions class="mx-0">
+        <mat-accordion class="accordion customer-info-accordion">
+          <mat-expansion-panel
+            (opened)="panelOpenState.additionalInfo = true"
+            (closed)="panelOpenState.additionalInfo = false"
+          >
+            <mat-expansion-panel-header>
+              <mat-panel-title class="d-flex justify-content-start">
+                <div class="numbers me-3">2</div>  
+                <h2>Please select the products the customer can access</h2>
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <mat-expansion-panel
+            (opened)="panelOpenState.additionalInfo = true"
+            (closed)="panelOpenState.additionalInfo = false"
+            hideToggle="true"
+            >
+
+            <mat-expansion-panel-header>
+                <mat-panel-title class="d-flex justify-content-start">
+                    <mat-icon class="coloricon">expand_less</mat-icon>
+                    <div class="strong-text ps-3">Transaction</div>
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div class="d-flex ms-5">
+                <div class="row col-md-12">
+                    <div class="col-md-5 m-3" *ngFor="let data of transactions; let i = index">
+                        <mat-checkbox color="primary" 
+                        [checked]="data.checked"
+                        (change)="productsAccess($event, i)">
+                          {{ data?.transactionname }}
+                        </mat-checkbox>
+                    </div>
+                </div>
+            </div>
+            </mat-expansion-panel>
+          </mat-expansion-panel>
+        </mat-accordion>
+    </mat-card-actions>
+
+     <!-- 3 -->
+     <mat-card-actions class="mx-0">
+        <mat-accordion class="accordion customer-info-accordion">
+          <mat-expansion-panel
+            (opened)="panelOpenState.additionalInfo = true"
+            (closed)="panelOpenState.additionalInfo = false"
+          >
+            <mat-expansion-panel-header>
+              <mat-panel-title class="d-flex justify-content-start">
+                <div class="numbers me-3">3</div>  
+                <h2>Please select an FX reference ID option</h2>
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <mat-divider class="mb-2"></mat-divider>
+            <div class="d-flex ms-5">
+                <div class="row col-md-12">
+                    <div class="col-md-5 m-3" *ngFor="let items of fxIdList; let i = index">
+                        <mat-checkbox color="primary" 
+                        [checked]="items.checked"
+                        (change)="selectFxId($event, i)">
+                          {{items?.name}}
+                        </mat-checkbox>
+                    </div>
+                </div>
+            </div>
+          </mat-expansion-panel>
+        </mat-accordion>
+    </mat-card-actions>
+
+    <!-- 4 -->
+    <mat-card-actions class="mx-0">
+        <mat-accordion class="accordion customer-info-accordion">
+          <mat-expansion-panel
+            (opened)="panelOpenState.additionalInfo = true"
+            (closed)="panelOpenState.additionalInfo = false"
+          >
+            <mat-expansion-panel-header>
+              <mat-panel-title class="d-flex justify-content-start">
+                <div class="numbers me-3">4</div>  
+                <h2>Please select the approval sequence</h2>
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <mat-divider class="mb-2"></mat-divider>
+            <div class="d-flex ms-5">
+                <div class="row col-md-12">
+                    <div class="col-md-5 m-3" *ngFor="let items of approvalSequence; let i = index">
+                        <mat-checkbox 
+                          color="primary"
+                          [checked]="items.checked" 
+                          (change)="selectApprovalSequence($event, i)">
+                          {{items?.name}}
+                        </mat-checkbox>
+                    </div>
+                </div>
+            </div>
+          </mat-expansion-panel>
+        </mat-accordion>
+    </mat-card-actions>
+
+    <!-- 5 -->
+    <mat-card-actions class="mx-0">
+        <mat-accordion class="accordion customer-info-accordion">
+          <mat-expansion-panel
+            (opened)="panelOpenState.additionalInfo = true"
+            (closed)="panelOpenState.additionalInfo = false"
+          >
+            <mat-expansion-panel-header>
+              <mat-panel-title class="d-flex justify-content-start">
+                <div class="numbers me-3">5</div>  
+                <h2>Please select the users that must be added to this workflow</h2>
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <mat-divider class="mb-2"></mat-divider>
+                <mat-card-content class="list-table">
+                    <div class="pt-2 ps-2">
+                        <mat-form-field appearance="outline" class="p-0">
+                            <input matInput placeholder="Search" (keyup)="applyFilter($event)"/>
+                            <mat-icon matSuffix>search</mat-icon>
+                        </mat-form-field>
+                    </div>
+                    <mat-divider></mat-divider>
+
+                    <table mat-table [dataSource]="usersDataSource" matSort>
+                        
+                        <ng-container matColumnDef="select">
+                            <th mat-header-cell *matHeaderCellDef>
+                            <mat-checkbox (change)="$event ? usersMasterToggle() : null"
+                                            [checked]="usersSelection.hasValue() && usersIsAllSelected()"
+                                            [indeterminate]="usersSelection.hasValue() && !usersIsAllSelected()">
+                            </mat-checkbox>
+                            </th>
+                            <td mat-cell *matCellDef="let row; let i = index">
+                            <mat-checkbox (click)="$event.stopPropagation()"
+                                            (change)="usersCheckedList($event,i, row)"
+                                            [checked]="getWorkflowIdData?.companyId ? row.checked : usersSelection.isSelected(row)">
+                            </mat-checkbox>
+                            </td>
+                        </ng-container>  
+                            
+                        <ng-container matColumnDef="name">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+                        <td mat-cell *matCellDef="let row">{{ row.name }}</td>
+                        </ng-container>
+                
+                        <ng-container matColumnDef="id">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>ID Number</th>
+                        <td mat-cell *matCellDef="let row">{{ row.id }}</td>
+                        </ng-container>
+                
+                        <ng-container matColumnDef="role">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Role</th>
+                        <td mat-cell *matCellDef="let row">{{ row.role }}</td>
+                        </ng-container>
+                
+                        <ng-container matColumnDef="status">
+                        <th mat-header-cell *matHeaderCellDef>Status</th>
+                        <td mat-cell *matCellDef="let row">
+                            <span
+                                class="p-2 pe-3 ps-3 status"
+                                [ngClass]="{
+                                    active: row.status ==  'Active',
+                                    disabled: row.status === 'Disabled'
+                                }"
+                                >
+                                {{ row.status }}
+                            </span>
+                        </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="lastviewed">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>Last viewed</th>
+                            <td mat-cell *matCellDef="let row">{{ row.lastviewed }}</td>
+                        </ng-container>
+                
+                        <tr mat-header-row *matHeaderRowDef="usersDisplayedColumns"></tr>
+                        <tr mat-row *matRowDef="let row; columns: usersDisplayedColumns"></tr>
+                
+                        <tr class="mat-row" *matNoDataRow>
+                        <td class="mat-cell" colspan="4">No data matching the filter</td>
+                        </tr>
+                    </table>
+                    <mat-paginator #paginator hidePageSize="true" [pageSize]="pageSize"></mat-paginator>
+                </mat-card-content>
+          </mat-expansion-panel>
+        </mat-accordion>
+    </mat-card-actions>
+
+    <!-- 6 -->
+    <mat-card-actions class="mx-0">
+        <mat-accordion class="accordion customer-info-accordion">
+          <mat-expansion-panel
+            (opened)="panelOpenState.additionalInfo = true"
+            (closed)="panelOpenState.additionalInfo = false"
+          >
+            <mat-expansion-panel-header>
+              <mat-panel-title class="d-flex justify-content-start">
+                <div class="numbers me-3">6</div>  
+                <h2>Please select the checkers that must be added to this workflow</h2>
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <mat-divider class="mb-2"></mat-divider>
+                <mat-card-content class="list-table">                    
+                    <table mat-table [dataSource]="checkersDataSource" matSort>
+                        
+                        <ng-container matColumnDef="select">
+                            <th mat-header-cell *matHeaderCellDef>
+                            <mat-checkbox (change)="$event ? checkersMasterToggle() : null"
+                                            [checked]="checkersSelection.hasValue() && checkersIsAllSelected()"
+                                            [indeterminate]="checkersSelection.hasValue() && !checkersIsAllSelected()">
+                            </mat-checkbox>
+                            </th>
+                            <td mat-cell *matCellDef="let row; let i = index">
+                            <mat-checkbox (click)="$event.stopPropagation()"
+                                            (change)="checkersCheckedList($event,i, row)"
+                                            [checked]="getWorkflowIdData?.companyId ? row.checked : checkersSelection.isSelected(row)">
+                            </mat-checkbox>
+                            </td>
+                        </ng-container>  
+                            
+                        <ng-container matColumnDef="name">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+                        <td mat-cell *matCellDef="let row">{{ row.name }}</td>
+                        </ng-container>
+                
+                        <ng-container matColumnDef="id">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>ID Number</th>
+                        <td mat-cell *matCellDef="let row">{{ row.id }}</td>
+                        </ng-container>
+                
+                        <ng-container matColumnDef="profiletype">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Profile type</th>
+                        <td mat-cell *matCellDef="let row">{{ row.profiletype }}</td>
+                        </ng-container>
+                
+                        <ng-container matColumnDef="status">
+                        <th mat-header-cell *matHeaderCellDef>Status</th>
+                        <td mat-cell *matCellDef="let row">
+                            <span
+                                class="p-2 pe-3 ps-3 status"
+                                [ngClass]="{
+                                    active: row.status ==  'Active',
+                                    disabled: row.status === 'Disabled'
+                                }"
+                                >
+                                {{ row.status }}
+                            </span>
+                        </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="lastviewed">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>Last viewed</th>
+                            <td mat-cell *matCellDef="let row">{{ row.lastviewed }}</td>
+                        </ng-container>
+                
+                        <tr mat-header-row *matHeaderRowDef="checkersDisplayedColumns"></tr>
+                        <tr mat-row *matRowDef="let row; columns: checkersDisplayedColumns"></tr>
+                
+                        <tr class="mat-row" *matNoDataRow>
+                        <td class="mat-cell" colspan="4">No data matching the filter</td>
+                        </tr>
+                    </table>
+                    <mat-paginator #checkersPaginator hidePageSize="true" [pageSize]="pageSize"></mat-paginator>
+                </mat-card-content>
+          </mat-expansion-panel>
+        </mat-accordion>
+    </mat-card-actions>
+</form>
+
+<div class="py-4" *ngIf="mode === 'view'">
+    <button mat-raised-button color="primary" class="px-5" (click)="quit()">Quit</button>
+</div>
+
+<div class="py-4" *ngIf="mode === 'update'">
+  <div class="d-flex justify-content-between">
+    <div>
+      <button mat-stroked-button color="primary" class="px-5" (click)="quit()">Quit</button>
+    </div>
+    <div class="d-flex justify-content-end">
+      <button mat-stroked-button color="primary" class="px-5 me-4" (click)="back()">Back</button>
+      <button mat-raised-button color="primary" class="px-5" (click)="updateWorkFlow()">Submit</button>
+    </div>
+  </div>
+</div>
+
+<div class="py-4" *ngIf="!mode">
+  <div class="d-flex justify-content-between">
+    <div>
+      <button mat-stroked-button color="primary" class="px-5" (click)="quit()">Quit</button>
+    </div>
+    <div>
+      <button mat-raised-button color="primary" class="px-5" (click)="createWorkFlow()">Submit</button>
+    </div>
+  </div>
+</div>

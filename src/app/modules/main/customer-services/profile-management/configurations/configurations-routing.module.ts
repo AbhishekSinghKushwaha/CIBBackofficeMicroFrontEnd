@@ -43,6 +43,10 @@ const routes: Routes = [
           { path: 'list', component: ListTransactionConfigurationComponent }
         ]
       },
+      {
+        path: 'workflow-management',
+        loadChildren: () => import('./workflow-management/workflow-management.module').then(m => m.WorkflowManagementModule)
+      }
     ]
   }
 ];

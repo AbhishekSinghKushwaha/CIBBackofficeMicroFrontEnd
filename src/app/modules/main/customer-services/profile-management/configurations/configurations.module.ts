@@ -15,6 +15,8 @@ import { ConfirmDialogModule } from 'src/app/shared/modals/confirm-dialog/confir
 import { TransactionConfigurationComponent } from './transaction-configuration/transaction-configuration.component';
 import { ListTransactionConfigurationComponent } from './transaction-configuration/list-transaction-configuration/list-transaction-configuration.component';
 import { SharedComponentsModule } from 'src/app/shared/components/shared-components.module';
+import { WorkflowManagementModule } from './workflow-management/workflow-management.module';
+import { CreateWorkflowModule } from './workflow-management/create-workflow/create-workflow.module';
 
 
 @NgModule({
@@ -35,7 +37,9 @@ import { SharedComponentsModule } from 'src/app/shared/components/shared-compone
     SharedModalsModule,
     ReactiveFormsModule,
     ConfirmDialogModule,
-    SharedComponentsModule
+    SharedComponentsModule,
+    WorkflowManagementModule,
+    CreateWorkflowModule
   ],
 })
 export class ConfigurationsModule { }

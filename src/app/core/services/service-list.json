@@ -81,5 +81,11 @@
     "submit": "/cibbackoffice-v1/api/TransactionApproval/Submit",
     "getTransactions": "/cibbackoffice-v1/api/TransactionApproval/GetTransactions",
     "getAccountDetails": "/cibbackoffice-v1/api/TransactionApproval/GetAccountDetails/"
+  },
+  "workflowManagement": {
+    "getWorkflows": "/cibbackoffice-v1/api/WorkflowSettings",
+    "createWorkflow": "/cibbackoffice-v1/api/WorkflowSettings",
+    "deleteWorkflow": "/cibbackoffice-v1/api/WorkflowSettings/delete",
+    "getWorkflowId": "/cibbackoffice-v1/api/WorkflowSettings"
   }
 }

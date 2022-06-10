@@ -32,6 +32,19 @@ const routes: Routes = [
     path: 'configure-transaction',
     loadChildren: (): Promise<any> =>
       import('./configure-transaction/configure-transaction.module').then(m => m.ConfigureTransactionModule),
+  },
+  {
+    path: 'create-workflow-management',
+    loadChildren: () => import('./profile-management/configurations/workflow-management/create-workflow/create-workflow.module').then(m => m.CreateWorkflowModule)
+  },
+  {
+    path: 'workflow-management/:mode',
+    loadChildren: () => import('./profile-management/configurations/workflow-management/create-workflow/create-workflow.module').then(m => m.CreateWorkflowModule)
+  },
+  {
+    path: 'success',
+    loadChildren: (): Promise<any> =>
+      import('./confirmation/confirmation.module').then(m => m.ConfirmationModule),
   }
 ];
 
