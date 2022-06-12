@@ -1,0 +1,62 @@
+table {
+    width: 100%;
+  }
+  
+  .mat-form-field {
+    font-size: 14px;
+  }
+  
+  td,
+  th {
+    color: var(--black);
+    font-size: 14px;
+  }
+  
+  th {
+    font-weight: 600;
+    background-color: #e9eaea;
+  }
+
+  hr {
+    margin: 0.7rem 0 !important;
+  }
+  
+  .status {
+    text-transform: capitalize;
+    border-radius: 15px;
+    &.active {
+      background-color: rgba(47, 152, 3, 0.04);
+      color: var(--green);
+    }
+    &.disabled {
+      background-color: rgba(243, 135, 7, 0.04);
+      color: var(--orange);
+    }
+    &.rejected {
+      background-color: rgba(243, 7, 7, 0.04);
+      color: var(--red);
+    }
+  }
+
+.eyeicon {
+    color: #A32A29;
+}
+
+.button_icon {
+    background: rgba(146, 148, 151, 0.2);
+    box-shadow: none;
+  }
+
+.card{
+    border: none !important;
+  }
+  
+::ng-deep .my-menu {
+    width: 270px;
+    overflow: hidden !important;
+  }
+
+  .list-table{
+    border:solid 1px  var(--cool-grey-20);
+    border-radius: 10px;
+  }

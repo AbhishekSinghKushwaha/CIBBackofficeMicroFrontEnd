@@ -55,6 +55,10 @@ const routes: Routes = [
           { path: 'new', component: AddTransactionMonitoringComponent },
         ]
       },
+      {
+        path: 'workflow-management',
+        loadChildren: () => import('./workflow-management/workflow-management.module').then(m => m.WorkflowManagementModule)
+      }
     ]
   }
 ];

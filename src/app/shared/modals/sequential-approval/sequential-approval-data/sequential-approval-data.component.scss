@@ -1,0 +1,85 @@
+.sequential-data-modal-screen {
+    width: 700px;
+    margin: 0;
+    padding: 0;
+  }
+
+  table {
+    width: 100%;
+  }
+  
+  td,
+  th {
+    color: var(--black);
+    font-size: 14px;
+  }
+  
+  th {
+    font-weight: 600;
+    background-color: #e9eaea;
+  }
+
+  hr {
+    margin: 0.7rem 0 !important;
+  }
+  
+  .status {
+    text-transform: capitalize;
+    border-radius: 15px;
+    &.active {
+      background-color: rgba(47, 152, 3, 0.04);
+      color: var(--green);
+    }
+    &.disabled {
+      background-color: rgba(243, 135, 7, 0.04);
+      color: var(--orange);
+    }
+    &.rejected {
+      background-color: rgba(243, 7, 7, 0.04);
+      color: var(--red);
+    }
+  }
+ 
+:host ::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-ripple .mat-ripple-element {
+    opacity: 0.03 !important;
+    background-color: #A32A29!important;
+  }
+
+:host ::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background,.mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
+    background-color: #A32A29;
+  }
+  
+:host ::ng-deep .mat-form-field-flex > .mat-form-field-infix {
+    padding: 0.4em 0px !important;
+  }
+:host ::ng-deep .mat-form-field-appearance-outline .mat-form-field-label {
+    margin-top: -15px;
+  }
+
+.list-table{
+  border:solid 1px  var(--cool-grey-20);
+  border-radius: 10px;
+}  
+
+:host ::ng-deep .mat-paginator-navigation-previous {
+    display: none !important;
+}
+
+:host ::ng-deep .mat-paginator-navigation-next {
+    display: none !important;
+}   
+
+.checkbox {
+    border: 1px solid #9b8a8a;
+    display: inline-block;
+    cursor: pointer;
+    width: 25px;
+    text-align: center;
+    border-radius: 2px;
+}
+
+.checkbox.checked {
+  background-color: #A42A29;
+  color: #fff;
+}
+

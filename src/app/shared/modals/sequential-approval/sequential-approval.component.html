@@ -1,0 +1,35 @@
+<link rel="stylesheet" href="https://fonts.sandbox.google.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+
+<div class="sequential-modal-screen p-0">
+    <div class="d-flex justify-content-between">
+        <div>
+            <h3 class="strong-text">Sequential approval</h3>
+        </div>
+        <div>
+            <mat-icon (click)="close()" class="cursor-pointer addicon">close</mat-icon>
+        </div>
+    </div>
+    <p class="text-grey pt-2 mb-4">Please select the sequence of transaction approvals</p>
+
+    <div class="row cursor-pointer border rounded border-sequential mb-3" (click)="close()">
+        <div class="col-md-3 pt-3">
+          <button mat-fab class="button_icon ms-1">
+            <mat-icon class="material-symbols-outlined addicon">add</mat-icon>
+          </button>
+        </div>
+        <div class="col-md-8 card card-block justify-content-center">
+          <span class="strong-text">Assign the sequence at random</span>
+        </div>
+    </div>
+
+    <div class="row cursor-pointer border rounded border-sequential" (click)="sequenceManually()">
+        <div class="col-md-3 pt-3">
+          <button mat-fab class="button_icon ms-1">
+            <mat-icon class="material-symbols-outlined addicon">add</mat-icon>
+          </button>
+        </div>
+        <div class="col-md-8 card card-block justify-content-center">
+          <span class="strong-text">Assign the sequence manually</span>
+        </div>
+    </div>
+</div>      

@@ -90,5 +90,11 @@
     "getAmount": "/cibbackoffice-v1/api/TransactionMonitoring/get-flagged-amounts",
     "getCurrencies": "/cibbackoffice-v1/api/TransactionMonitoring/get-flagged-currencies",
     "getCountries": "/cibbackoffice-v1/api/TransactionMonitoring/get-flagged-countries"
+  },
+  "workflowManagement": {
+    "getWorkflows": "/cibbackoffice-v1/api/WorkflowSettings",
+    "createWorkflow": "/cibbackoffice-v1/api/WorkflowSettings",
+    "deleteWorkflow": "/cibbackoffice-v1/api/WorkflowSettings/delete",
+    "getWorkflowId": "/cibbackoffice-v1/api/WorkflowSettings"
   }
 }

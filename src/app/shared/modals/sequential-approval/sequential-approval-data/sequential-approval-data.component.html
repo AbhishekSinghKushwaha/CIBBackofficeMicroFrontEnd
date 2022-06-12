@@ -1,0 +1,107 @@
+<div class="sequential-data-modal-screen p-0">
+    <div class="d-flex justify-content-between pb-2">
+        <div>
+            <h3 class="strong-text">Sequential approval</h3>
+        </div>
+        <div>
+            <mat-icon (click)="close()" class="cursor-pointer addicon">close</mat-icon>
+        </div>
+    </div>
+
+    <mat-divider class="pb-2"></mat-divider>
+    <mat-card-content class="list-table">
+        <div class="pt-2 ps-2">
+            <mat-form-field appearance="outline" class="p-0">
+                <input matInput placeholder="Search" (keyup)="applyFilter($event)"/>
+                <mat-icon matSuffix>search</mat-icon>
+            </mat-form-field>
+        </div>
+        <mat-divider></mat-divider>
+
+        <table mat-table [dataSource]="usersDataSource" matSort class="w-100">
+            
+            <ng-container matColumnDef="select">
+                <th mat-header-cell *matHeaderCellDef>
+                <mat-checkbox (change)="$event ? usersMasterToggle() : null"
+                                [checked]="usersSelection.hasValue() && usersIsAllSelected()"
+                                [indeterminate]="usersSelection.hasValue() && !usersIsAllSelected()">
+                </mat-checkbox>
+                </th>
+                <td mat-cell *matCellDef="let row; let i = index">
+                <mat-checkbox (click)="$event.stopPropagation()"
+                            (change)="updateCheckedList($event,i, row)"
+                            [checked]="getWorkflowIdData?.companyId ? row.checked : usersSelection.isSelected(row)">
+                </mat-checkbox>
+                <!-- <mat-checkbox (click)="$event.stopPropagation()"
+                                (change)="$event ? usersSelection.toggle(row) : null"
+                                [checked]="usersSelection.isSelected(row)">
+                </mat-checkbox> -->
+                <!-- <div class="checkbox" [class.checked]="value > 0" (click)="incrementValue(i)">
+                    <span *ngIf="value > 0">{{value}}</span>
+                    <span *ngIf="!value">&nbsp;</span>
+                </div>
+                <input type="number" hidden [(ngModel)]="value" /> -->
+                <!-- <div class="checkbox" [class.checked]="value > 0" (click)="incrementValue(i)">
+                    <span *ngIf="value > 0">{{value}}</span>
+                    <span *ngIf="!value">&nbsp;</span>
+                </div>
+                <input type="number" hidden [(ngModel)]="value" /> -->
+                </td>
+            </ng-container>
+                
+            <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+            <td mat-cell *matCellDef="let row">{{ row.name }}</td>
+            </ng-container>
+    
+            <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>ID Number</th>
+            <td mat-cell *matCellDef="let row">{{ row.id }}</td>
+            </ng-container>
+    
+            <ng-container matColumnDef="role">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Role</th>
+            <td mat-cell *matCellDef="let row">{{ row.role }}</td>
+            </ng-container>
+    
+            <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef>Status</th>
+            <td mat-cell *matCellDef="let row">
+                <span
+                    class="p-2 pe-3 ps-3 status"
+                    [ngClass]="{
+                        active: row.status ==  'Active',
+                        disabled: row.status === 'Disabled'
+                    }"
+                    >
+                    {{ row.status }}
+                </span>
+            </td>
+            </ng-container>
+
+            <ng-container matColumnDef="lastviewed">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Last viewed</th>
+                <td mat-cell *matCellDef="let row">{{ row.lastviewed }}</td>
+            </ng-container>
+    
+            <tr mat-header-row *matHeaderRowDef="usersDisplayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: usersDisplayedColumns"></tr>
+    
+            <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" colspan="4">No data matching the filter</td>
+            </tr>
+        </table>
+        <mat-paginator #paginator hidePageSize="true" [pageSize]="pageSize"></mat-paginator>
+    </mat-card-content>
+
+    <div class="py-4">
+        <div class="d-flex justify-content-between">
+          <div>
+            <button mat-stroked-button color="primary" class="px-5" (click)="cancel()">Cancel</button>
+          </div>
+          <div>
+            <button mat-raised-button color="primary" class="px-5" (click)="confirm()">Confirm</button>
+          </div>
+        </div>
+    </div>
+</div>    

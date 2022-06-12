@@ -25,12 +25,12 @@ export class BiometricVerificationComponent implements OnInit {
 
   continue() {
     this.dialogRef.close(true);
-    this.router.navigate(['/customer-services/transaction-approvals/success']);
+    this.router.navigate(['/customer-services/success']);
   }
 
   skipBio() {
     this.dialogRef.close(true);
-    this.router.navigate(['/customer-services/transaction-approvals/success']);
+    this.router.navigate(['/customer-services/success']);
   }
 
 }
