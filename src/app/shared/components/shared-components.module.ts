@@ -5,10 +5,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatStyleModule } from 'src/app/mat-style.module';
 import { AccountDropdownItemComponent } from './account-dropdown-item/account-dropdown-item.component';
 import { ConfirmationCompletionComponent } from './confirmation-completion/confirmation-completion.component';
+import { EmptyListComponent } from './empty-list/empty-list.component';
 
 const components = [
   AccountDropdownItemComponent,
   ConfirmationCompletionComponent,
+  EmptyListComponent
 ];
 
 @NgModule({

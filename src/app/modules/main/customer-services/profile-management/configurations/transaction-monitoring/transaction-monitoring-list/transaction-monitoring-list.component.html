@@ -1,0 +1,124 @@
+<mat-card class="h-100">
+  <div class="d-flex justify-content-between">
+    <div class="h2">Transaction Monitoring Configuration</div>
+    <div class="text-danger strong-text cursor-pointer" routerLink="../new">
+      <div class="row">
+        <div class="col-2">
+          <mat-icon class="icon-display">add</mat-icon>
+        </div>
+        <div class="col-10">Add Transaction</div>
+      </div>
+    </div>
+  </div>
+  <div class="row mb-3">
+    <small>Select transaction you wish to configure.</small>
+  </div>
+  <div class="row mt-2">
+    <mat-form-field class="w-50" color="accent" appearance="legacy">
+      <mat-label>Select Monitoring Criteria</mat-label>
+      <mat-select (selectionChange)="onSearch($event)">
+        <mat-option
+          [value]="item"
+          *ngFor="let item of options; let i = index"
+          >{{ item }}</mat-option
+        >
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <mat-card-content class="list-table mt-2" *ngIf="criteria">
+    <div class="row">
+      <h2 class="m-4">{{ criteria }}</h2>
+    </div>
+    <table
+      mat-table
+      [dataSource]="dataSource"
+      matSort
+      (matSortChange)="announceSortChange($event)"
+      class="mat-elevation-z1 w-100"
+    >
+      <ng-container matColumnDef="transactionType">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+          Transaction Type
+        </th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.transactionType }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="accountNumber">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+          Account Number
+        </th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.accountNumber }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="companyCIF">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Company CIF</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.companyCif }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="amount">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Amount</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.amount | number: '0.2' }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="currencyCode">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Currency Code</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.currencyCode }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="country">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Country</th>
+        <td mat-cell *matCellDef="let element">
+          {{ findCountry(element.countryCode) }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="flag">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+        <td mat-cell *matCellDef="let element">
+          <img
+            class="rounded-circle img-d"
+            [src]="flagPath(element.countryCode || element.currencyCode)"
+            width="60px"
+            height="60px"
+            alt=""
+          />
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="user">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>User</th>
+        <td mat-cell *matCellDef="let element">{{ element.createdBy }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="dateCreated">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          sortActionDescription="Sort by Date Created"
+        >
+          Date Created
+        </th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.createdAt | date: 'dd/MM/y' }}
+        </td>
+      </ng-container>
+
+      <tr
+        mat-header-row
+        *matHeaderRowDef="displayedColumns"
+        class="header-table"
+      ></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  </mat-card-content>
+</mat-card>

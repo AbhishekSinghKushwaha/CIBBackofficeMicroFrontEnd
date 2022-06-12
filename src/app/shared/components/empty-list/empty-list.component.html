@@ -1,0 +1,23 @@
+<div class="row mt-5 lower-template text-center">
+  <div class="cursor-pointer">
+    <img
+      width="450px"
+      src="assets/images/visual-support-icons-empty-data.svg"
+      class="img-fluid"
+    />
+    <p class="text-bold pt-3">
+      {{ description }}
+    </p>
+
+    <button
+      mat-flat-button
+      class="mt-1"
+      color="primary"
+      type="button"
+      (click)="add()"
+    >
+      {{ btnText }}
+    </button>
+  </div>
+  <div></div>
+</div>

@@ -15,6 +15,11 @@ import { ConfirmDialogModule } from 'src/app/shared/modals/confirm-dialog/confir
 import { TransactionConfigurationComponent } from './transaction-configuration/transaction-configuration.component';
 import { ListTransactionConfigurationComponent } from './transaction-configuration/list-transaction-configuration/list-transaction-configuration.component';
 import { SharedComponentsModule } from 'src/app/shared/components/shared-components.module';
+import { TransactionMonitoringComponent } from './transaction-monitoring/transaction-monitoring.component';
+import { TransactionMonitoringListComponent } from './transaction-monitoring/transaction-monitoring-list/transaction-monitoring-list.component';
+import { AddTransactionMonitoringComponent } from './transaction-monitoring/add-transaction-monitoring/add-transaction-monitoring.component';
+import { CurrencySelectionModule } from 'src/app/shared/modals/currency-selection/currency-selection.module';
+import { CountryModalModule } from 'src/app/shared/modals/country-modal/country-modal.module';
 
 
 @NgModule({
@@ -27,6 +32,9 @@ import { SharedComponentsModule } from 'src/app/shared/components/shared-compone
     ListHolidaysComponent,
     TransactionConfigurationComponent,
     ListTransactionConfigurationComponent,
+    TransactionMonitoringComponent,
+    TransactionMonitoringListComponent,
+    AddTransactionMonitoringComponent
   ],
   imports: [
     CommonModule,
@@ -35,7 +43,9 @@ import { SharedComponentsModule } from 'src/app/shared/components/shared-compone
     SharedModalsModule,
     ReactiveFormsModule,
     ConfirmDialogModule,
-    SharedComponentsModule
+    SharedComponentsModule,
+    CurrencySelectionModule,
+    CountryModalModule
   ],
 })
 export class ConfigurationsModule { }

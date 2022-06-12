@@ -6,13 +6,13 @@
       floatLabel="always"
       (click)="openCurrencyModal()"
     >
-      <mat-label>Amount</mat-label>
+      <mat-label>Currency</mat-label>
       <input
         matInput
         type="text"
         class="strong-text"
         [id]="fieldName"
-        [name]="fieldName"
+        [name]="name || fieldName"
         [value]="currency?.currencyCode || ''"
         [placeholder]="currency?.currencyCode || 'KES'"
       />

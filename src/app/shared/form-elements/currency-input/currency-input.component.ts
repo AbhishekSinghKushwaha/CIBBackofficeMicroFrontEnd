@@ -38,12 +38,16 @@ export class CurrencyInputComponent
   public fieldName!: string;
 
   @Input()
+  public name!: string;
+
+  @Input()
   public label!: string;
 
   @Input()
   placeholder!: string;
 
-  currency: CurrencyModel = { currencyCode: "", currencyDescription: "" };
+  @Input()
+  currency: CurrencyModel;
 
   public value: TransferAmount = {
     amount: 0,
@@ -85,7 +89,7 @@ export class CurrencyInputComponent
     // Get Selected Currency
     this.subscriptions.push(
       this.currencySelectionService.selected.subscribe((x) => {
-        this.currency = x;
+        x && (this.currency = x) || (this.currency = { currencyCode: "", currencyDescription: "" });
         this.fieldName &&
           this.parentForm.controls[this.fieldName].setValue(
             this.currency
@@ -122,6 +126,7 @@ export class CurrencyInputComponent
   openCurrencyModal() {
     this.dataLookupService.getCurrencies().subscribe((res) => {
       if (res.status) {
+        this.storageService.setData("currencies", res.data)
         this.currencySelectionService.open(res.data);
       }
     });
