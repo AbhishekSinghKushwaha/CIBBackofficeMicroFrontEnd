@@ -1,0 +1,140 @@
+<div *ngIf="!stage">
+  <mat-card class="mb-3">
+    <div class="d-flex justify-content-between p-1">
+      <div class="d-flex justify-content-start">
+        <div>Transaction Monitoring Configuration</div>
+      </div>
+    </div>
+  </mat-card>
+
+  <form [formGroup]="formData" autocomplete="off">
+    <mat-accordion class="example-headers-align" formArrayName="formArray">
+      <mat-expansion-panel
+        [expanded]="true"
+        (opened)="(true)"
+        showToggle
+        *ngFor="let form of formDataArray.controls; let i = index"
+        [formGroupName]="i"
+      >
+        <mat-expansion-panel-header>
+          <mat-panel-title class="h4 pt-2 pb-2 d-flex justify-content-between">
+            <div>{{ form.get('criteria')?.value }}</div>
+            <mat-icon
+              class="text-danger"
+              (click)="deleteRow(i, form.get('criteria')?.value)"
+              >delete</mat-icon
+            >
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-divider class="ms-3 me-3"></mat-divider>
+        <div class="row mt-3">
+          <div class="col-md-6">
+            <mat-form-field
+              class="full-width"
+              color="accent"
+              appearance="legacy"
+              style="width: 100%"
+            >
+              <mat-label>Monitoring Criteria</mat-label>
+              <mat-select formControlName="criteria">
+                <mat-option
+                  *ngIf="form.get('criteria')?.value"
+                  [value]="form.get('criteria')?.value"
+                  >{{ form.get('criteria')?.value }}</mat-option
+                >
+                <mat-option
+                  [value]="item"
+                  *ngFor="let item of refinedOptions; let i = index"
+                  >{{ item }}</mat-option
+                >
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-md-6">
+            <div
+              class="
+                d-flex
+                justify-content-between
+                text-black
+                add-new
+                cursor-pointer
+                p-2
+                mt-3
+              "
+              (click)="openData(form.get('criteria')?.value)"
+              *ngIf="form.get('criteria')?.value"
+            >
+              <div class="strong-text">
+                {{ form.get('criteria')?.value }}
+              </div>
+              <small class="text-grey">
+                {{ data[form.get('criteria')?.value]?.length }} item{{
+                  (data[form.get('criteria')?.value]?.length > 1 && 's') || ''
+                }}
+                selected
+              </small>
+              <div>
+                <mat-icon svgIcon="caret-right"></mat-icon>
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </form>
+
+  <mat-card class="mb-3 mt-3" *ngIf="refinedOptions?.length">
+    <div
+      class="row text-danger add-new cursor-pointer p-2"
+      (click)="addNewLine()"
+    >
+      <div class="col-md-1">
+        <mat-icon class="icon-display">add</mat-icon>
+      </div>
+      <div class="col-md-11">Add additional monitor</div>
+    </div>
+  </mat-card>
+
+  <div class="row mb-3 mt-3">
+    <div class="col-md-6">
+      <div class="d-flex justify-content-start">
+        <button
+          mat-flat-button
+          color="default"
+          type="button"
+          [routerLink]="'../list'"
+        >
+          <span class="text-danger">Quit</span>
+        </button>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="d-flex justify-content-end">
+        <button
+          mat-flat-button
+          color="default"
+          type="button"
+          [routerLink]="'../list'"
+          class="me-3"
+        >
+          <span class="text-danger">Back</span>
+        </button>
+        <button
+          mat-flat-button
+          color="primary"
+          type="button"
+          (click)="submit()"
+        >
+          Save
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row" *ngIf="stage === 'completed'">
+  <app-confirmation-completion
+    [data]="completionData"
+    (confirmationDone)="confirmationDone($event)"
+  ></app-confirmation-completion>
+</div>

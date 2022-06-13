@@ -1,0 +1,154 @@
+<div class="d-flex justify-content-between" *ngIf="data?.action === 'new'">
+  <div class="h3">Configure Template</div>
+  <div class="h5 text-danger strong-text cursor-pointer" (click)="addNewLine()">
+    <span><mat-icon class="icon-display">add</mat-icon></span>
+    <span> Add row</span>
+  </div>
+</div>
+<div class="d-flex justify-content-between" *ngIf="data?.action === 'edit'">
+  <div class="h3">Edit Template</div>
+</div>
+<mat-divider mat-inset></mat-divider>
+<div class="list-table mt-5">
+  <form [formGroup]="formData" autocomplete="off">
+    <table
+      mat-table
+      [dataSource]="dataSource"
+      matSort
+      (matSortChange)="announceSortChange($event)"
+      class="mat-elevation-z1 w-100"
+      formArrayName="formArray"
+    >
+      <!-- Checkbox Column -->
+      <ng-container matColumnDef="select" *ngIf="data?.action === 'edit'">
+        <th mat-header-cell *matHeaderCellDef>
+          <mat-checkbox
+            (change)="$event ? masterToggle() : null"
+            [checked]="selection.hasValue() && isAllSelected()"
+            [indeterminate]="selection.hasValue() && !isAllSelected()"
+          >
+          </mat-checkbox>
+        </th>
+        <td mat-cell *matCellDef="let row; let i = index">
+          <mat-checkbox
+            (click)="$event.stopPropagation()"
+            (change)="$event ? selection.toggle(row.value?.name) : null"
+            [checked]="selection.isSelected(row.value?.name)"
+          >
+          </mat-checkbox>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="currency">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          sortActionDescription="Sort by currency"
+          style="width: 60%"
+        >
+          Currency
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let element; let i = index"
+          [formGroupName]="i"
+          class="pl-4 pe-4"
+        >
+          <span *ngIf="!element.value.edit">
+            {{ element?.value?.currency?.currencyCode }}</span
+          >
+          <app-currency-input
+            *ngIf="element.value.edit"
+            name="inputName{{ i }}"
+            [parentForm]="element"
+            fieldName="currency"
+            label="Currency"
+            placeholder="Select currency"
+            formControlName="currency"
+            [currency]="element.value.currency"
+          >
+          </app-currency-input>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="amount">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          sortActionDescription="Sort by amount"
+          style="width: 30%"
+          class="pl-4 pe-4"
+        >
+          Amount
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let element; let i = index"
+          [formGroupName]="i"
+        >
+          <span *ngIf="!element.value.edit"> {{ element.value.amount }}</span>
+          <mat-form-field *ngIf="element.value.edit">
+            <input
+              name="inputName{{ i }}"
+              matInput
+              type="text"
+              formControlName="amount"
+              placeholder="Enter amount"
+            />
+          </mat-form-field>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef style="width: 10%">Actions</th>
+        <td mat-cell *matCellDef="let element; let i = index">
+          <div>
+            <mat-icon
+              svgIcon="three-dots-circled"
+              [matMenuTriggerFor]="menu"
+            ></mat-icon>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item (click)="editRow(element)">
+                <span>Edit</span>
+              </button>
+              <button mat-menu-item (click)="removeRow(i)">
+                <span>Remove</span>
+              </button>
+            </mat-menu>
+          </div>
+        </td>
+      </ng-container>
+
+      <tr
+        mat-header-row
+        *matHeaderRowDef="displayedColumns"
+        class="header-table"
+      ></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  </form>
+</div>
+<app-empty-list
+  *ngIf="
+    formData?.value?.formArray.length === 1 && formData.status === 'INVALID'
+  "
+  (btnAction)="addNewLine()"
+  [btnText]="'Add Amount'"
+  [description]="'You have not added any amount yet'"
+></app-empty-list>
+<div class="row-fluid d-flex justify-content-end mt-5">
+  <button mat-flat-button color="default" type="button" (click)="cancel()">
+    <span class="text-danger">Cancel</span>
+  </button>
+  <button
+    mat-flat-button
+    color="primary"
+    type="button"
+    (click)="submit()"
+    [disabled]="formData.status === 'INVALID'"
+  >
+    Save
+  </button>
+</div>

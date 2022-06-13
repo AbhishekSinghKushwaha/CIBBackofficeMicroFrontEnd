@@ -35,7 +35,6 @@
   "transactionConfiguration": {
     "postTransactionConfiguration": "/cibbackoffice-v1/api/TransactionConfiguration",
     "getTransactionConfigurationType": "/cibbackoffice-v1/api/TransactionConfiguration/",
-
     "getTransactionConfigurationArea": "/cibbackoffice-v1/api/TransactionConfiguration/area",
     "getTransactionConfigurationChargeEvent": "/cibbackoffice-v1/api/TransactionConfiguration/charge-event",
     "getTransactionConfigurationChargeGrid": "/cibbackoffice-v1/api/TransactionConfiguration/grid",
@@ -81,6 +80,16 @@
     "submit": "/cibbackoffice-v1/api/TransactionApproval/Submit",
     "getTransactions": "/cibbackoffice-v1/api/TransactionApproval/GetTransactions",
     "getAccountDetails": "/cibbackoffice-v1/api/TransactionApproval/GetAccountDetails/"
+  },
+  "transactionMonitoring": {
+    "getTransactionTypes": "/cibbackoffice-v1/api/TransactionMonitoring/get-flagged-transfer-types",
+    "getAccountNumbers": "/cibbackoffice-v1/api/TransactionMonitoring/get-flagged-account-numbers",
+    "searchCompanyCIFs": "/cibcore/api/Corporates/Cif/Corporates/",
+    "saveCriteria": "/cibbackoffice-v1/api/TransactionMonitoring/CreateTransactionMonitoring",
+    "getCompanyCIF": "/cibbackoffice-v1/api/TransactionMonitoring/get-flagged-cifs",
+    "getAmount": "/cibbackoffice-v1/api/TransactionMonitoring/get-flagged-amounts",
+    "getCurrencies": "/cibbackoffice-v1/api/TransactionMonitoring/get-flagged-currencies",
+    "getCountries": "/cibbackoffice-v1/api/TransactionMonitoring/get-flagged-countries"
   },
   "workflowManagement": {
     "getWorkflows": "/cibbackoffice-v1/api/WorkflowSettings",

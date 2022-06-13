@@ -18,11 +18,16 @@ export class CurrencySelectionComponent implements OnInit {
   ) {
     this.selected = this.currencySelectionService.default;
     this.currencySelectionService.selected.subscribe(
-      (x) => (this.selected = x)
+      (x) => {
+        if (x) {
+          this.selected = x;
+          this.close()
+        }
+      }
     );
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   close(): void {
     this.dialogRef.close(true);
