@@ -96,5 +96,12 @@
     "createWorkflow": "/cibbackoffice-v1/api/WorkflowSettings",
     "deleteWorkflow": "/cibbackoffice-v1/api/WorkflowSettings/delete",
     "getWorkflowId": "/cibbackoffice-v1/api/WorkflowSettings"
+  },
+  "sweeps": {
+    "getChargeEvents": "/cibcore/api/ChargeEvents",
+    "querySweeps": "/cibbackoffice-v1/api/Sweep/QuerySweep",
+    "setUpSweep": "/cibbackoffice-v1/api/Sweep/SetupSweep",
+    "suspendSweep": "/cibbackoffice-v1/api/Sweep/SuspendSweep",
+    "sweepDetailId": "/cibbackoffice-v1/api/Sweep/SweepDetail"
   }
 }

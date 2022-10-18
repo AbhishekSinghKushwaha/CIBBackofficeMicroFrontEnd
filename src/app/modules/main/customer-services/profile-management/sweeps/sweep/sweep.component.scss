@@ -1,0 +1,41 @@
+table {
+    width: 100%;
+  }
+  
+  .mat-form-field {
+    font-size: 14px;
+  }
+  
+  td,
+  th {
+    color: var(--black);
+    font-size: 14px;
+  }
+  
+  th {
+    font-weight: 600;
+    background-color: #e9eaea;
+  }
+
+  hr {
+    margin: 0.7rem 0 !important;
+  }
+
+.card{
+    border: none !important;
+    margin: 15px;
+  }
+  
+::ng-deep .my-menu {
+    width: 220px;
+    overflow: hidden !important;
+  }
+
+.list-table{
+border:solid 1px  var(--cool-grey-20);
+border-radius: 10px;
+}
+
+.setup-icon {
+    color: #A32A29;
+}

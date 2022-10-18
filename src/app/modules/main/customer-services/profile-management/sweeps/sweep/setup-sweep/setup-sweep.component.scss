@@ -1,0 +1,8 @@
+:host ::ng-deep .mat-select-arrow {
+    opacity: 0;
+  }
+
+::ng-deep .mat-select-panel .mat-option {
+    height: 3.8em !important;
+    padding-bottom: 5px !important;
+}

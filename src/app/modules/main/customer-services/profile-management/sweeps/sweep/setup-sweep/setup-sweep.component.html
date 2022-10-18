@@ -1,0 +1,215 @@
+<link
+  rel="stylesheet"
+  href="https://fonts.sandbox.google.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"
+/>
+
+<mat-card class="mb-3">
+  <div class="d-flex justify-content-between p-1">
+    <div class="d-flex justify-content-start">
+      <h2>Set up sweep</h2>
+    </div>
+  </div>
+</mat-card>
+
+<form autocomplete="off" [formGroup]="setupSweepForm">
+    <mat-card class="mb-3">
+        <h2 class="p-1 pb-2">Select the accounts for this sweep</h2>
+        <mat-divider></mat-divider>
+        <mat-card-content class="p-3">
+            <div class="row">
+                <div class="col-md-4">
+                <mat-form-field appearance="fill" class="w-100" floatLabel="always">
+                    <mat-label>Source account</mat-label>
+                    <mat-select 
+                    formControlName="sourceAccount" 
+                    placeholder="Select an account"
+                    name="sourceAccount">
+                    <ng-container *ngFor="let data of accounts">   
+                        <mat-option
+                            *ngIf="this.setupSweepForm.get('destinationAccount')?.value.id !== data.id"
+                            [value]="data"
+                            class="p-4"
+                            (click)="setSelectedAccount(data)"
+                        >
+                            {{ data.name }}
+                            <mat-divider class="mt-3"></mat-divider>
+                        </mat-option>
+                    </ng-container>
+                    </mat-select>
+                    <mat-icon matSuffix>expand_more</mat-icon>
+                </mat-form-field>
+                </div>
+
+                <div class="col-md-4">
+                    <mat-form-field appearance="fill" class="w-100" floatLabel="always">
+                        <mat-label>Destination account</mat-label>
+                        <mat-select 
+                        formControlName="destinationAccount" 
+                        name="destinationAccount"
+                        placeholder="Select an account">
+                        <ng-container *ngFor="let data of accounts"> 
+                            <mat-option
+                                *ngIf="this.setupSweepForm.get('sourceAccount')?.value.id !== data.id"
+                                [value]="data"
+                                class="p-4"
+                                (click)="setSelectedAccount(data)"
+                            >
+                                {{ data.name }}
+                                <mat-divider class="mt-3"></mat-divider>
+                            </mat-option>
+                        </ng-container>
+                        </mat-select>
+                        <mat-icon matSuffix>expand_more</mat-icon>
+                    </mat-form-field>
+                </div>
+                <div class="text-danger pb-2" *ngIf="error">
+                  A Sweep has already been set up for this source and destination account. Please select different accounts.
+                </div>
+            </div>
+            <mat-divider></mat-divider>
+            <div class="pt-4 pb-2">
+                <div class="d-flex justify-content-end">
+                  <div>
+                    <button 
+                    mat-stroked-button 
+                    color="primary" 
+                    [disabled]="setupSweepForm.invalid"
+                    class="px-5" 
+                    (click)="next()"
+                    >Next</button>
+                  </div>
+                </div>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</form> 
+
+<!--Sweep Details-->
+<form autocomplete="off" [formGroup]="setupSweepDetailsForm">
+    <mat-card-actions class="mx-0" *ngIf="mode">
+        <mat-accordion class="accordion customer-info-accordion">
+          <mat-expansion-panel
+            (opened)="panelOpenState.additionalInfo = true"
+            (closed)="panelOpenState.additionalInfo = false"
+            [expanded]="true"
+          >
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <h2>Please enter the details for this sweep </h2>
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <mat-divider class="pb-2"></mat-divider>
+            <div class="d-flex flex-column">
+                <div class="row pt-4">
+                  <div class="col-md-3">                    
+                    <app-input
+                      [parentForm]="setupSweepDetailsForm"
+                      fieldName="sweepName"
+                      placeholder="Enter the name"
+                      formControlName="sweepName"
+                      label="Sweep name"
+                    ></app-input>
+                  </div>
+                  <div class="col-md-3">
+                    <mat-form-field appearance="fill" class="w-100" floatLabel="always">
+                        <mat-label>Start date</mat-label>
+                        <input matInput [matDatepicker]="picker" formControlName="startDate" placeholder="Select a start date">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-3">
+                    <mat-form-field appearance="fill" class="w-100" floatLabel="always">
+                        <mat-label>Execution mode</mat-label>
+                        <mat-select formControlName="executionMode" name="executionMode" placeholder="Select a mode">
+                          <mat-option *ngFor="let data of executionMode" [value]="data">
+                            {{ data.name }}
+                          </mat-option>
+                        </mat-select>
+                        <mat-icon matSuffix>expand_more</mat-icon>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-3" 
+                  *ngIf="this.setupSweepDetailsForm.get('executionMode')?.value.id === 1 ||
+                  this.setupSweepDetailsForm.get('executionMode')?.value.id === 2 ||
+                  !this.setupSweepDetailsForm.get('executionMode')?.value">
+                    <mat-form-field appearance="fill" class="w-100" floatLabel="always">
+                        <input 
+                        matInput 
+                        formControlName="executionModeDetails" 
+                        name="executionModeDetails"
+                        placeholder="Execution mode details">
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-3" *ngIf="this.setupSweepDetailsForm.get('executionMode')?.value.id === 3">
+                    <app-input
+                      [parentForm]="setupSweepDetailsForm"
+                      fieldName="executionDetails"
+                      placeholder="Enter time of day (hh:mm)"
+                      formControlName="executionDetails"
+                      label="Time of day"
+                    ></app-input>
+                  </div>
+                  <div class="col-md-3" *ngIf="this.setupSweepDetailsForm.get('executionMode')?.value.id === 4">
+                    <app-input
+                      [parentForm]="setupSweepDetailsForm"
+                      fieldName="executionDetails"
+                      placeholder="Enter the minimum balance"
+                      formControlName="executionDetails"
+                      label="Minimum account balance"
+                    ></app-input>
+                  </div>
+                  <div class="col-md-3" *ngIf="this.setupSweepDetailsForm.get('executionMode')?.value.id === 5">
+                    <app-input
+                      [parentForm]="setupSweepDetailsForm"
+                      fieldName="executionDetails"
+                      placeholder="Maximum account balance"
+                      formControlName="executionDetails"
+                      label="Enter the maximum balance"
+                    ></app-input>
+                  </div>
+                  <div class="col-md-3">
+                    <mat-form-field appearance="fill" class="w-100" floatLabel="always">
+                        <mat-label>Execution frequency</mat-label>
+                        <mat-select formControlName="frequency" name="frequency" placeholder="Select the frequency">
+                          <mat-option *ngFor="let data of chargeEvents" [value]="data">
+                            {{ data.name }}
+                          </mat-option>
+                        </mat-select>
+                        <mat-icon matSuffix>expand_more</mat-icon>
+                      </mat-form-field>
+                  </div>
+                  <div class="col-md-3">
+                    <mat-form-field appearance="fill" class="w-100" floatLabel="always">
+                        <mat-label>Holidays and weekends</mat-label>
+                        <mat-select formControlName="holidays" name="holidays" placeholder="Select an option">
+                          <mat-option *ngFor="let data of holidays" [value]="data">
+                            {{ data.name }}
+                          </mat-option>
+                        </mat-select>
+                        <mat-icon matSuffix>expand_more</mat-icon>
+                      </mat-form-field>
+                  </div>
+                </div>
+            </div>
+          </mat-expansion-panel>
+        </mat-accordion>
+    </mat-card-actions>
+</form>
+
+<div class="py-4" *ngIf="mode">
+    <div class="d-flex justify-content-end">
+      <div>
+        <button mat-stroked-button color="primary" class="px-5" (click)="back()">Back</button>
+      </div>
+      <div class="ps-3">
+        <button 
+        mat-raised-button
+        [disabled]="setupSweepDetailsForm.invalid" 
+        color="primary" 
+        class="px-5" 
+        (click)="submit()"
+        >Submit</button>
+      </div>
+    </div>
+</div>

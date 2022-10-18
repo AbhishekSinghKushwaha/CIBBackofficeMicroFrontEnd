@@ -45,6 +45,14 @@ const routes: Routes = [
     path: 'success',
     loadChildren: (): Promise<any> =>
       import('./confirmation/confirmation.module').then(m => m.ConfirmationModule),
+  },
+  {
+    path: 'setup-sweep',
+    loadChildren: () => import('./profile-management/sweeps/sweep/setup-sweep/setup-sweep.module').then(m => m.SetupSweepModule)
+  },
+  {
+    path: 'reinitiate-sweep',
+    loadChildren: () => import('./profile-management/sweeps/reinitiate-sweep/reinitiate-sweep.module').then(m => m.ReinitiateSweepModule)
   }
 ];
 

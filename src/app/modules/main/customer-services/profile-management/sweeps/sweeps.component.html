@@ -1,1 +1,38 @@
-<p>sweeps works!</p>
+<div class="row screen">
+    <div class="col-md-3 ps-0 inner-content">
+      <mat-card class="mat-elevation-z20 ps-0 h-100 pt-0 pe-0">
+        <mat-card-content>
+          <mat-list role="list" class="pt-0">
+            <mat-list-item
+              role="listitem"
+              class="row-fluid cursor-pointer"
+              [routerLink]="['list']"
+              routerLinkActive="router-link-active"
+            >
+              <div class="col-10 strong-text">Sweep</div>
+              <div class="col-1">
+                <mat-icon color="primary" svgIcon="caret-right"></mat-icon>
+              </div>
+              <mat-divider mat-inset></mat-divider>
+            </mat-list-item>
+            <mat-list-item
+              role="listitem"
+              class="row-fluid cursor-pointer"
+              [routerLink]="['/customer-services/reinitiate-sweep']"
+              routerLinkActive="router-link-active"
+            >
+              <div class="col-10 strong-text">Re-initiate failed sweep</div>
+              <div class="col-1">
+                <mat-icon color="primary" svgIcon="caret-right"></mat-icon>
+              </div>
+              <mat-divider mat-inset></mat-divider>
+            </mat-list-item>
+          </mat-list>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div class="col-md-9 p-2 pt-0 inner-content">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+  

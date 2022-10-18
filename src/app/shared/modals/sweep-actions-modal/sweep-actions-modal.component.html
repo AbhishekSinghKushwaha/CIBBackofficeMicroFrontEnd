@@ -1,0 +1,141 @@
+<div class="sweep-modal-screen p-0">
+    <div class="pt-2 d-flex justify-content-between">
+        <div>
+            <h3 class="strong-text">{{data?.title}}</h3>
+        </div>
+        <div>
+            <mat-icon (click)="close()" class="cursor-pointer close-icon">close</mat-icon>
+        </div>
+    </div>
+
+    <div class="pt-4 pb-2" *ngIf="data?.id === 3">
+        <h3 class="strong-text">Are you sure you want to revoke this sweep?</h3>
+        <small class="text-grey">Once this sweep is revoked, it will be removed and would need to be set up again</small>
+    </div>
+
+    <div class="pt-4 pb-2" *ngIf="data?.id === 4">
+        <h3 class="strong-text">Are you sure you want to re-initiate this sweep?</h3>
+        <small class="text-grey">Once this sweep is re-initiated, all the details will remain the same</small>
+    </div>
+
+    <div class="row col-md-12 pt-4" *ngIf="data?.id === 4">
+        <div class="col-md-3">
+            <div class="text-grey">Customer name</div>
+            <h4 class="strong-text">{{data?.customerName}}</h4>
+        </div>
+        <div class="col-md-3">
+            <div class="text-grey">Customer CIF</div>
+            <h4 class="strong-text">{{data?.customerCif}}</h4>
+        </div>
+    </div>
+
+    <div class="row col-md-12 py-4">
+        <div class="col-md-3">
+            <div class="text-grey">Source account</div>
+            <h4 class="strong-text">{{data?.sourceAccount}}</h4>
+        </div>
+        <div class="col-md-3">
+            <div class="text-grey">Destination account</div>
+            <h4 class="strong-text">{{data?.destinationAccount}}</h4>
+        </div>
+    </div>
+    <mat-divider class="mb-3"></mat-divider>
+    
+    <div class="row col-md-12">
+        <div class="col-md-3">
+            <div class="text-grey">Sweep name</div>
+            <h4 class="strong-text">{{data?.sweepName}}</h4>
+        </div>
+        <div class="col-md-3">
+            <div class="text-grey">Start date</div>
+            <h4 class="strong-text">{{data?.startDate}}</h4>
+        </div>
+        <div class="col-md-3">
+            <div class="text-grey">Execution mode</div>
+            <h4 class="strong-text">{{data?.executionMode}}</h4>
+        </div>
+        <div class="col-md-3">
+            <div class="text-grey">Time of day</div>
+            <h4 class="strong-text">{{data?.executionDetails}}</h4>
+        </div>  
+        <div class="col-md-3 pt-4">
+            <div class="text-grey">Execution frequency</div>
+            <h4 class="strong-text">{{data?.frequency}}</h4>
+        </div>
+        <div class="col-md-4 pt-4">
+            <div class="text-grey">Holidays and weekends</div>
+            <h4 class="strong-text">{{data?.holidays}}</h4>
+        </div>
+    </div>
+
+    <form autocomplete="off" [formGroup]="sweepDetailsForm">
+        <div class="pt-2" *ngIf="data?.id === 2">
+            <mat-divider class="my-3"></mat-divider>
+            <h4 class="strong-text pb-2">Please select the date range that this sweep will be suspended for</h4>
+            <div class="row col-md-12">
+                <div class="col-md-4">
+                    <mat-form-field appearance="fill" class="w-100" floatLabel="always">
+                        <mat-label>Start date</mat-label>
+                        <input matInput [matDatepicker]="picker" formControlName="startDate" placeholder="Select a date">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                    <mat-form-field appearance="fill" class="w-100" floatLabel="always">
+                        <mat-label>End date</mat-label>
+                        <input matInput [matDatepicker]="pickerEnd" formControlName="endDate" placeholder="Select a date">
+                        <mat-datepicker-toggle matSuffix [for]="pickerEnd"></mat-datepicker-toggle>
+                        <mat-datepicker #pickerEnd></mat-datepicker>
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+    </form>
+    
+
+    <div class="py-4">
+        <div class="d-flex justify-content-end">
+          <div>
+            <button mat-stroked-button color="primary" class="px-5" (click)="close()">Back</button>
+          </div>
+          <!--View-->
+          <div class="ps-3" *ngIf="data?.id === 1">
+            <button 
+            mat-raised-button 
+            color="primary" 
+            class="px-5" 
+            (click)="edit()"
+            >Edit</button>
+          </div>
+          <!--Suspend-->
+          <div class="ps-3" *ngIf="data?.id === 2">
+            <button 
+            mat-raised-button
+            [disabled]="sweepDetailsForm.invalid"
+            color="primary" 
+            class="px-5" 
+            (click)="suspend()"
+            >Submit</button>
+          </div>
+          <!--Revoke-->
+          <div class="ps-3" *ngIf="data?.id === 3">
+            <button 
+            mat-raised-button
+            color="primary" 
+            class="px-5" 
+            (click)="revoke()"
+            >Confirm</button>
+          </div>
+          <!--Reinitate-->
+          <div class="ps-3" *ngIf="data?.id === 4">
+            <button 
+            mat-raised-button
+            color="primary" 
+            class="px-5" 
+            (click)="reinitiate()"
+            >Confirm</button>
+          </div>
+        </div>
+    </div>
+</div>    

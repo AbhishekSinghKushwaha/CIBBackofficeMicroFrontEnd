@@ -10,7 +10,7 @@ import { SharedComponentsModule } from '../components/shared-components.module';
 import { SelectCifModalComponent } from './select-cif-modal/select-cif-modal.component';
 import { SelectAccountNumberModalComponent } from './select-account-number-modal/select-account-number-modal.component';
 import { SelectTransactionTypeModalComponent } from './select-transaction-type-modal/select-transaction-type-modal.component';
-
+import { SweepActionsModalModule } from './sweep-actions-modal/sweep-actions-modal.module';
 
 
 @NgModule({
@@ -27,7 +27,8 @@ import { SelectTransactionTypeModalComponent } from './select-transaction-type-m
     MatStyleModule,
     ReactiveFormsModule,
     FormElementsModule,
-    SharedComponentsModule
+    SharedComponentsModule,
+    SweepActionsModalModule
   ],
   exports:[
     ConfigureFileTemplatesModalComponent,
